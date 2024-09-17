@@ -34,7 +34,21 @@ class TutorialPage extends StatelessWidget {
           bottomNavigationBar: BottomAppBar(
             height: MyInt.bottomBarHeight.toDouble(),
             child: Center(
-              child: MyButton.tutorialBottomButton,
+              child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/objective");
+                  },
+                  style: ButtonStyle(
+                    fixedSize: WidgetStateProperty.all<Size>(
+                        const Size(300, 150)),
+                  ),
+                  child: const Text(
+                      "Inizia",
+                      style: TextStyle(
+                        fontSize: 30,
+                      )
+                  )
+              )
             ),
           ),
         )

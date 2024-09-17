@@ -25,11 +25,11 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(20.0),
+            const Padding(
+              padding: EdgeInsets.all(20.0),
               child: Text(
                 "Tentativo numero: ",
-                style: const TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20),
               ),
             ),
 
@@ -44,7 +44,7 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
                       child: Text(
                         headers[index],
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 25),
+                        style: const TextStyle(fontSize: 25),
                       ),
                     ),
                   ),
@@ -52,7 +52,7 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
               ),
             ),
 
-            // Scroll per il corpo della tabella
+            //Animali visti
             Expanded(
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
@@ -91,7 +91,10 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
                 style: TextStyle(fontSize: 17),
               ),
               ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, "/notVisited");
+                  },
                   child: const Text("Cosa visitare")
               )
             ],

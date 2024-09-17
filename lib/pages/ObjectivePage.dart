@@ -13,10 +13,20 @@ class ObjectivePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Obiettivo"),
       ),
-      body: const Center(
-        child: Text(
-          MyString.placeholder,
-          style: TextStyle(fontSize: 60),
+      body: Center(
+        child: Column(
+          children: [
+            const Text(
+              MyString.placeholder,
+              style: TextStyle(fontSize: 60),
+            ),
+            ElevatedButton(
+                onPressed: (){
+                  Navigator.pushNamed(context, "/exhibit");
+                },
+                child: const Text("Vai a exhibit")
+            )
+          ],
         ),
       ),
       bottomNavigationBar: BottomAppBar(

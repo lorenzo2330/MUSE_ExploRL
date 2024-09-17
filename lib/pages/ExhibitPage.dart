@@ -1,8 +1,12 @@
-import 'package:app_rl/res/myButton.dart';
+import 'dart:math';
+
+import 'package:app_rl/models/myList.dart';
+import 'package:app_rl/providers/EnergyProvider.dart';
+import 'package:app_rl/providers/ExhibitProvider.dart';
 import 'package:app_rl/res/myColors.dart';
 import 'package:app_rl/res/myInt.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ExhibitPage extends StatefulWidget {
   const ExhibitPage({super.key});
@@ -14,31 +18,60 @@ class ExhibitPage extends StatefulWidget {
 class _ExhibitPageState extends State<ExhibitPage> {
   bool trovato = false;
 
+
+  final random = Random();
+
+  var n = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    // Generate the random index once when the page is created
+    n = random.nextInt(MyList.nomiAnimali.length);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    /*  Invocato subito dopo initState(), permette l'utilizzo di context
+    *   (cosa non possibile in initState), senza che il decremento avvenga
+    *   ad ogni pressione del floatingActionButton, usato per il test
+    *   (come invece accadrebbe in build) */
+
+    //Raggiunto un nuovo exhibit, decremento l'energia
+    context.read<EnergyProvider>().decreaseEnergy();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.backgroundYellow,
+      backgroundColor: (context.watch<EnergyProvider>().energy == 0) ? Colors.red : (context.watch<ExhibitProvider>().winnerExhibit == n) ? Colors.greenAccent : MyColors.backgroundYellow,
       appBar: AppBar(
-        title: const Text("Exhibit"),
+          automaticallyImplyLeading: context.watch<EnergyProvider>().energy > 0,
+          title: const Text("Exhibit"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text("Titolo Exhibit", style: TextStyle(fontSize: 30)),
-            Image.asset("images/imgSpringbok.png", scale: 2),
+            Text(MyList.nomiAnimali[n], style: const TextStyle(fontSize: 30)),
+            Image.asset("images/${MyList.pathAnimali[n]}", scale: 2),
             trovato
                 ? SizedBox(
                   height: 250,
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        const Column(
+                        Column(
                           children: [
-                            Text("Alimentazione: ...",
-                                style: TextStyle(fontSize: 25)),
-                            Text("Località geografica: ...",
-                                style: TextStyle(fontSize: 25))
+                            Text("Alimentazione: ${MyList.alimAnimali[n]}",
+                                style: const TextStyle(fontSize: 25)
+                            ),
+                            Text("Località geografica: ${MyList.locAnimali[n]}",
+                                style: const TextStyle(fontSize: 25)
+                            ),
                           ],
                         ),
                         Container(
@@ -54,7 +87,9 @@ class _ExhibitPageState extends State<ExhibitPage> {
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pushNamed(context, "/alreadyVisited");
+                                      },
                                       style: ButtonStyle(
                                         fixedSize: WidgetStateProperty.all<Size>(
                                             const Size(200, 10)),
@@ -67,7 +102,9 @@ class _ExhibitPageState extends State<ExhibitPage> {
                                       )
                                   ),
                                   ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pushNamed(context, "/notVisited");
+                                      },
                                       style: ButtonStyle(
                                         fixedSize: WidgetStateProperty.all<Size>(
                                             const Size(200, 10)),
@@ -114,13 +151,14 @@ class _ExhibitPageState extends State<ExhibitPage> {
             trovato = !trovato;
           });
         },
+        child: const Icon(Icons.qr_code_outlined),
       ),
       bottomNavigationBar: BottomAppBar(
         height: MyInt.bottomBarHeight.toDouble(),
-        child: const Center(
+        child: Center(
           child: Text(
-            "Punti energia",
-            style: TextStyle(fontSize: 30),
+            "Punti energia: ${context.watch<EnergyProvider>().energy}",
+            style: const TextStyle(fontSize: 30),
           ),
         ),
       ),

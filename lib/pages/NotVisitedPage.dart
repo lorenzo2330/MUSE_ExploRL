@@ -33,7 +33,6 @@ class _NotVisitedPageState extends State<NotVisitedPage> {
             ...List.generate(
                 8,
                 (index) => Card(
-                      //color: MyColors.firstRowTable,
                       child: SizedBox(
                           height: 100,
                           child: Center(
@@ -54,7 +53,11 @@ class _NotVisitedPageState extends State<NotVisitedPage> {
                 style: TextStyle(fontSize: 17),
               ),
               ElevatedButton(
-                  onPressed: () {}, child: const Text("Cosa hai già visitato"))
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, "/alreadyVisited");
+                  },
+                  child: const Text("Cosa hai già visitato"))
             ],
           ),
         ),

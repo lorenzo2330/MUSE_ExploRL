@@ -26,7 +26,9 @@ class HomePage extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, "/tutorial");
+              },
               style: ButtonStyle(
                 fixedSize: WidgetStateProperty.all<Size>(
                     const Size(250, 75)), // Larghezza: 150, Altezza: 50
