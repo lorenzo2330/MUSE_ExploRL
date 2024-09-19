@@ -11,8 +11,7 @@ import 'ErrorPage.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    //Giusto per comodità se voglio fare operazioni su argomenti in input
-    final args = settings.arguments;
+    //final args = settings.arguments;  //Giusto per comodità se voglio fare operazioni su argomenti in input
 
     switch(settings.name){
       case "/home":

@@ -1,7 +1,6 @@
 import 'package:app_rl/pages/TutorialPageInfo.dart';
 import 'package:app_rl/pages/TutorialPageQR.dart';
 import 'package:app_rl/pages/TutorialPageTables.dart';
-import 'package:app_rl/res/myButton.dart';
 import 'package:app_rl/res/myColors.dart';
 import 'package:app_rl/res/myInt.dart';
 import 'package:app_rl/res/myString.dart';

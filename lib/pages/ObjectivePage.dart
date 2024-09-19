@@ -1,7 +1,11 @@
+import 'package:app_rl/models/myList.dart';
+import 'package:app_rl/providers/ExhibitProvider.dart';
 import 'package:app_rl/res/myColors.dart';
 import 'package:app_rl/res/myInt.dart';
-import 'package:app_rl/res/myString.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/EnergyProvider.dart';
 
 class ObjectivePage extends StatelessWidget {
   const ObjectivePage({super.key});
@@ -15,16 +19,24 @@ class ObjectivePage extends StatelessWidget {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const Text(
-              MyString.placeholder,
-              style: TextStyle(fontSize: 60),
+            Text(
+              "Vai a: ${MyList.nomiAnimali[context.watch<ExhibitProvider>().nextExhibit]}",
+              style: const TextStyle(fontSize: 50),
             ),
             ElevatedButton(
                 onPressed: (){
+                  //Accedo a ExhibitProvider senza "ascoltare i cambiamenti"
+                  final exhibitProvider = Provider.of<ExhibitProvider>(context, listen: false);
+                  exhibitProvider.visit(exhibitProvider.nextExhibit);
+                  exhibitProvider.unlockExhibit();
+
+                  context.read<EnergyProvider>().decreaseEnergy();
+
                   Navigator.pushNamed(context, "/exhibit");
                 },
-                child: const Text("Vai a exhibit")
+                child: const Text("Exhibit raggiunto")
             )
           ],
         ),

@@ -19,15 +19,17 @@ class _ExhibitPageState extends State<ExhibitPage> {
   bool trovato = false;
 
 
+  late bool endGame, noEnergy, hasWin;
+
   final random = Random();
 
-  var n = 0;
+  //var n = 0;
 
   @override
   void initState() {
     super.initState();
     // Generate the random index once when the page is created
-    n = random.nextInt(MyList.nomiAnimali.length);
+    //n = random.nextInt(MyList.nomiAnimali.length);    //utile per testare, normalmente dovrebbe essere l'utente a scegliere il prossimo
   }
 
   @override
@@ -35,29 +37,27 @@ class _ExhibitPageState extends State<ExhibitPage> {
     super.didChangeDependencies();
 
     /*  Invocato subito dopo initState(), permette l'utilizzo di context
-    *   (cosa non possibile in initState), senza che il decremento avvenga
-    *   ad ogni pressione del floatingActionButton, usato per il test
-    *   (come invece accadrebbe in build) */
-
-    //Raggiunto un nuovo exhibit, decremento l'energia
-    context.read<EnergyProvider>().decreaseEnergy();
+    *   (cosa non possibile in initState) */
+    hasWin = context.watch<ExhibitProvider>().nextIsWinnerExhibit();
+    noEnergy = context.watch<EnergyProvider>().energy == 0;
+    endGame = hasWin || noEnergy;
   }
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: (context.watch<EnergyProvider>().energy == 0) ? Colors.red : (context.watch<ExhibitProvider>().winnerExhibit == n) ? Colors.greenAccent : MyColors.backgroundYellow,
+      backgroundColor: endGame ? hasWin ? Colors.greenAccent : Colors.red : MyColors.backgroundYellow,
       appBar: AppBar(
-          automaticallyImplyLeading: context.watch<EnergyProvider>().energy > 0,
+          automaticallyImplyLeading: !endGame,
           title: const Text("Exhibit"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(MyList.nomiAnimali[n], style: const TextStyle(fontSize: 30)),
-            Image.asset("images/${MyList.pathAnimali[n]}", scale: 2),
+            Text(MyList.nomiAnimali[context.watch<ExhibitProvider>().nextExhibit], style: const TextStyle(fontSize: 30)),
+            Image.asset("images/${MyList.pathAnimali[context.watch<ExhibitProvider>().nextExhibit]}", scale: 2),
             trovato
                 ? SizedBox(
                   height: 250,
@@ -66,10 +66,10 @@ class _ExhibitPageState extends State<ExhibitPage> {
                       children: [
                         Column(
                           children: [
-                            Text("Alimentazione: ${MyList.alimAnimali[n]}",
+                            Text("Alimentazione: ${MyList.alimAnimali[context.watch<ExhibitProvider>().nextExhibit]}",
                                 style: const TextStyle(fontSize: 25)
                             ),
-                            Text("Località geografica: ${MyList.locAnimali[n]}",
+                            Text("Località geografica: ${MyList.locAnimali[context.watch<ExhibitProvider>().nextExhibit]}",
                                 style: const TextStyle(fontSize: 25)
                             ),
                           ],
@@ -81,8 +81,8 @@ class _ExhibitPageState extends State<ExhibitPage> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              const Text("Hai ancora ... punti energia",
-                                  style: TextStyle(fontSize: 25)),
+                              Text("Hai ancora ${context.watch<EnergyProvider>().energy} punti energia",
+                                  style: const TextStyle(fontSize: 25)),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
@@ -103,15 +103,17 @@ class _ExhibitPageState extends State<ExhibitPage> {
                                   ),
                                   ElevatedButton(
                                       onPressed: () {
-                                        Navigator.pushNamed(context, "/notVisited");
+                                        //------------------Objective----------------Tutorial------------------Home
+                                        if(endGame) { Navigator.pop(context); Navigator.pop(context); Navigator.pop(context); }
+                                        else { Navigator.pushNamed(context, "/notVisited"); }
                                       },
                                       style: ButtonStyle(
                                         fixedSize: WidgetStateProperty.all<Size>(
                                             const Size(200, 10)),
                                       ),
-                                      child: const Text(
-                                          "Cosa puoi visitare ora",
-                                          style: TextStyle(
+                                      child: Text(
+                                          endGame ? "Nuovo tentativo" : "Cosa puoi visitare ora",
+                                          style: const TextStyle(
                                             fontSize: 15,
                                           )
                                       )

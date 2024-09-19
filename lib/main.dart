@@ -2,6 +2,7 @@ import 'package:app_rl/pages/HomePage.dart';
 import 'package:app_rl/pages/RouteGenerator.dart';
 import 'package:app_rl/providers/EnergyProvider.dart';
 import 'package:app_rl/providers/ExhibitProvider.dart';
+import 'package:app_rl/providers/GameProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,9 +10,10 @@ void main() {
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => EnergyProvider()),
-        ChangeNotifierProvider(create: (_) => ExhibitProvider())
+        ChangeNotifierProvider(create: (_) => ExhibitProvider()),
+        ChangeNotifierProvider(create: (_) => GameProvider())
       ],
-      child: MyApp()));
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

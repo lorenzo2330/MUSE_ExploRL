@@ -3,7 +3,10 @@
 import 'package:flutter/material.dart';
 
 class EnergyProvider extends ChangeNotifier{
-  int _energy = 23;
+
+  static const int maxEnergy = 15;
+
+  int _energy = maxEnergy;
 
   int get energy => _energy;    //getter
 
@@ -13,4 +16,6 @@ class EnergyProvider extends ChangeNotifier{
 
   /*  Notify listeners avvisa tutti i listeners comunicando
   *   che è avvenuta una modifica (ha cambiato stato) */
+
+  void prepareToStart(){ _energy = maxEnergy; }
 }

@@ -1,5 +1,8 @@
+import 'package:app_rl/providers/EnergyProvider.dart';
+import 'package:app_rl/providers/ExhibitProvider.dart';
 import 'package:app_rl/res/myColors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../res/myButton.dart';
 import '../res/myInt.dart';
@@ -27,6 +30,17 @@ class HomePage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
+                /*
+                //Accedo a ExhibitProvider senza "ascoltare i cambiamenti"
+                final exhibitProvider = Provider.of<ExhibitProvider>(context, listen: false);
+                exhibitProvider.visit(exhibitProvider.nextExhibit);
+                exhibitProvider.unlockExhibit();
+
+                 */
+
+                context.read<ExhibitProvider>().prepareToStart();
+                context.read<EnergyProvider>().prepareToStart();
+
                 Navigator.pushNamed(context, "/tutorial");
               },
               style: ButtonStyle(
