@@ -1,10 +1,9 @@
-import 'dart:math';
 
-import 'package:app_rl/models/myList.dart';
 import 'package:app_rl/providers/EnergyProvider.dart';
 import 'package:app_rl/providers/ExhibitProvider.dart';
 import 'package:app_rl/res/myColors.dart';
 import 'package:app_rl/res/myInt.dart';
+import 'package:app_rl/res/myWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,17 +19,6 @@ class _ExhibitPageState extends State<ExhibitPage> {
 
 
   late bool endGame, noEnergy, hasWin;
-
-  final random = Random();
-
-  //var n = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    // Generate the random index once when the page is created
-    //n = random.nextInt(MyList.nomiAnimali.length);    //utile per testare, normalmente dovrebbe essere l'utente a scegliere il prossimo
-  }
 
   @override
   void didChangeDependencies() {
@@ -56,8 +44,9 @@ class _ExhibitPageState extends State<ExhibitPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(MyList.nomiAnimali[context.watch<ExhibitProvider>().nextExhibit], style: const TextStyle(fontSize: 30)),
-            Image.asset("images/${MyList.pathAnimali[context.watch<ExhibitProvider>().nextExhibit]}", scale: 2),
+            Text(context.watch<ExhibitProvider>().nextExhibit.scientificName, style: const TextStyle(fontSize: 30, fontStyle: FontStyle.italic,)),
+            Text(context.watch<ExhibitProvider>().nextExhibit.normalName, style: const TextStyle(fontSize: 30)),
+            Image.asset("images/${context.watch<ExhibitProvider>().nextExhibit.resPhoto}", scale: 2),
             trovato
                 ? SizedBox(
                   height: 250,
@@ -66,10 +55,10 @@ class _ExhibitPageState extends State<ExhibitPage> {
                       children: [
                         Column(
                           children: [
-                            Text("Alimentazione: ${MyList.alimAnimali[context.watch<ExhibitProvider>().nextExhibit]}",
+                            Text("Alimentazione: ${context.watch<ExhibitProvider>().nextExhibit.alim}",
                                 style: const TextStyle(fontSize: 25)
                             ),
-                            Text("Località geografica: ${MyList.locAnimali[context.watch<ExhibitProvider>().nextExhibit]}",
+                            Text("Località geografica: ${context.watch<ExhibitProvider>().nextExhibit.loc}",
                                 style: const TextStyle(fontSize: 25)
                             ),
                           ],
@@ -103,7 +92,7 @@ class _ExhibitPageState extends State<ExhibitPage> {
                                   ),
                                   ElevatedButton(
                                       onPressed: () {
-                                        //------------------Objective----------------Tutorial------------------Home
+                                        //--------------------Objective----------------Tutorial------------------Home
                                         if(endGame) { Navigator.pop(context); Navigator.pop(context); Navigator.pop(context); }
                                         else { Navigator.pushNamed(context, "/notVisited"); }
                                       },
@@ -133,8 +122,8 @@ class _ExhibitPageState extends State<ExhibitPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        const Text("Vai al piano {}",
-                            style: TextStyle(fontSize: 25)),
+                        Text("Vai al piano ${context.watch<ExhibitProvider>().nextExhibit.nPiano}",
+                            style: const TextStyle(fontSize: 25)),
                         const Text(
                           "Scansiona il QR code per scoprire le caratteristiche",
                           style: TextStyle(fontSize: 20),
@@ -148,22 +137,33 @@ class _ExhibitPageState extends State<ExhibitPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          setState(() {
-            trovato = !trovato;
-          });
-        },
+        onPressed: (){ setState(() { trovato = !trovato; }); },
         child: const Icon(Icons.qr_code_outlined),
       ),
       bottomNavigationBar: BottomAppBar(
         height: MyInt.bottomBarHeight.toDouble(),
-        child: Center(
-          child: Text(
-            "Punti energia: ${context.watch<EnergyProvider>().energy}",
-            style: const TextStyle(fontSize: 30),
-          ),
-        ),
+        child: MyWidgets.getBattery(charge: context.watch<EnergyProvider>().energy)
       ),
     );
   }
 }
+
+/*
+* Stack(
+          alignment: Alignment.center,
+          children: [
+            CustomPaint(
+              //size: const Size(300, 75),
+              painter: Battery(charge: ),
+            ),
+            Text(
+              "Energia rimanente: ${context.watch<EnergyProvider>().energy}",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black87,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            )
+          ],
+        ),*/

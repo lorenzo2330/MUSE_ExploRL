@@ -6,7 +6,10 @@ import 'package:app_rl/providers/GameProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'models/exhibit_list.dart';
+
 void main() {
+  ExhibitList.setNeighbors(); //Invoco una sola volta all'avvio, assegno i vari vicini ad ogni Exhibit
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => EnergyProvider()),

@@ -1,6 +1,6 @@
-import 'package:app_rl/models/myList.dart';
 import 'package:app_rl/providers/ExhibitProvider.dart';
 import 'package:app_rl/res/myColors.dart';
+import 'package:app_rl/res/myWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,22 +21,16 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.backgroundYellow,
-      appBar: AppBar(
-        title: const Text("Cosa hai già visitato"),
-      ),
+      appBar: AppBar(title: const Text("Cosa hai già visitato")),
       body: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Text(
-                "Tentativo numero: ",
-                style: TextStyle(fontSize: 20),
-              ),
+              padding: EdgeInsets.all(18.0),
+              child: Text("Tentativo numero: ", style: TextStyle(fontSize: 30))
             ),
-
             Container(
               color: MyColors.firstRowTable,
               child: Row(
@@ -45,11 +39,11 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
                   headers.length,
                   (index) => Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(4.0),
                       child: Text(
                         headers[index],
                         textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 30),
                       ),
                     ),
                   ),
@@ -65,41 +59,11 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
                   children: List.generate(
                       context.watch<ExhibitProvider>().visited.length,
                       (index) => Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            //mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Padding(
-                                // *** NOME ANIMALE ***
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  MyList.nomiAnimali[context
-                                      .watch<ExhibitProvider>()
-                                      .visited[index]],
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 20),
-                                ),
-                              ),
-                              Padding(
-                                // *** LOCATION ANIMALE ***
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  MyList.locAnimali[context
-                                      .watch<ExhibitProvider>()
-                                      .visited[index]],
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 20),
-                                ),
-                              ),
-                              Padding(
-                                // *** ALIMENTAZIONE ANIMALE ***
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  MyList.alimAnimali[context
-                                      .watch<ExhibitProvider>()
-                                      .visited[index]],
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 20),
-                                ),
-                              ),
+                              MyWidgets.getAlreadyVisitedRowField(context.watch<ExhibitProvider>().visited[index].shortName),
+                              MyWidgets.getAlreadyVisitedRowField(context.watch<ExhibitProvider>().visited[index].loc),
+                              MyWidgets.getAlreadyVisitedRowField(context.watch<ExhibitProvider>().visited[index].alim),
                             ],
                           )),
                 ),

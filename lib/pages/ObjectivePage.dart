@@ -1,4 +1,3 @@
-import 'package:app_rl/models/myList.dart';
 import 'package:app_rl/providers/ExhibitProvider.dart';
 import 'package:app_rl/res/myColors.dart';
 import 'package:app_rl/res/myInt.dart';
@@ -22,7 +21,7 @@ class ObjectivePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              "Vai a: ${MyList.nomiAnimali[context.watch<ExhibitProvider>().nextExhibit]}",
+              "Vai a: ${context.watch<ExhibitProvider>().nextExhibit.normalName}",
               style: const TextStyle(fontSize: 50),
             ),
             ElevatedButton(
@@ -30,7 +29,6 @@ class ObjectivePage extends StatelessWidget {
                   //Accedo a ExhibitProvider senza "ascoltare i cambiamenti"
                   final exhibitProvider = Provider.of<ExhibitProvider>(context, listen: false);
                   exhibitProvider.visit(exhibitProvider.nextExhibit);
-                  exhibitProvider.unlockExhibit();
 
                   context.read<EnergyProvider>().decreaseEnergy();
 

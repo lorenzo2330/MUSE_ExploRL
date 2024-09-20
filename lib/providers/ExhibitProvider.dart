@@ -1,68 +1,57 @@
 
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
-import '../models/myList.dart';
-
-class ExhibitProvider extends ChangeNotifier{
-
-  final random = Random();
+import '../models/Exhibit.dart';
+import '../models/exhibit_list.dart';
 
 
-  bool _firstExhibit = true;
+class ExhibitProvider extends ChangeNotifier {
 
-  bool get firstExhibit => _firstExhibit;
+  Exhibit _nextExhibit = ExhibitList.startingExhibit;
 
-  void setFirstExhibit(){ _firstExhibit = false; notifyListeners(); }
+  void setExhibit(Exhibit e) { _nextExhibit = e; notifyListeners(); }
 
+  Exhibit get nextExhibit => _nextExhibit;
 
-  int _nextExhibit = -1;
+  List<Exhibit> _visited = [];
 
-  int get nextExhibit => _nextExhibit == -1 ? getRandomExhibit() : _nextExhibit;
+  //List<Exhibit> _notVisited = [];
 
-  int getRandomExhibit(){ _nextExhibit = random.nextInt(MyList.nomiAnimali.length); return _nextExhibit; }
+  List<Exhibit> get visited => _visited;
 
-  void setExhibit(int n){ _nextExhibit = n; notifyListeners(); }
+  //List<Exhibit> get notVisited => _notVisited;
 
-
-  List<int> _visited = [];
-
-  List<int> _notVisited = [];
-
-  List<int> get visited => _visited;
-
-  List<int> get notVisited => _notVisited;
-
-  void visit(int n) { _visited.add(n); _notVisited.remove(n); notifyListeners(); }
-
-  void unlockExhibit(){
-    for(int i = 0; i < 3; i++){ //ne sblocco x ogni volta
-      int newExh = random.nextInt(MyList.nomiAnimali.length);
-      while(_visited.contains(newExh)) { newExh = random.nextInt(MyList.nomiAnimali.length); }
-      if(!_notVisited.contains(newExh)){ _notVisited.add(newExh); }
-    }
-  }
-
-
-
-  late int _winnerExhibit;
-
-  int get winnerExhibit => _winnerExhibit;    //getter
-
-  bool nextIsWinnerExhibit() { return _winnerExhibit == _nextExhibit; }
-
-  void generateRandomExhibit(){
-    _winnerExhibit = random.nextInt(MyList.nomiAnimali.length); //Genero un Exhibit vincente
+  void visit(Exhibit e) {
+    _visited.add(e);
+    //_notVisited.remove(e);
+    //unlockNearExhibit(e);
     notifyListeners();
   }
 
-  void prepareToStart(){
+  /*
+  //Aggiunge i vicini non ancora presenti
+  void unlockNearExhibit(Exhibit e) {
+    _notVisited = []; //Azzero le possibili destinazioni
+    for (var ex in e.neighbors) {
+      print("\nExh ${ex.nName} -> ");
+      if (!_notVisited.contains(ex)) {
+        _notVisited.add(ex);
+        print("Aggiungo\n");
+      }
+      else{
+        print("Non aggiungo\n");
+      }
+    }
+  }
+
+   */
+
+  bool nextIsWinnerExhibit() { return ExhibitList.winnerExhibit == _nextExhibit; }
+
+  void prepareToStart() {
     _visited = [];
-    _notVisited = [];
-    generateRandomExhibit();  //Genero un nuovo exhibit vincente
-    _firstExhibit = true;
-    _nextExhibit = -1;
+    //_notVisited = [];
+    _nextExhibit = ExhibitList.startingExhibit;
     notifyListeners();
   }
 
