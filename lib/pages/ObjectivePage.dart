@@ -20,21 +20,17 @@ class ObjectivePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(
-              "Vai a: ${context.watch<ExhibitProvider>().nextExhibit.normalName}",
-              style: const TextStyle(fontSize: 50),
+            const Text(
+              "**Descrizione obiettivo attività**",
+              style: TextStyle(fontSize: 50),
             ),
             ElevatedButton(
                 onPressed: (){
-                  //Accedo a ExhibitProvider senza "ascoltare i cambiamenti"
-                  final exhibitProvider = Provider.of<ExhibitProvider>(context, listen: false);
-                  exhibitProvider.visit(exhibitProvider.nextExhibit);
 
-                  context.read<EnergyProvider>().decreaseEnergy();
 
                   Navigator.pushNamed(context, "/exhibit");
                 },
-                child: const Text("Exhibit raggiunto")
+                child: const Text("Avvio")
             )
           ],
         ),

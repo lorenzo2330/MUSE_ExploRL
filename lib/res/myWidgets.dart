@@ -1,10 +1,8 @@
-
 import 'package:flutter/material.dart';
 
 import '../models/Battery.dart';
 
-class MyWidgets{
-
+class MyWidgets {
   static Stack getBattery({required int charge}) {
     return Stack(
       alignment: Alignment.center,
@@ -26,7 +24,7 @@ class MyWidgets{
     );
   }
 
-  static Expanded getAlreadyVisitedRowField(String text){
+  static Expanded getAlreadyVisitedRowField(String text) {
     /*  Expanded bilancia lo spazio disponibile tra le colonne,
     *   il testo sarà quindi centrato in ciascuna colonna,
     *   grazie all'attributo textAlign: TextAlign.center  */
@@ -42,7 +40,7 @@ class MyWidgets{
     );
   }
 
-  static Padding getNotVisitedRowField(String text){
+  static Padding getNotVisitedRowField(String text) {
     return Padding(
       // *** NOME ANIMALE ***
       padding: const EdgeInsets.all(8.0),
@@ -54,7 +52,7 @@ class MyWidgets{
     );
   }
 
-  static Padding getNotVisitedTitleField(String text){
+  static Padding getNotVisitedTitleField(String text) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Text(
@@ -65,5 +63,7 @@ class MyWidgets{
     );
   }
 
-
+  static Text detailsOfExhibit(String text) {
+    return Text(text, style: const TextStyle(fontSize: 25));
+  }
 }

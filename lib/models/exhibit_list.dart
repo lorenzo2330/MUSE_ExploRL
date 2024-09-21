@@ -156,23 +156,23 @@ class ExhibitList {
       resPhoto: "imgOrnitorinco.png");
 
   static void setNeighbors() {
-    springbok.neighbors = [wallabyDalColloRosso, lemureCatta];
-    capibara.neighbors = [opossumDellaVirginia, cervoNobile];
+    springbok.neighbors = [lemureCatta, wallabyDalColloRosso];
+    capibara.neighbors = [cervoNobile, opossumDellaVirginia];
     cervoNobile.neighbors = [capibara, tasso, wallabyDalColloRosso];
     wallabyDalColloRosso.neighbors = [cervoNobile, springbok];
     lemureCatta.neighbors = [leoneAfricano, springbok];
-    opossumDellaVirginia.neighbors = [tasso, capibara];
-    tasso.neighbors = [opossumDellaVirginia, linceEurasiatica, cervoNobile];
-    leoneAfricano.neighbors = [dingo, otariaOrsinaDelCapo, lemureCatta];
-    linceEurasiatica.neighbors = [tricheco, dingo, tasso];
-    dingo.neighbors = [linceEurasiatica, leoneAfricano];
-    otariaOrsinaDelCapo.neighbors = [oritteropo, leoneAfricano];
+    opossumDellaVirginia.neighbors = [capibara, tasso];
+    tasso.neighbors = [cervoNobile, linceEurasiatica, opossumDellaVirginia];
+    leoneAfricano.neighbors = [dingo, lemureCatta, otariaOrsinaDelCapo];
+    linceEurasiatica.neighbors = [dingo, tasso, tricheco];
+    dingo.neighbors = [leoneAfricano, linceEurasiatica];
+    otariaOrsinaDelCapo.neighbors = [leoneAfricano, oritteropo];
     leoneMarinoSudamericano.neighbors = [formichiereGigante, tricheco];
-    tricheco.neighbors = [leoneMarinoSudamericano,  riccioComune, linceEurasiatica];
+    tricheco.neighbors = [leoneMarinoSudamericano, linceEurasiatica, riccioComune];
     oritteropo.neighbors = [ornitorinco, otariaOrsinaDelCapo];
-    formichiereGigante.neighbors = [riccioComune, leoneMarinoSudamericano];
+    formichiereGigante.neighbors = [leoneMarinoSudamericano, riccioComune];
     riccioComune.neighbors = [formichiereGigante, ornitorinco, tricheco];
-    ornitorinco.neighbors = [riccioComune, oritteropo];
+    ornitorinco.neighbors = [oritteropo, riccioComune];
   }
 
   static Exhibit winnerExhibit = leoneMarinoSudamericano;

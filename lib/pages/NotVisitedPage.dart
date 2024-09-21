@@ -1,3 +1,4 @@
+import 'package:app_rl/providers/GameProvider.dart';
 import 'package:app_rl/res/myColors.dart';
 import 'package:app_rl/res/myWidgets.dart';
 import 'package:flutter/material.dart';
@@ -48,8 +49,8 @@ class _NotVisitedPageState extends State<NotVisitedPage> {
                             listen: false);
                         exhibitProvider
                             .setExhibit(exhibitProvider.nextExhibit.neighbors[index]);
+                        context.read<GameProvider>().daTrovare();
                         Navigator.pop(context); // Torno a ExhibitPage
-                        Navigator.pop(context); // Torno a ObjectivePage
                       },
                       child: Card(
                         child: SizedBox(
