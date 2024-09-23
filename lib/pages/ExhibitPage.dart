@@ -3,6 +3,7 @@ import 'package:app_rl/providers/ExhibitProvider.dart';
 import 'package:app_rl/providers/GameProvider.dart';
 import 'package:app_rl/res/myColors.dart';
 import 'package:app_rl/res/myInt.dart';
+import 'package:app_rl/res/myQR.dart';
 import 'package:app_rl/res/myWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,11 +33,12 @@ class _ExhibitPageState extends State<ExhibitPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: endGame
-          ? hasWin
+      backgroundColor:
+          context.watch<GameProvider>().trovato && endGame
+            ? hasWin
               ? Colors.greenAccent
               : Colors.red
-          : MyColors.backgroundYellow,
+            : MyColors.backgroundYellow,
       appBar: AppBar(
         automaticallyImplyLeading: !endGame,
         title: const Text("Exhibit"),
@@ -45,107 +47,11 @@ class _ExhibitPageState extends State<ExhibitPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(context.watch<ExhibitProvider>().nextExhibit.scientificName,
-                style: const TextStyle(
-                  fontSize: 30,
-                  fontStyle: FontStyle.italic,
-                )),
-            Text(context.watch<ExhibitProvider>().nextExhibit.normalName,
-                style: const TextStyle(fontSize: 30)),
-            Image.asset(
-                "images/${context.watch<ExhibitProvider>().nextExhibit.resPhoto}",
-                scale: 2),
+            MyWidgets.namesOfExhibits(context),
+            MyWidgets.imageBox(context),
             context.watch<GameProvider>().trovato
-                ? SizedBox(
-                    height: 250,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          children: [
-                            MyWidgets.detailsOfExhibit("Alimentazione: ${context.watch<ExhibitProvider>().nextExhibit.alim}"),
-                            MyWidgets.detailsOfExhibit("Località geografica: ${context.watch<ExhibitProvider>().nextExhibit.loc}")
-                          ],
-                        ),
-                        Container(
-                          height: 100,
-                          width: double.infinity,
-                          color: Colors.white,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                  "Hai ancora ${context.watch<EnergyProvider>().energy} punti energia",
-                                  style: const TextStyle(fontSize: 25)),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, "/alreadyVisited");
-                                      },
-                                      style: ButtonStyle(
-                                        fixedSize:
-                                            WidgetStateProperty.all<Size>(
-                                                const Size(200, 10)),
-                                      ),
-                                      child: const Text("Cosa hai già visitato",
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                          ))),
-                                  ElevatedButton(
-                                      onPressed: () {
-                                        //--------------------Objective----------------Tutorial------------------Home
-                                        if (endGame) {
-                                          Navigator.pop(context);
-                                          Navigator.pop(context);
-                                          Navigator.pop(context);
-                                        } else {
-                                          Navigator.pushNamed(
-                                              context, "/notVisited");
-                                        }
-                                      },
-                                      style: ButtonStyle(
-                                        fixedSize:
-                                            WidgetStateProperty.all<Size>(
-                                                const Size(200, 10)),
-                                      ),
-                                      child: Text(
-                                          endGame
-                                              ? "Nuovo tentativo"
-                                              : "Cosa puoi visitare ora",
-                                          style: const TextStyle(
-                                            fontSize: 15,
-                                          )))
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                : Container(
-                    height: 250,
-                    width: 350,
-                    color: Colors.white,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                            "Vai al piano ${context.watch<ExhibitProvider>().nextExhibit.nPiano}",
-                            style: const TextStyle(fontSize: 25)),
-                        const Text(
-                          "Scansiona il QR code per scoprire le caratteristiche",
-                          style: TextStyle(fontSize: 20),
-                          textAlign: TextAlign.center,
-                        ),
-                        Image.asset("images/imgScannerQR.png"),
-                      ],
-                    ),
-                  ),
+                ? MyWidgets.findedExhibit(context, endGame)
+                : const MyQr()
           ],
         ),
       ),
@@ -159,6 +65,7 @@ class _ExhibitPageState extends State<ExhibitPage> {
         child: const Icon(Icons.qr_code_outlined),
       ),
       bottomNavigationBar: BottomAppBar(
+          color: MyColors.backgroundYellow,
           height: MyInt.bottomBarHeight.toDouble(),
           child: MyWidgets.getBattery(
               charge: context.watch<EnergyProvider>().energy)),
@@ -166,22 +73,3 @@ class _ExhibitPageState extends State<ExhibitPage> {
   }
 }
 
-/*
-* Stack(
-          alignment: Alignment.center,
-          children: [
-            CustomPaint(
-              //size: const Size(300, 75),
-              painter: Battery(charge: ),
-            ),
-            Text(
-              "Energia rimanente: ${context.watch<EnergyProvider>().energy}",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black87,
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-              ),
-            )
-          ],
-        ),*/

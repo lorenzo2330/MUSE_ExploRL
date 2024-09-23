@@ -1,5 +1,6 @@
 import 'package:app_rl/providers/EnergyProvider.dart';
 import 'package:app_rl/providers/ExhibitProvider.dart';
+import 'package:app_rl/providers/GameProvider.dart';
 import 'package:app_rl/res/myColors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +41,7 @@ class HomePage extends StatelessWidget {
 
                 context.read<ExhibitProvider>().prepareToStart();
                 context.read<EnergyProvider>().prepareToStart();
+                context.read<GameProvider>().daTrovare();
 
                 Navigator.pushNamed(context, "/tutorial");
               },

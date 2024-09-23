@@ -1,3 +1,4 @@
+import 'package:app_rl/pages/TutorialPageEnergy.dart';
 import 'package:app_rl/pages/TutorialPageInfo.dart';
 import 'package:app_rl/pages/TutorialPageQR.dart';
 import 'package:app_rl/pages/TutorialPageTables.dart';
@@ -12,13 +13,14 @@ class TutorialPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 3,
+        length: 4,
         child: Scaffold(
           backgroundColor: MyColors.backgroundYellow,
           appBar: AppBar(
             title: const Text(MyString.tutorial),
             bottom: const TabBar(tabs: [
               Tab(icon: Icon(Icons.info_outline)),
+              Tab(icon: Icon(Icons.battery_5_bar_outlined)),
               Tab(icon: Icon(Icons.qr_code_outlined)),
               Tab(icon: Icon(Icons.grid_4x4_outlined)),
             ]),
@@ -26,6 +28,7 @@ class TutorialPage extends StatelessWidget {
           body: const TabBarView(
             children: [
               TutorialPageInfo(),
+              TutorialPageEnergy(),
               TutorialPageQR(),
               TutorialPageTables(),
             ],

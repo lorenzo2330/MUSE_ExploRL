@@ -21,7 +21,7 @@ class Battery extends CustomPainter {
 
   //Dimensioni della batteria  (completa)
   final double batteryWidth = 300;
-  final double batteryHeight = 75;
+  final double batteryHeight = 50;
 
   //Bordo della batteria
   final batteryBorder = Paint()
