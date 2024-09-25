@@ -1,11 +1,11 @@
-import 'package:app_rl/providers/ExhibitProvider.dart';
-import 'package:app_rl/res/myColors.dart';
-import 'package:app_rl/res/myWidgets.dart';
+import 'package:app_rl/providers/exhibit_provider.dart';
+import 'package:app_rl/res/my_colors.dart';
+import 'package:app_rl/res/my_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/EnergyProvider.dart';
-import '../res/myInt.dart';
+import '../providers/energy_provider.dart';
+import '../res/my_int.dart';
 
 class AlreadyVisitedPage extends StatefulWidget {
   const AlreadyVisitedPage({super.key});

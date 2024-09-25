@@ -1,13 +1,5 @@
 
 class Exhibit {
-  String normalName;
-  String scientificName;
-  String shortName;
-  String alim;
-  String loc;
-  int nPiano;
-  String resPhoto;
-  List<Exhibit> neighbors = [];
 
   Exhibit({
     required this.normalName,
@@ -18,4 +10,15 @@ class Exhibit {
     required this.nPiano,
     required this.resPhoto,
   });
+
+  String normalName;
+  String scientificName;
+  String shortName;
+  String alim;
+  String loc;
+  int nPiano;
+  String resPhoto;
+  List<Exhibit> neighbors = [];
 }
+
+

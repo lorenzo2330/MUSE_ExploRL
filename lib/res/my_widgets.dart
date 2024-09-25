@@ -1,10 +1,11 @@
-import 'package:app_rl/res/myColors.dart';
+import 'package:app_rl/res/my_colors.dart';
+import 'package:app_rl/res/my_int.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/Battery.dart';
-import '../providers/ExhibitProvider.dart';
-import 'myButton.dart';
+import '../models/battery.dart';
+import '../providers/exhibit_provider.dart';
+import 'my_button.dart';
 
 class MyWidgets {
   static Stack getBattery({required int charge}) {
@@ -60,25 +61,23 @@ class MyWidgets {
     );
   }
 
-  static Expanded getNotVisitedField(String text, bool isTitle) {
+  static Padding getNotVisitedField(String text, bool isTitle) {
     /*  Expanded bilancia lo spazio disponibile tra le colonne,
     *   il testo sarà quindi centrato in ciascuna colonna,
     *   grazie all'attributo textAlign: TextAlign.center  */
-    return Expanded(
-      child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            text,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: isTitle ? 25 : 20),
-          )),
-    );
+    return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          text,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: isTitle ? 25 : 20),
+        ));
   }
 
   static SizedBox findedExhibit(BuildContext context, bool endGame) {
     var exProv = context.watch<ExhibitProvider>();
     return SizedBox(
-      height: 250,
+      height: MyInt.qrSize.height,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

@@ -1,5 +1,5 @@
 
-import 'package:app_rl/res/myInt.dart';
+import 'package:app_rl/res/my_int.dart';
 import 'package:flutter/material.dart';
 
 class TutorialPageInfo extends StatelessWidget {

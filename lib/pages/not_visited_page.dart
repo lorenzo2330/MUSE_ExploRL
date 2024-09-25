@@ -1,11 +1,10 @@
-import 'package:app_rl/providers/GameProvider.dart';
-import 'package:app_rl/res/myColors.dart';
-import 'package:app_rl/res/myWidgets.dart';
+import 'package:app_rl/res/my_colors.dart';
+import 'package:app_rl/res/my_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/EnergyProvider.dart';
-import '../providers/ExhibitProvider.dart';
-import '../res/myInt.dart';
+import '../providers/energy_provider.dart';
+import '../providers/exhibit_provider.dart';
+import '../res/my_int.dart';
 
 class NotVisitedPage extends StatefulWidget {
   const NotVisitedPage({super.key});
@@ -50,7 +49,7 @@ class _NotVisitedPageState extends State<NotVisitedPage> {
                                     listen: false);
                             exhibitProvider.setExhibit(
                                 exhibitProvider.nextExhibit.neighbors[index]);
-                            context.read<GameProvider>().daTrovare();
+                            context.read<ExhibitProvider>().setDaScansionare();
                             Navigator.pop(context); // Torno a ExhibitPage
                           },
                           child: Card(

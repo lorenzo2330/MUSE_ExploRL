@@ -1,4 +1,4 @@
-import 'package:app_rl/models/Exhibit.dart';
+import 'package:app_rl/models/exhibit.dart';
 
 class ExhibitList {
 
@@ -155,7 +155,28 @@ class ExhibitList {
       nPiano: -1,
       resPhoto: "imgOrnitorinco.png");
 
+  static Exhibit lupoGrigio = Exhibit(
+      normalName: "Lupo (grigio)",
+      scientificName: "Canis lupus",
+      shortName: "Lupo",
+      alim: "4(*)",
+      loc: "Eurasia",
+      nPiano: 0,
+      resPhoto: "imgLupoGrigio.png"
+  );
+
+  static Exhibit castoroEuropeo = Exhibit(
+      normalName: "Castoro europeo",
+      scientificName: "none",
+      shortName: "none",
+      alim: "none",
+      loc: "none",
+      nPiano: 0,
+      resPhoto: "none.png"
+  );
+
   static void setNeighbors() {
+    //Game
     springbok.neighbors = [lemureCatta, wallabyDalColloRosso];
     capibara.neighbors = [cervoNobile, opossumDellaVirginia];
     cervoNobile.neighbors = [capibara, tasso, wallabyDalColloRosso];
@@ -173,9 +194,14 @@ class ExhibitList {
     formichiereGigante.neighbors = [leoneMarinoSudamericano, riccioComune];
     riccioComune.neighbors = [formichiereGigante, ornitorinco, tricheco];
     ornitorinco.neighbors = [oritteropo, riccioComune];
+
+    //Tutorial
+    lupoGrigio.neighbors = [castoroEuropeo, leoneAfricano];
   }
 
   static Exhibit winnerExhibit = leoneMarinoSudamericano;
 
   static Exhibit startingExhibit = opossumDellaVirginia;
+
+  static Exhibit tutorialExhibit = lupoGrigio;
 }

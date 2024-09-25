@@ -1,10 +1,10 @@
-import 'package:app_rl/providers/EnergyProvider.dart';
-import 'package:app_rl/providers/ExhibitProvider.dart';
-import 'package:app_rl/providers/GameProvider.dart';
-import 'package:app_rl/res/myColors.dart';
-import 'package:app_rl/res/myInt.dart';
-import 'package:app_rl/res/myQR.dart';
-import 'package:app_rl/res/myWidgets.dart';
+import 'package:app_rl/providers/energy_provider.dart';
+import 'package:app_rl/providers/exhibit_provider.dart';
+import 'package:app_rl/providers/game_provider.dart';
+import 'package:app_rl/res/my_colors.dart';
+import 'package:app_rl/res/my_int.dart';
+import 'package:app_rl/res/my_qr.dart';
+import 'package:app_rl/res/my_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -49,16 +49,16 @@ class _ExhibitPageState extends State<ExhibitPage> {
           children: [
             MyWidgets.namesOfExhibits(context),
             MyWidgets.imageBox(context),
-            context.watch<GameProvider>().trovato
+            context.watch<ExhibitProvider>().scansioneCorretta
                 ? MyWidgets.findedExhibit(context, endGame)
-                : const MyQr()
+                : MyQr(context: context)
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //Segno che ho: scansionato l'exhibit => visto l'exhibit => "consumato" un'energia,
-          context.read<GameProvider>().scanned();
+          context.read<ExhibitProvider>().setScansioneCorretta();
           context.read<ExhibitProvider>().visit(context.read<ExhibitProvider>().nextExhibit);
           context.read<EnergyProvider>().decreaseEnergy();
         },

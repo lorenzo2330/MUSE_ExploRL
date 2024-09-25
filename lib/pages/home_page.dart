@@ -1,13 +1,12 @@
-import 'package:app_rl/providers/EnergyProvider.dart';
-import 'package:app_rl/providers/ExhibitProvider.dart';
-import 'package:app_rl/providers/GameProvider.dart';
-import 'package:app_rl/res/myColors.dart';
+import 'package:app_rl/providers/energy_provider.dart';
+import 'package:app_rl/providers/exhibit_provider.dart';
+import 'package:app_rl/res/my_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../res/myButton.dart';
-import '../res/myInt.dart';
-import '../res/myString.dart';
+import '../res/my_button.dart';
+import '../res/my_int.dart';
+import '../res/my_string.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -41,7 +40,6 @@ class HomePage extends StatelessWidget {
 
                 context.read<ExhibitProvider>().prepareToStart();
                 context.read<EnergyProvider>().prepareToStart();
-                context.read<GameProvider>().daTrovare();
 
                 Navigator.pushNamed(context, "/tutorial");
               },

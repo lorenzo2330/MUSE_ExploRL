@@ -1,14 +1,13 @@
-import 'package:app_rl/pages/HomePage.dart';
-import 'package:app_rl/pages/RouteGenerator.dart';
-import 'package:app_rl/providers/EnergyProvider.dart';
-import 'package:app_rl/providers/ExhibitProvider.dart';
-import 'package:app_rl/providers/GameProvider.dart';
+import 'package:app_rl/pages/home_page.dart';
+import 'package:app_rl/pages/route_generator.dart';
+import 'package:app_rl/providers/energy_provider.dart';
+import 'package:app_rl/providers/exhibit_provider.dart';
+import 'package:app_rl/providers/game_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'models/exhibit_list.dart';
 
-void main() {
+void main() async {
   ExhibitList.setNeighbors(); //Invoco una sola volta all'avvio, assegno i vari vicini ad ogni Exhibit
   runApp(MultiProvider(
       providers: [

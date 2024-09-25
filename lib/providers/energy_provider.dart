@@ -12,7 +12,7 @@ class EnergyProvider extends ChangeNotifier{
 
   //void plusOne(){ _energy++; notifyListeners(); } //nel caso ci fosse un modo per incrementare energia
 
-  void decreaseEnergy(){ _energy--; notifyListeners(); }
+  void decreaseEnergy(){ if(_energy > 0) { _energy--; notifyListeners(); } }
 
   /*  Notify listeners avvisa tutti i listeners comunicando
   *   che è avvenuta una modifica (ha cambiato stato) */

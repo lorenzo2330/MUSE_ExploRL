@@ -1,7 +1,9 @@
+
 import 'package:flutter/material.dart';
 
-import 'myInt.dart';
-import 'myString.dart';
+import 'my_int.dart';
+import 'my_string.dart';
+
 
 class MyButton {
   static ElevatedButton homePageBottomButton = ElevatedButton(
@@ -46,6 +48,8 @@ class MyButton {
   static ElevatedButton restartButton(BuildContext context) {
     return ElevatedButton(
         onPressed: () {
+          //Salvo i dati della partita
+
           Navigator.pop(context); //Objective
           Navigator.pop(context); //Tutorial
           Navigator.pop(context); //Home
@@ -58,4 +62,7 @@ class MyButton {
               fontSize: 15,
             )));
   }
+
+
+
 }

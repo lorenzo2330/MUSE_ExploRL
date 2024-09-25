@@ -1,13 +1,13 @@
 
-import 'package:app_rl/pages/AlreadyVisitedPage.dart';
-import 'package:app_rl/pages/ExhibitPage.dart';
-import 'package:app_rl/pages/HomePage.dart';
-import 'package:app_rl/pages/NotVisitedPage.dart';
-import 'package:app_rl/pages/ObjectivePage.dart';
-import 'package:app_rl/pages/TutorialPage.dart';
+import 'package:app_rl/pages/already_visited_page.dart';
+import 'package:app_rl/pages/exhibit_page.dart';
+import 'package:app_rl/pages/home_page.dart';
+import 'package:app_rl/pages/not_visited_page.dart';
+import 'package:app_rl/pages/objective_page.dart';
+import 'package:app_rl/pages/tutorial_page.dart';
 import 'package:flutter/material.dart';
 
-import 'ErrorPage.dart';
+import 'error_page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

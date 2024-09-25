@@ -1,6 +1,7 @@
 
-import 'package:app_rl/providers/EnergyProvider.dart';
 import 'package:flutter/material.dart';
+
+import '../providers/energy_provider.dart';
 
 class Battery extends CustomPainter {
 
