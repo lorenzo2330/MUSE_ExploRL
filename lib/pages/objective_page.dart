@@ -7,8 +7,14 @@ import 'package:provider/provider.dart';
 import '../providers/energy_provider.dart';
 import '../res/my_widgets.dart';
 
-class ObjectivePage extends StatelessWidget {
+class ObjectivePage extends StatefulWidget {
   const ObjectivePage({super.key});
+
+  @override
+  State<ObjectivePage> createState() => _ObjectivePageState();
+}
+
+class _ObjectivePageState extends State<ObjectivePage> {
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +44,6 @@ class ObjectivePage extends StatelessWidget {
                   },
                   child: const Text("Avvio")
               ),
-
-
             ],
           ),
         ),

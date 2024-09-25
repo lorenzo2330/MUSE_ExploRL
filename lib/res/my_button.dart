@@ -1,9 +1,30 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/exhibit.dart';
+import '../providers/exhibit_provider.dart';
 import 'my_int.dart';
 import 'my_string.dart';
 
+void saveData(List<Exhibit> visited) async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  late int nPartite =
+      prefs.getInt("nMatch") ?? 0; //Recupero il numero di partite
+
+  nPartite++; //Aggiorno aggiungendo la partita appena conclusa
+
+  prefs.setInt("nMatch",
+      nPartite); //Salvo nuovamente il numero di partite che sono state fatte
+
+  List<String> match = [];
+  for (Exhibit ex in visited) {
+    match.add(ex.normalName);
+  }
+  prefs.setStringList("Game-$nPartite", match);
+}
 
 class MyButton {
   static ElevatedButton homePageBottomButton = ElevatedButton(
@@ -49,6 +70,7 @@ class MyButton {
     return ElevatedButton(
         onPressed: () {
           //Salvo i dati della partita
+          saveData(context.read<ExhibitProvider>().visited);
 
           Navigator.pop(context); //Objective
           Navigator.pop(context); //Tutorial
@@ -60,7 +82,8 @@ class MyButton {
         child: const Text("Nuovo tentativo",
             style: TextStyle(
               fontSize: 15,
-            )));
+            ))
+    );
   }
 
 

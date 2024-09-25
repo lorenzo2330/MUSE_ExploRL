@@ -16,7 +16,6 @@ class ExhibitPage extends StatefulWidget {
 }
 
 class _ExhibitPageState extends State<ExhibitPage> {
-
   late bool endGame, noEnergy, hasWin;
 
   @override
@@ -33,12 +32,11 @@ class _ExhibitPageState extends State<ExhibitPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          context.watch<GameProvider>().trovato && endGame
-            ? hasWin
+      backgroundColor: context.watch<GameProvider>().trovato && endGame
+          ? hasWin
               ? Colors.greenAccent
               : Colors.red
-            : MyColors.backgroundYellow,
+          : MyColors.backgroundYellow,
       appBar: AppBar(
         automaticallyImplyLeading: !endGame,
         title: const Text("Exhibit"),
@@ -59,7 +57,9 @@ class _ExhibitPageState extends State<ExhibitPage> {
         onPressed: () {
           //Segno che ho: scansionato l'exhibit => visto l'exhibit => "consumato" un'energia,
           context.read<ExhibitProvider>().setScansioneCorretta();
-          context.read<ExhibitProvider>().visit(context.read<ExhibitProvider>().nextExhibit);
+          context
+              .read<ExhibitProvider>()
+              .visit(context.read<ExhibitProvider>().nextExhibit);
           context.read<EnergyProvider>().decreaseEnergy();
         },
         child: const Icon(Icons.qr_code_outlined),
@@ -72,4 +72,3 @@ class _ExhibitPageState extends State<ExhibitPage> {
     );
   }
 }
-

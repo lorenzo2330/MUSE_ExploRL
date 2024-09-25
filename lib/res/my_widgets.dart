@@ -7,6 +7,8 @@ import '../models/battery.dart';
 import '../providers/exhibit_provider.dart';
 import 'my_button.dart';
 
+
+
 class MyWidgets {
   static Stack getBattery({required int charge}) {
     return Stack(
@@ -75,7 +77,7 @@ class MyWidgets {
   }
 
   static SizedBox findedExhibit(BuildContext context, bool endGame) {
-    var exProv = context.watch<ExhibitProvider>();
+    var exProv = context.read<ExhibitProvider>();
     return SizedBox(
       height: MyInt.qrSize.height,
       child: Column(
@@ -94,8 +96,8 @@ class MyWidgets {
             children: [
               MyButton.alreadyVisitedButton(context),
               endGame
-                  ? MyButton.restartButton(context)
-                  : MyButton.notVisitedButton(context),
+                ? MyButton.restartButton(context)
+                : MyButton.notVisitedButton(context),
             ],
           )
         ],

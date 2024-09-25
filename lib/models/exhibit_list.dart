@@ -204,4 +204,29 @@ class ExhibitList {
   static Exhibit startingExhibit = opossumDellaVirginia;
 
   static Exhibit tutorialExhibit = lupoGrigio;
+
+  static Exhibit getExhibitByName(String name){
+    switch(name){
+    case "Springbok" : return springbok;
+    case "Capibara" : return capibara;
+    case "Cervo nobile" : return cervoNobile;
+    case "Wallaby dal collo rosso" : return wallabyDalColloRosso;
+    case "Lemure catta" : return lemureCatta;
+    case "Opossum della Virginia" : return opossumDellaVirginia;
+    case "Tasso" : return tasso;
+    case "Leone (africano)" : return leoneAfricano;
+    case "Lince eurasiatica" : return linceEurasiatica;
+    case "Dingo" : return dingo;
+    case "Otaria orsina del Capo" : return otariaOrsinaDelCapo;
+    case "Leone marino sudamericano" : return leoneMarinoSudamericano;
+    case "Tricheco" : return tricheco;
+    case "Oritteropo" : return oritteropo;
+    case "Formichiere gigante" : return formichiereGigante;
+    case "Riccio comune" : return riccioComune;
+    case "Ornitorinco" : return ornitorinco;
+    case "Lupo (grigio)" : return lupoGrigio;
+    case "Castoro europeo" : return castoroEuropeo;
+    default:  return startingExhibit;
+    }
+  }
 }
