@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/battery.dart';
+import '../models/exhibit.dart';
 import '../providers/exhibit_provider.dart';
 import 'my_button.dart';
 
@@ -79,7 +80,7 @@ class MyWidgets {
         ));
   }
 
-  static SizedBox findedExhibit(BuildContext context, bool endGame) {
+  static SizedBox findedExhibit(BuildContext context, bool noEnergy, bool hasWin) {
     var exProv = context.read<ExhibitProvider>();
     return SizedBox(
       height: MyInt.qrSize.height,
@@ -94,14 +95,30 @@ class MyWidgets {
                   "Località geografica: ${exProv.nextExhibit.loc}")
             ],
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              MyButton.alreadyVisitedButton(context),
-              endGame
-                ? MyButton.restartButton(context, false)
-                : MyButton.notVisitedButton(context),
-            ],
+          SizedBox(
+            height: 250,
+            width: 300,
+            child: Container(
+              color: noEnergy || hasWin ? noEnergy ? Colors.deepOrangeAccent : Colors.lightGreenAccent : MyColors.backgroundYellow,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    noEnergy || hasWin ? noEnergy ? "Hai esaurito tutti i punti energia" : "Hai trovato l'exhibit vincente!" : "",
+                    style: TextStyle(fontSize: noEnergy || hasWin ? 25 : 1),
+                    textAlign: TextAlign.center,
+                  ),
+                  Column(
+                    children: [
+                      MyButton.alreadyVisitedButton(context),
+                      noEnergy || hasWin
+                        ? MyButton.restartButton(context, false)
+                        : MyButton.notVisitedButton(context),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           )
         ],
       ),
@@ -112,24 +129,22 @@ class MyWidgets {
     return Text(text, style: const TextStyle(fontSize: 25));
   }
 
-  static Column namesOfExhibits(BuildContext context) {
-    var exProv = context.watch<ExhibitProvider>();
+  static Column namesOfExhibits(Exhibit e) {
     return Column(
       children: [
-        Text(exProv.nextExhibit.scientificName,
+        Text(e.scientificName,
             style: const TextStyle(
               fontSize: 22,
               fontStyle: FontStyle.italic,
             )),
-        Text(exProv.nextExhibit.normalName,
+        Text(e.normalName,
             style: const TextStyle(fontSize: 22)),
       ],
     );
   }
 
-  static SizedBox imageBox(BuildContext context) {
-    var exProv = context.watch<ExhibitProvider>();
-    var imgPath = "images/${exProv.nextExhibit.resPhoto}";
+  static SizedBox imageBox(BuildContext context, Exhibit e) {
+    var imgPath = "images/${e.resPhoto}";
     return SizedBox(
       height: 150,
       width: 150,
@@ -146,7 +161,7 @@ class MyWidgets {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [       //Immagine più grande
-                        MyWidgets.namesOfExhibits(context),
+                        MyWidgets.namesOfExhibits(e),
                         Image.asset(imgPath),
                         TextButton(
                             onPressed: () { Navigator.of(context).pop(); }, //Chiude il popup

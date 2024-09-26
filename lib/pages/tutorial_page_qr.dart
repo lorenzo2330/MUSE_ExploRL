@@ -3,6 +3,7 @@ import 'package:app_rl/res/my_int.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/exhibit_list.dart';
 import '../res/my_qr.dart';
 import '../res/my_widgets.dart';
 
@@ -24,8 +25,8 @@ class _TutorialPageQRState extends State<TutorialPageQR> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            MyWidgets.namesOfExhibits(context),
-            MyWidgets.imageBox(context),
+            MyWidgets.namesOfExhibits(ExhibitList.lupoGrigio),
+            MyWidgets.imageBox(context, ExhibitList.lupoGrigio),
             context.read<ExhibitProvider>().scansioneCorrettaTutorial
                 ? SizedBox(
                     height: MyInt.qrSize.height,
@@ -38,17 +39,21 @@ class _TutorialPageQRState extends State<TutorialPageQR> {
                             fontSize: 20
                           )
                         ),
-                        const Text(
-                          "Località geografica: Eurasia",
-                          style: TextStyle(
-                            fontSize: 20
-                          ),
-                        ),
-                        const Text(
-                          "Numero di dita appoggiate a terra: 4",
-                          style: TextStyle(
-                              fontSize: 20
-                          ),
+                        const Column(
+                          children: [
+                            Text(
+                              "Località geografica: Eurasia",
+                              style: TextStyle(
+                                fontSize: 20
+                              ),
+                            ),
+                            Text(
+                              "Numero di dita appoggiate a terra: 4",
+                              style: TextStyle(
+                                  fontSize: 20
+                              ),
+                            ),
+                          ],
                         ),
                         ElevatedButton(
                             onPressed: (){ context.read<ExhibitProvider>().setDaScansionare(); },

@@ -45,14 +45,15 @@ class _ExhibitPageState extends State<ExhibitPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            MyWidgets.namesOfExhibits(context),
-            MyWidgets.imageBox(context),
+            MyWidgets.namesOfExhibits(context.read<ExhibitProvider>().nextExhibit),
+            MyWidgets.imageBox(context, context.read<ExhibitProvider>().nextExhibit),
             context.watch<ExhibitProvider>().scansioneCorretta
-                ? MyWidgets.findedExhibit(context, endGame)
+                ? MyWidgets.findedExhibit(context, noEnergy, hasWin)
                 : MyQr(context: context)
           ],
         ),
       ),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //Segno che ho: scansionato l'exhibit => visto l'exhibit => "consumato" un'energia,

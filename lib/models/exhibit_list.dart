@@ -165,14 +165,14 @@ class ExhibitList {
       resPhoto: "imgLupoGrigio.png"
   );
 
-  static Exhibit castoroEuropeo = Exhibit(
-      normalName: "Castoro europeo",
-      scientificName: "none",
-      shortName: "none",
-      alim: "none",
-      loc: "none",
+  static Exhibit bradipoDidattilo = Exhibit(
+      normalName: "Bradipo didattilo",
+      scientificName: "Choloepus didactylus",
+      shortName: "Bradipo",
+      alim: "2(*)",
+      loc: "Americhe",
       nPiano: 0,
-      resPhoto: "none.png"
+      resPhoto: "imgBradipoDidattilo.png"
   );
 
   static void setNeighbors() {
@@ -196,7 +196,7 @@ class ExhibitList {
     ornitorinco.neighbors = [oritteropo, riccioComune];
 
     //Tutorial
-    lupoGrigio.neighbors = [castoroEuropeo, leoneAfricano];
+    lupoGrigio.neighbors = [bradipoDidattilo, leoneAfricano];
   }
 
   static Exhibit winnerExhibit = leoneMarinoSudamericano;
@@ -225,7 +225,7 @@ class ExhibitList {
     case "Riccio comune" : return riccioComune;
     case "Ornitorinco" : return ornitorinco;
     case "Lupo (grigio)" : return lupoGrigio;
-    case "Castoro europeo" : return castoroEuropeo;
+    case "Bradipo didattilo" : return bradipoDidattilo;
     default:  return startingExhibit;
     }
   }
@@ -249,7 +249,7 @@ class ExhibitList {
     if(name == "Riccio comune") return true;
     if(name == "Ornitorinco") return true;
     if(name == "Lupo (grigio)") return true;
-    if(name == "Castoro europeo") return true;
+    if(name == "Bradipo didattilo") return true;
     return false;
   }
 }

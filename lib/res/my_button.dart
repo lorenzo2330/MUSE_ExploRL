@@ -57,6 +57,7 @@ class MyButton {
   static ElevatedButton notVisitedButton(BuildContext context) {
     return ElevatedButton(
         onPressed: () {
+          Navigator.pop(context);
           Navigator.pushNamed(context, "/notVisited");
         },
         style: ButtonStyle(

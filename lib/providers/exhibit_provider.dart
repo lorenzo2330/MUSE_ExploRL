@@ -24,7 +24,7 @@ class ExhibitProvider extends ChangeNotifier {
   List<Exhibit> get visited => _visited;
 
   void visit(Exhibit e) {
-    _visited.add(e);
+    if(e != ExhibitList.tutorialExhibit) _visited.add(e);
     notifyListeners();
   }
 

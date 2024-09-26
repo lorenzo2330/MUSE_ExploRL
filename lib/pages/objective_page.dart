@@ -22,8 +22,9 @@ class _ObjectivePageState extends State<ObjectivePage> {
       /*  PopScope permette di monitorare il "tornare indietro", in questo
       *   caso, tornando indietro si ritorna nella sezione tutorial, quindi
       *   sarà necessario settare nuovamente inTutorial = true  */
-      onPopInvoked: (bool x) {
+      onPopInvokedWithResult: (bool x, dynamic result) {
         context.read<ExhibitProvider>().setInTutorial(true);
+        return;
       },
       child: Scaffold(
         backgroundColor: MyColors.backgroundYellow,
