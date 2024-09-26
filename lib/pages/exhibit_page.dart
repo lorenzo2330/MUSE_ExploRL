@@ -68,7 +68,10 @@ class _ExhibitPageState extends State<ExhibitPage> {
           color: MyColors.backgroundYellow,
           height: MyInt.bottomBarHeight.toDouble(),
           child: MyWidgets.getBattery(
-              charge: context.watch<EnergyProvider>().energy)),
+              charge: context.watch<EnergyProvider>().energy,
+              batterySize: MyInt.batterySize
+          )
+      ),
     );
   }
 }

@@ -1,8 +1,6 @@
-import 'package:app_rl/providers/energy_provider.dart';
-import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/res/my_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../res/my_button.dart';
 import '../res/my_int.dart';
@@ -30,17 +28,6 @@ class HomePage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                /*
-                //Accedo a ExhibitProvider senza "ascoltare i cambiamenti"
-                final exhibitProvider = Provider.of<ExhibitProvider>(context, listen: false);
-                exhibitProvider.visit(exhibitProvider.nextExhibit);
-                exhibitProvider.unlockExhibit();
-
-                 */
-
-                context.read<ExhibitProvider>().prepareToStart();
-                context.read<EnergyProvider>().prepareToStart();
-
                 Navigator.pushNamed(context, "/tutorial");
               },
               style: ButtonStyle(
@@ -54,6 +41,10 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
+            ElevatedButton(onPressed: () async {
+              final SharedPreferences prefs = await SharedPreferences.getInstance();
+              await prefs.clear();  // Questo cancellerà tutti i dati salvati nello SharedPreferences
+            }, child: const Text("Cancella dati"))
           ],
         ),
       ),

@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../providers/energy_provider.dart';
+import '../res/my_button.dart';
 import '../res/my_int.dart';
 
 class AlreadyVisitedPage extends StatefulWidget {
@@ -22,11 +23,13 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
   late int nPartitaAttuale = 0;
 
   late List<List<String>> listOfMatch = [];
+  late List<int> listOfEnergy = [];
   late List<String> match = [];
   String? selectedMatch; // Variabile per tenere traccia dell'elemento selezionato
 
   late List<Exhibit> l = [];
   late List<Exhibit> actualList = [];
+  late int energyToDisplay = EnergyProvider.maxEnergy;
 
   void loadData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -34,7 +37,8 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
     setState(() {
       late int nPartite = prefs.getInt("nMatch") ?? 0;  //Recupero il numero di partite
       for(int i = 1; i <= nPartite; i++){ //La prima partita viene salvata come Game-1
-        match = prefs.getStringList("Game-$i") ?? []; //se è null non prendo niente
+        match = prefs.getStringList("Game-$i-match") ?? []; //se è null non prendo niente
+        listOfEnergy.add(prefs.getInt("Game-$i-energy") ?? EnergyProvider.maxEnergy - match.length);
         listOfMatch.add(match);
       }
       nPartitaAttuale = listOfMatch.length ;
@@ -56,6 +60,7 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
     return retList;
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,33 +79,47 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
                   children: [
                     Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Center(
-                          child: DropdownButton<String>(
-                            hint: const Text("Seleziona una partita"),
-                            value: selectedMatch,
-                            items: List.generate(
-                                listOfMatch.length + 1,
-                                    (index)
-                                    {
-                                      final gameLabel = index == listOfMatch.length ? "Partita attuale" : "Partita ${index + 1}";
-                                      return DropdownMenuItem<String>(
-                                        value: index.toString(),
-                                        child: Text(gameLabel),
-                                      );
-                                    }),
-                            onChanged: (String? newValue){
-                              setState(() {
-                                selectedMatch = newValue;
-                                if(newValue == null || int.parse(newValue) == listOfMatch.length){
-                                  l = actualList;
-                                }
-                                else{
-                                  l = getRelativeListOfExhibit(listOfMatch[int.parse(newValue)]);
-                                }
-                              });
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 5,
+                              child: DropdownButton<String>(
+                                hint: const Text("Seleziona una partita"),
+                                value: selectedMatch,
+                                items: List.generate(
+                                    listOfMatch.length + 1,
+                                        (index)
+                                        {
+                                          final gameLabel = index == listOfMatch.length ? "Partita attuale" : "Partita ${index + 1}";
+                                          return DropdownMenuItem<String>(
+                                            value: index.toString(),
+                                            child: Text(gameLabel),
+                                          );
+                                        }),
+                                onChanged: (String? newValue){
+                                  setState(() {
+                                    selectedMatch = newValue;
+                                    if(newValue == null || int.parse(newValue) == listOfMatch.length){
+                                      l = actualList;
+                                      energyToDisplay = context.read<EnergyProvider>().energy;
+                                    }
+                                    else{
+                                      l = getRelativeListOfExhibit(listOfMatch[int.parse(newValue)]);
+                                      energyToDisplay = listOfEnergy[int.parse(newValue)];
+                                    }
+                                  });
 
-                            },
-                          ),
+                                },
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: MyWidgets.getBattery(
+                                  charge: energyToDisplay,
+                                  batterySize: const Size(100, 45)
+                              ),
+                            )
+                          ],
                         )
                     ),
                     Row(
@@ -134,39 +153,9 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
                 ),
               ),
             ),
-            ElevatedButton(
-                onPressed: () {
-                  final exhibitProvider =
-                      Provider.of<ExhibitProvider>(context, listen: false);
-                  final energyProvider =
-                      Provider.of<EnergyProvider>(context, listen: false);
-                  bool endGame = exhibitProvider.nextIsWinnerExhibit() ||
-                      energyProvider.energy == 0;
-                  //--------------------Exhibit--------------Objective----------------Tutorial------------------Home--------------
-                  if (endGame) {
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                    Navigator.pop(context);
-                  } else {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, "/notVisited");
-                  }
-                  //--------------Exhibit---------------------NotVisited----------------------------------------------------------
-                },
-                /*
-                    * style: ButtonStyle(
-                      fixedSize: WidgetStateProperty.all<Size>(
-                          const Size(200, 10)),
-                    ),*/
-                child: Text(
-                    context.watch<ExhibitProvider>().nextIsWinnerExhibit() ||
-                            context.watch<EnergyProvider>().energy == 0
-                        ? "Nuovo tentativo"
-                        : "Cosa puoi visitare ora",
-                    style: const TextStyle(
-                      fontSize: 15,
-                    )))
+            context.watch<ExhibitProvider>().nextIsWinnerExhibit() || context.watch<EnergyProvider>().energy == 0
+                ? MyButton.restartButton(context, true)
+                : MyButton.notVisitedButton(context),
           ],
         ),
       ),
@@ -174,7 +163,10 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
           color: MyColors.backgroundYellow,
           height: MyInt.bottomBarHeight.toDouble(),
           child: MyWidgets.getBattery(
-              charge: context.watch<EnergyProvider>().energy)),
+              charge: context.watch<EnergyProvider>().energy,
+              batterySize: MyInt.batterySize
+          )
+      ),
     );
   }
 }

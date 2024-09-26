@@ -16,13 +16,12 @@ class Battery extends CustomPainter {
     }
   }
 
-  Battery({ required this.charge });
+  Battery({ required this.charge, required this.batterySize });
 
   final int charge;
 
   //Dimensioni della batteria  (completa)
-  final double batteryWidth = 300;
-  final double batteryHeight = 50;
+  final Size batterySize;
 
   //Bordo della batteria
   final batteryBorder = Paint()
@@ -51,21 +50,21 @@ class Battery extends CustomPainter {
 
     final shellRect = Rect.fromCenter(
       center: center,
-      width: batteryWidth,
-      height: batteryHeight,
+      width: batterySize.width,
+      height: batterySize.height,
     );
 
     canvas.drawRect(shellRect, batteryBorder);
 
     //Calcola la larghezza della batteria (in base a quanta energia rimane
-    final double fillWith = (batteryWidth - 4)  * (charge / EnergyProvider.maxEnergy);
+    final double fillWith = (batterySize.width - 4)  * (charge / EnergyProvider.maxEnergy);
 
     //Calcola la dimensione del rettangolo da colorare
     final fillRect  = Rect.fromLTWH(
-        center.dx - (batteryWidth / 2) + 2,
-        center.dy - (batteryHeight / 2) + 2,
+        center.dx - (batterySize.width / 2) + 2,
+        center.dy - (batterySize.height / 2) + 2,
         fillWith,
-        batteryHeight - 4,
+      batterySize.height - 4,
     );
 
     //Disegno effettivo della batteria

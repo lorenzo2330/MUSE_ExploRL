@@ -19,7 +19,7 @@ class _NotVisitedPageState extends State<NotVisitedPage> {
     return Scaffold(
       backgroundColor: MyColors.backgroundYellow,
       appBar: AppBar(
-        title: const Text("Cosa puoi visitare"),
+        title: const Text("Cosa puoi visitare ora"),
       ),
       body: Padding(
         padding:
@@ -53,7 +53,7 @@ class _NotVisitedPageState extends State<NotVisitedPage> {
                             Navigator.pop(context); // Torno a ExhibitPage
                           },
                           child: Card(
-                            color: Colors.deepOrange[100]!,
+                            color: MyColors.otherRowTable,
                             child: SizedBox(
                                 height: 75,
                                 child: Center(
@@ -87,7 +87,9 @@ class _NotVisitedPageState extends State<NotVisitedPage> {
           color: MyColors.backgroundYellow,
           height: MyInt.bottomBarHeight.toDouble(),
           child: MyWidgets.getBattery(
-              charge: context.watch<EnergyProvider>().energy)),
+              charge: context.watch<EnergyProvider>().energy,
+              batterySize: MyInt.batterySize
+          )),
     );
   }
 }

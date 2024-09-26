@@ -229,4 +229,27 @@ class ExhibitList {
     default:  return startingExhibit;
     }
   }
+
+  static bool scannedExhibit(String name){
+    if(name == "Springbok") return true;
+    if(name == "Capibara") return true;
+    if(name == "Cervo nobile") return true;
+    if(name == "Wallaby dal collo rosso") return true;
+    if(name == "Lemure catta") return true;
+    if(name == "Opossum della Virginia") return true;
+    if(name == "Tasso") return true;
+    if(name == "Leone (africano)") return true;
+    if(name == "Lince eurasiatica") return true;
+    if(name == "Dingo") return true;
+    if(name == "Otaria orsina del Capo") return true;
+    if(name == "Leone marino sudamericano") return true;
+    if(name == "Tricheco") return true;
+    if(name == "Oritteropo") return true;
+    if(name == "Formichiere gigante") return true;
+    if(name == "Riccio comune") return true;
+    if(name == "Ornitorinco") return true;
+    if(name == "Lupo (grigio)") return true;
+    if(name == "Castoro europeo") return true;
+    return false;
+  }
 }

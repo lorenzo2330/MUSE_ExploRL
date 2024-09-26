@@ -10,16 +10,19 @@ import 'my_button.dart';
 
 
 class MyWidgets {
-  static Stack getBattery({required int charge}) {
+  static Stack getBattery({required int charge, required Size batterySize}) {
     return Stack(
       alignment: Alignment.center,
       children: [
         CustomPaint(
           //size: const Size(300, 75),
-          painter: Battery(charge: charge),
+          painter: Battery(
+            charge: charge,
+            batterySize: batterySize
+          ),
         ),
         Text(
-          "Energia rimanente: $charge",
+          batterySize.width == MyInt.batterySize.width ? "Energia rimanente: $charge" : "$charge",
           textAlign: TextAlign.center,
           style: const TextStyle(
             color: Colors.black87,
@@ -96,7 +99,7 @@ class MyWidgets {
             children: [
               MyButton.alreadyVisitedButton(context),
               endGame
-                ? MyButton.restartButton(context)
+                ? MyButton.restartButton(context, false)
                 : MyButton.notVisitedButton(context),
             ],
           )
@@ -126,10 +129,38 @@ class MyWidgets {
 
   static SizedBox imageBox(BuildContext context) {
     var exProv = context.watch<ExhibitProvider>();
+    var imgPath = "images/${exProv.nextExhibit.resPhoto}";
     return SizedBox(
       height: 150,
       width: 150,
-      child: Image.asset("images/${exProv.nextExhibit.resPhoto}", scale: 2),
+      child: GestureDetector(
+        onTap: (){
+          showDialog(
+              context: context,
+              builder: (BuildContext context){
+                return Dialog(
+                  backgroundColor: Colors.white,
+                  child: SizedBox(
+                    height: 400,
+                    width: 300,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [       //Immagine più grande
+                        MyWidgets.namesOfExhibits(context),
+                        Image.asset(imgPath),
+                        TextButton(
+                            onPressed: () { Navigator.of(context).pop(); }, //Chiude il popup
+                            child: const Text("Chiudi")
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              }
+          );
+        },
+        child: Image.asset(imgPath, scale: 2)
+      ),
     );
   }
 }

@@ -8,4 +8,5 @@ class MyInt {
   static const int tutorialStringSize = 30;
   static const int bottomBarHeight = 75;
   static const Size qrSize = Size(275, 350);                    //Larghezza, Altezza
+  static const Size batterySize = Size(300, 50);
 }

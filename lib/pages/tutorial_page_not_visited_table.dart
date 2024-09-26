@@ -28,7 +28,7 @@ class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTabl
           Expanded(
             flex: 2,
             child: Text(
-                "Tabella \"Cosa visitare\"",
+                "Cosa puoi visitare ora",
               style: TextStyle(
                 fontSize: MyInt.tutorialStringSize.toDouble(),
               ),
@@ -55,7 +55,7 @@ class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTabl
                         });
                       },
                       child: Card(
-                        color: Colors.deepOrange[100]!,
+                        color: MyColors.otherRowTable,
                         child: Row(
                           mainAxisAlignment:
                           MainAxisAlignment.spaceAround,

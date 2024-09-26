@@ -36,7 +36,7 @@ class _TutorialPageEnergyState extends State<TutorialPageEnergy> {
                 },
                 child: const Text("Simula una scansione")
             ),
-            MyWidgets.getBattery(charge: energy),
+            MyWidgets.getBattery(charge: energy, batterySize: MyInt.batterySize),
             Text(
                 energy > 0 ? "Sei ancora in gioco" : "Hai esaurito l'energia",
                 style: TextStyle(

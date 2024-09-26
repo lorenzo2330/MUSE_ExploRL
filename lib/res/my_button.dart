@@ -1,4 +1,5 @@
 
+import 'package:app_rl/providers/energy_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,7 +9,7 @@ import '../providers/exhibit_provider.dart';
 import 'my_int.dart';
 import 'my_string.dart';
 
-void saveData(List<Exhibit> visited) async {
+void saveData(List<Exhibit> visited, int energy) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   late int nPartite =
@@ -23,7 +24,8 @@ void saveData(List<Exhibit> visited) async {
   for (Exhibit ex in visited) {
     match.add(ex.normalName);
   }
-  prefs.setStringList("Game-$nPartite", match);
+  prefs.setStringList("Game-$nPartite-match", match);
+  prefs.setInt("Game-$nPartite-energy", energy);
 }
 
 class MyButton {
@@ -66,15 +68,16 @@ class MyButton {
             )));
   }
 
-  static ElevatedButton restartButton(BuildContext context) {
+  static ElevatedButton restartButton(BuildContext context, bool hasToPop) {
     return ElevatedButton(
         onPressed: () {
           //Salvo i dati della partita
-          saveData(context.read<ExhibitProvider>().visited);
+          saveData(context.read<ExhibitProvider>().visited, context.read<EnergyProvider>().energy);
 
-          Navigator.pop(context); //Objective
-          Navigator.pop(context); //Tutorial
-          Navigator.pop(context); //Home
+          context.read<ExhibitProvider>().prepareToStart();
+          context.read<EnergyProvider>().prepareToStart();
+
+          if(hasToPop) { Navigator.pop(context); }  //Se siamo in una delle due tabelle
         },
         style: ButtonStyle(
           fixedSize: WidgetStateProperty.all<Size>(const Size(200, 10)),

@@ -77,8 +77,11 @@ class _MyQrState extends State<MyQr> {
                       ? context.watch<ExhibitProvider>().scansioneCorretta
                           ? "Trovato QR corretto: ${result!.code}"
                           : "Trovato QR errato: ${result!.code}"
-                      : "Scansiona un codice QR",
-                  style: const TextStyle(fontSize: 20),
+                      : "Scansiona il QR code",
+                  style:
+                  (result != null)
+                      ? const TextStyle(fontSize: 12)
+                      : const TextStyle(fontSize: 20),
                 ), //(result != null) ? Text("Trovato QR: ${result!.code}") : const Text("Scansiona un codice QR"),
               ),
             )
@@ -106,14 +109,16 @@ class _MyQrState extends State<MyQr> {
     //Ascolta i dati ricevuti e verifica se "vede" un QR
     controller.scannedDataStream.listen((scanData) {
       setState(() {
-        if (scanData.code == exProv.nextExhibit.normalName) {
-          exProv.setScansioneCorretta();
-          exProv.visit(context.read<ExhibitProvider>().nextExhibit);
-          if (!noDecrease) {
-            enProv.decreaseEnergy();
+        if(ExhibitList.scannedExhibit(scanData.code ?? "retFalse")){
+          if (scanData.code == exProv.nextExhibit.normalName) {
+            exProv.setScansioneCorretta();
+            exProv.visit(context.read<ExhibitProvider>().nextExhibit);
+            if (!noDecrease) {
+              enProv.decreaseEnergy();
+            }
           }
+          result = scanData;
         }
-        result = scanData;
       });
     });
     //Il valore scansionato sarà in result.code
