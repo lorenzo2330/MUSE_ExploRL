@@ -11,4 +11,10 @@ class GameProvider extends ChangeNotifier{
 
   void daTrovare(){ _trovato = false; }
 
+  final Set<int> _sezioniVisitate = { 0 };
+
+  Set<int> get sezioniVisitate => _sezioniVisitate;
+
+  void addSezioniVisitate(int index){ _sezioniVisitate.add(index); notifyListeners(); }
+
 }

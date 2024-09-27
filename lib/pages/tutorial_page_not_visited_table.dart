@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../models/exhibit.dart';
 import '../providers/exhibit_provider.dart';
+import '../providers/game_provider.dart';
 import '../res/my_colors.dart';
 import '../res/my_widgets.dart';
 
@@ -18,6 +19,15 @@ class TutorialPageNotVisitedTable extends StatefulWidget {
 class _TutorialPageNotVisitedTableState
     extends State<TutorialPageNotVisitedTable> {
   Exhibit? prossimo;
+
+  @override
+  void initState() {
+    super.initState();
+    // Funzione chiamata al caricamento iniziale della pagina
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<GameProvider>().addSezioniVisitate(4);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

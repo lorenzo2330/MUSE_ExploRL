@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/exhibit_list.dart';
+import '../providers/game_provider.dart';
 import '../res/my_qr.dart';
 import '../res/my_widgets.dart';
 
@@ -18,6 +19,15 @@ class _TutorialPageQRState extends State<TutorialPageQR> {
   bool showDetails = false;
 
   @override
+  void initState() {
+    super.initState();
+    // Funzione chiamata al caricamento iniziale della pagina
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<GameProvider>().addSezioniVisitate(2);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(2.0),
@@ -27,7 +37,7 @@ class _TutorialPageQRState extends State<TutorialPageQR> {
           children: [
             MyWidgets.namesOfExhibits(ExhibitList.lupoGrigio),
             MyWidgets.imageBox(context, ExhibitList.lupoGrigio),
-            context.read<ExhibitProvider>().scansioneCorrettaTutorial
+            context.watch<ExhibitProvider>().scansioneCorrettaTutorial
                 ? SizedBox(
                     height: MyInt.qrSize.height,
                     child: Column(

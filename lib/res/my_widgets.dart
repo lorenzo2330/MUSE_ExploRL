@@ -113,7 +113,7 @@ class MyWidgets {
                       MyButton.alreadyVisitedButton(context),
                       noEnergy || hasWin
                         ? MyButton.restartButton(context, false)
-                        : MyButton.notVisitedButton(context),
+                        : MyButton.notVisitedButton(context, false),
                     ],
                   ),
                 ],

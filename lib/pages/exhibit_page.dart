@@ -53,7 +53,7 @@ class _ExhibitPageState extends State<ExhibitPage> {
           ],
         ),
       ),
-
+      /*
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //Segno che ho: scansionato l'exhibit => visto l'exhibit => "consumato" un'energia,
@@ -65,6 +65,8 @@ class _ExhibitPageState extends State<ExhibitPage> {
         },
         child: const Icon(Icons.qr_code_outlined),
       ),
+
+       */
       bottomNavigationBar: BottomAppBar(
           color: MyColors.backgroundYellow,
           height: MyInt.bottomBarHeight.toDouble(),

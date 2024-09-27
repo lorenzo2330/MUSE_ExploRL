@@ -2,6 +2,9 @@ import 'package:app_rl/providers/energy_provider.dart';
 import 'package:app_rl/res/my_int.dart';
 import 'package:app_rl/res/my_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/game_provider.dart';
 
 class TutorialPageEnergy extends StatefulWidget {
   const TutorialPageEnergy({super.key});
@@ -13,6 +16,14 @@ class TutorialPageEnergy extends StatefulWidget {
 class _TutorialPageEnergyState extends State<TutorialPageEnergy> {
 
   int energy = EnergyProvider.maxEnergy;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<GameProvider>().addSezioniVisitate(1);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

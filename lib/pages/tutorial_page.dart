@@ -3,6 +3,7 @@ import 'package:app_rl/pages/tutorial_page_info.dart';
 import 'package:app_rl/pages/tutorial_page_qr.dart';
 import 'package:app_rl/pages/tutorial_page_not_visited_table.dart';
 import 'package:app_rl/providers/exhibit_provider.dart';
+import 'package:app_rl/providers/game_provider.dart';
 import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/my_string.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,6 @@ class _TutorialPageState extends State<TutorialPage> {
     // Funzione chiamata al caricamento iniziale della pagina
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ExhibitProvider>().setInTutorial(true);
-      _sezioniVisitate.add(0);  //Segno che visito la prima schermata
     });
   }
 
@@ -52,7 +52,7 @@ class _TutorialPageState extends State<TutorialPage> {
             title: const Text(MyString.tutorial),
             actions: [
               //Mostra il pulsante di avvio solo una volta viste tutte le tab
-              if (_sezioniVisitate.length == nTab)
+              if (context.watch<GameProvider>().sezioniVisitate.length == nTab)
                 ElevatedButton(
                   onPressed: (){
                     Navigator.pushNamed(context, "/objective");

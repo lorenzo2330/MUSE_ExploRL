@@ -155,7 +155,7 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
             ),
             context.watch<ExhibitProvider>().nextIsWinnerExhibit() || context.watch<EnergyProvider>().energy == 0
                 ? MyButton.restartButton(context, true)
-                : MyButton.notVisitedButton(context),
+                : MyButton.notVisitedButton(context, true),
           ],
         ),
       ),

@@ -1,6 +1,8 @@
 import 'package:app_rl/providers/energy_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/game_provider.dart';
 import '../res/my_widgets.dart';
 
 class TutorialPageAlreadyVisitedTable extends StatefulWidget {
@@ -16,6 +18,15 @@ class _TutorialPageAlreadyVisitedTableState
   List<String> tutorialList = ["1", "2", "3"];
 
   String? selectedMatch;
+
+  @override
+  void initState() {
+    super.initState();
+    // Funzione chiamata al caricamento iniziale della pagina
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<GameProvider>().addSezioniVisitate(3);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

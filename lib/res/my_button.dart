@@ -54,10 +54,10 @@ class MyButton {
             )));
   }
 
-  static ElevatedButton notVisitedButton(BuildContext context) {
+  static ElevatedButton notVisitedButton(BuildContext context, bool fromAlreadyVisited) {
     return ElevatedButton(
         onPressed: () {
-          Navigator.pop(context);
+          if(fromAlreadyVisited) Navigator.pop(context);
           Navigator.pushNamed(context, "/notVisited");
         },
         style: ButtonStyle(
