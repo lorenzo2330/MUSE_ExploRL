@@ -11,7 +11,7 @@ class GameProvider extends ChangeNotifier{
 
   void daTrovare(){ _trovato = false; }
 
-  final Set<int> _sezioniVisitate = { 0 };
+  final Set<int> _sezioniVisitate = { 0 };  //Metto un set così non salva più volte gli indici delle stesse pagine
 
   Set<int> get sezioniVisitate => _sezioniVisitate;
 

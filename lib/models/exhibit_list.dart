@@ -5,7 +5,6 @@ class ExhibitList {
   static Exhibit springbok = Exhibit(
       normalName: "Springbok",
       scientificName: "Antidorcas marsupialis",
-      shortName: "Springbok",
       alim: "Erbivoro",
       loc: "Africa",
       nPiano: -1,
@@ -14,7 +13,6 @@ class ExhibitList {
   static Exhibit capibara = Exhibit(
       normalName: "Capibara",
       scientificName: "Hydrochoerus hydrochaeris",
-      shortName: "Capibara",
       alim: "Erbivoro",
       loc: "Americhe",
       nPiano: -1,
@@ -23,7 +21,6 @@ class ExhibitList {
   static Exhibit cervoNobile = Exhibit(
       normalName: "Cervo nobile",
       scientificName: "Cervus elaphus",
-      shortName: "Cervo",
       alim: "Erbivoro",
       loc: "Eurasia",
       nPiano: 1,
@@ -32,7 +29,6 @@ class ExhibitList {
   static Exhibit wallabyDalColloRosso = Exhibit(
       normalName: "Wallaby dal collo rosso",
       scientificName: "Macropus rufogriseus",
-      shortName: "Wallaby",
       alim: "Erbivoro",
       loc: "Oceania",
       nPiano: -1,
@@ -41,7 +37,6 @@ class ExhibitList {
   static Exhibit lemureCatta = Exhibit(
       normalName: "Lemure catta",
       scientificName: "Lemur catta",
-      shortName: "Lemure",
       alim: "Onnivoro",
       loc: "Africa",
       nPiano: -1,
@@ -50,7 +45,6 @@ class ExhibitList {
   static Exhibit opossumDellaVirginia = Exhibit(
       normalName: "Opossum della Virginia",
       scientificName: "Didelphis virginiana",
-      shortName: "Opossum",
       alim: "Onnivoro",
       loc: "Americhe",
       nPiano: -1,
@@ -59,7 +53,6 @@ class ExhibitList {
   static Exhibit tasso = Exhibit(
       normalName: "Tasso",
       scientificName: "Meles meles",
-      shortName: "Tasso",
       alim: "Onnivoro",
       loc: "Eurasia",
       nPiano: 3,
@@ -68,7 +61,6 @@ class ExhibitList {
   static Exhibit leoneAfricano = Exhibit(
       normalName: "Leone (africano)",
       scientificName: "Panthera leo",
-      shortName: "Leone",
       alim: "Carnivoro",
       loc: "Africa",
       nPiano: -1,
@@ -77,7 +69,6 @@ class ExhibitList {
   static Exhibit linceEurasiatica = Exhibit(
       normalName: "Lince eurasiatica",
       scientificName: "Lynx lynx",
-      shortName: "Lince",
       alim: "Carnivoro",
       loc: "Eurasia",
       nPiano: 3,
@@ -86,7 +77,6 @@ class ExhibitList {
   static Exhibit dingo = Exhibit(
       normalName: "Dingo",
       scientificName: "Canis lupus dingo",
-      shortName: "Dingo",
       alim: "Carnivoro",
       loc: "Oceania",
       nPiano: 0,
@@ -95,7 +85,6 @@ class ExhibitList {
   static Exhibit otariaOrsinaDelCapo = Exhibit(
       normalName: "Otaria orsina del Capo",
       scientificName: "Arctocephalus pusillus",
-      shortName: "Otaria",
       alim: "Piscivoro",
       loc: "Africa",
       nPiano: -1,
@@ -104,7 +93,6 @@ class ExhibitList {
   static Exhibit leoneMarinoSudamericano = Exhibit(
       normalName: "Leone marino sudamericano",
       scientificName: "Otaria flavescens",
-      shortName: "Leone marino",
       alim: "Piscivoro",
       loc: "Americhe",
       nPiano: -1,
@@ -113,7 +101,6 @@ class ExhibitList {
   static Exhibit tricheco = Exhibit(
       normalName: "Tricheco",
       scientificName: "Odobenus rosmarus",
-      shortName: "Tricheco",
       alim: "Piscivoro",
       loc: "Eurasia",
       nPiano: -1,
@@ -122,7 +109,6 @@ class ExhibitList {
   static Exhibit oritteropo = Exhibit(
       normalName: "Oritteropo",
       scientificName: "Orycteropus afer",
-      shortName: "Oritteropo",
       alim: "Insettivoro",
       loc: "Africa",
       nPiano: -1,
@@ -131,7 +117,6 @@ class ExhibitList {
   static Exhibit formichiereGigante = Exhibit(
       normalName: "Formichiere gigante",
       scientificName: "Myrmecophaga tridactyla",
-      shortName: "Formichiere",
       alim: "Insettivoro",
       loc: "Americhe",
       nPiano: -1,
@@ -140,7 +125,6 @@ class ExhibitList {
   static Exhibit riccioComune = Exhibit(
       normalName: "Riccio comune",
       scientificName: "Erinaceus europaeus",
-      shortName: "Riccio",
       alim: "Insettivoro",
       loc: "Eurasia",
       nPiano: 3,
@@ -149,7 +133,6 @@ class ExhibitList {
   static Exhibit ornitorinco = Exhibit(
       normalName: "Ornitorinco",
       scientificName: "Ornithorhynchus anatinus",
-      shortName: "Ornitorinco",
       alim: "Insettivoro",
       loc: "Oceania",
       nPiano: -1,
@@ -158,7 +141,6 @@ class ExhibitList {
   static Exhibit lupoGrigio = Exhibit(
       normalName: "Lupo (grigio)",
       scientificName: "Canis lupus",
-      shortName: "Lupo",
       alim: "4(*)",
       loc: "Eurasia",
       nPiano: 0,
@@ -168,7 +150,6 @@ class ExhibitList {
   static Exhibit bradipoDidattilo = Exhibit(
       normalName: "Bradipo didattilo",
       scientificName: "Choloepus didactylus",
-      shortName: "Bradipo",
       alim: "2(*)",
       loc: "Americhe",
       nPiano: 0,

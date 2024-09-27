@@ -19,9 +19,6 @@ class TutorialPage extends StatefulWidget {
 }
 
 class _TutorialPageState extends State<TutorialPage> {
-  //Metto un set così non salva più volte gli indici delle stesse pagine
-  final Set<int> _sezioniVisitate = {}; //Salva le pagine di tutorial viste
-
   final int nTab = 5;
 
   @override
@@ -78,7 +75,7 @@ class _TutorialPageState extends State<TutorialPage> {
                 Tab(icon: Icon(Icons.playlist_add_check)),
                 Tab(icon: Icon(Icons.playlist_add)),
               ],
-              onTap: (index) { setState(() { _sezioniVisitate.add(index); }); },
+              onTap: (index) { },
             ),
           ),
           body: const TabBarView(
@@ -90,30 +87,6 @@ class _TutorialPageState extends State<TutorialPage> {
               TutorialPageNotVisitedTable(),
             ],
           ),
-          /*
-          bottomNavigationBar: BottomAppBar(
-            height: MyInt.bottomBarHeight.toDouble(),
-            child: Center(
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, "/objective");
-                    context.read<ExhibitProvider>().setInTutorial(false);
-                  },
-                  style: ButtonStyle(
-                    fixedSize: WidgetStateProperty.all<Size>(
-                        const Size(300, 150)),
-                  ),
-                  child: const Text(
-                      "Inizia",
-                      style: TextStyle(
-                        fontSize: 30,
-                      )
-                  )
-              )
-            ),
-          ),
-
-           */
         ));
   }
 }
