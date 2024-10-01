@@ -5,9 +5,9 @@ import 'package:provider/provider.dart';
 
 import '../models/battery.dart';
 import '../models/exhibit.dart';
+import '../providers/energy_provider.dart';
 import '../providers/exhibit_provider.dart';
 import 'my_button.dart';
-
 
 
 class MyWidgets {
@@ -18,18 +18,29 @@ class MyWidgets {
         CustomPaint(
           //size: const Size(300, 75),
           painter: Battery(
-            charge: charge,
-            batterySize: batterySize
+              charge: charge,
+              batterySize: batterySize
           ),
         ),
-        Text(
-          batterySize.width == MyInt.batterySize.width ? "Energia rimanente: $charge" : "$charge",
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            color: Colors.black87,
-            fontSize: 17,
-            fontWeight: FontWeight.bold,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              batterySize.width == MyInt.batterySize.width
+                  ? "Energia rimanente: $charge   "
+                  : "$charge   ",
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.black87,
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            //const Icon(Icons.offline_bolt_outlined, color: Colors.yellow,),
+            //const Icon(Icons.offline_bolt, color: Colors.yellow,),
+            const Icon(Icons.offline_bolt_outlined),
+            //const Icon(Icons.offline_bolt),
+          ],
         )
       ],
     );
@@ -43,8 +54,8 @@ class MyWidgets {
       flex: index == 0
           ? 1
           : index == 3
-              ? 4
-              : 3,
+          ? 4
+          : 3,
       child: Container(
         height: isTitle ? 40 : 80,
         alignment: Alignment.center,
@@ -80,7 +91,8 @@ class MyWidgets {
         ));
   }
 
-  static SizedBox findedExhibit(BuildContext context, bool noEnergy, bool hasWin) {
+  static SizedBox findedExhibit(BuildContext context, bool noEnergy,
+      bool hasWin) {
     var exProv = context.read<ExhibitProvider>();
     return SizedBox(
       height: MyInt.qrSize.height,
@@ -96,15 +108,19 @@ class MyWidgets {
             ],
           ),
           SizedBox(
-            height: 250,
-            width: 300,
+            height: 275,
+            width: 325,
             child: Container(
-              color: noEnergy || hasWin ? noEnergy ? Colors.deepOrangeAccent : Colors.lightGreenAccent : MyColors.backgroundYellow,
+              color: noEnergy || hasWin ? noEnergy
+                  ? Colors.deepOrangeAccent
+                  : Colors.lightGreenAccent : MyColors.backgroundYellow,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    noEnergy || hasWin ? noEnergy ? "Hai esaurito tutti i punti energia" : "Hai trovato l'exhibit vincente!" : "",
+                    noEnergy || hasWin ? noEnergy
+                        ? "Hai esaurito tutti i punti energia"
+                        : "Hai trovato l'exhibit vincente!" : "",
                     style: TextStyle(fontSize: noEnergy || hasWin ? 25 : 1),
                     textAlign: TextAlign.center,
                   ),
@@ -112,10 +128,14 @@ class MyWidgets {
                     children: [
                       MyButton.alreadyVisitedButton(context),
                       noEnergy || hasWin
-                        ? MyButton.restartButton(context, false)
-                        : MyButton.notVisitedButton(context, false),
+                          ? MyButton.restartButton(context, false)
+                          : MyButton.notVisitedButton(context, false),
                     ],
                   ),
+                  Text(hasWin ? "Punti energia finali: ${context.watch<EnergyProvider>().energy}" : "",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize:  20),
+                  )
                 ],
               ),
             ),
@@ -149,33 +169,99 @@ class MyWidgets {
       height: 150,
       width: 150,
       child: GestureDetector(
-        onTap: (){
-          showDialog(
-              context: context,
-              builder: (BuildContext context){
-                return Dialog(
-                  backgroundColor: Colors.white,
-                  child: SizedBox(
-                    height: 400,
-                    width: 300,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [       //Immagine più grande
-                        MyWidgets.namesOfExhibits(e),
-                        Image.asset(imgPath),
-                        TextButton(
-                            onPressed: () { Navigator.of(context).pop(); }, //Chiude il popup
-                            child: const Text("Chiudi")
-                        )
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return Dialog(
+                    backgroundColor: Colors.white,
+                    child: SizedBox(
+                      height: 400,
+                      width: 300,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [ //Immagine più grande
+                          MyWidgets.namesOfExhibits(e),
+                          Image.asset(imgPath),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              }, //Chiude il popup
+                              child: const Text("Chiudi")
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                }
+            );
+          },
+          child: Image.asset(imgPath, scale: 2)
+      ),
+    );
+  }
+
+  static ListView getListOfNotVisitedExhibit(BuildContext context, bool tutorial){
+    return ListView(
+      children: [
+        ...List.generate(
+            context
+                .watch<ExhibitProvider>()
+                .nextExhibit
+                .neighbors
+                .length,
+                (index) => InkWell(
+              onTap: () {
+                if(tutorial){
+                  context.read<ExhibitProvider>().setProssimoForTutorial(context
+                      .read<ExhibitProvider>()
+                      .nextExhibit
+                      .neighbors[index]);
+                }
+                else {
+                  var exProv = context.read<ExhibitProvider>();
+                  exProv.setExhibit(exProv.nextExhibit.neighbors[index]);
+                  exProv.setDaScansionare();
+                  Navigator.pop(context); // Torno a ExhibitPage
+                }
+
+              },
+              child: Padding(
+                padding: EdgeInsets.only(
+                    top: tutorial ? 8.0 : 20, left: 8.0, right: 8.0, bottom: 8.0),
+                child: SizedBox(
+                  height: 100,
+                  child: Card(
+                    color: MyColors.otherRowTable,
+                    child: Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.spaceAround,
+                      children: [
+                        MyWidgets.getNotVisitedField(
+                            context
+                                .watch<ExhibitProvider>()
+                                .nextExhibit
+                                .neighbors[index]
+                                .normalName,
+                            false),
                       ],
                     ),
                   ),
-                );
-              }
-          );
-        },
-        child: Image.asset(imgPath, scale: 2)
-      ),
+                ),
+              ),
+            )),
+      ],
+    );
+  }
+
+  static BottomAppBar myBottomAppBar(BuildContext context){
+    return BottomAppBar(
+      color: MyColors.backgroundYellow,
+      height: MyInt.bottomBarHeight.toDouble(),
+      child: MyWidgets.getBattery(
+        charge: context.watch<EnergyProvider>().energy,
+        batterySize: MyInt.batterySize
+      )
     );
   }
 }

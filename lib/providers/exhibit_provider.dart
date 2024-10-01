@@ -56,6 +56,12 @@ class ExhibitProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Exhibit? _prossimoForTutorial;
+
+  Exhibit? get prossimoForTutorial => _prossimoForTutorial;
+
+  void setProssimoForTutorial(Exhibit? e){ _prossimoForTutorial = e; notifyListeners(); }
+
 /*  Notify listeners avvisa tutti i listeners comunicando
   *   che è avvenuta una modifica (ha cambiato stato) */
 }

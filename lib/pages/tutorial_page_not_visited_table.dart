@@ -2,10 +2,8 @@ import 'package:app_rl/res/my_int.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/exhibit.dart';
 import '../providers/exhibit_provider.dart';
 import '../providers/game_provider.dart';
-import '../res/my_colors.dart';
 import '../res/my_widgets.dart';
 
 class TutorialPageNotVisitedTable extends StatefulWidget {
@@ -18,7 +16,6 @@ class TutorialPageNotVisitedTable extends StatefulWidget {
 
 class _TutorialPageNotVisitedTableState
     extends State<TutorialPageNotVisitedTable> {
-  Exhibit? prossimo;
 
   @override
   void initState() {
@@ -26,6 +23,7 @@ class _TutorialPageNotVisitedTableState
     // Funzione chiamata al caricamento iniziale della pagina
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<GameProvider>().addSezioniVisitate(4);
+      context.read<ExhibitProvider>().setProssimoForTutorial(null);
     });
   }
 
@@ -33,7 +31,7 @@ class _TutorialPageNotVisitedTableState
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(20.0),
-        child: prossimo == null
+        child: context.watch<ExhibitProvider>().prossimoForTutorial == null
             ? Column(
                 children: [
                   Expanded(
@@ -47,46 +45,7 @@ class _TutorialPageNotVisitedTableState
                   ),
                   Expanded(
                     flex: 8,
-                    child: ListView(
-                      children: [
-                        Card(
-                          color: MyColors.firstRowTable,
-                          child: MyWidgets.getNotVisitedField("Nome", true),
-                        ),
-                        ...List.generate(
-                            context
-                                .watch<ExhibitProvider>()
-                                .nextExhibit
-                                .neighbors
-                                .length,
-                            (index) => InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      prossimo = context
-                                          .read<ExhibitProvider>()
-                                          .nextExhibit
-                                          .neighbors[index];
-                                    });
-                                  },
-                                  child: Card(
-                                    color: MyColors.otherRowTable,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
-                                      children: [
-                                        MyWidgets.getNotVisitedField(
-                                            context
-                                                .watch<ExhibitProvider>()
-                                                .nextExhibit
-                                                .neighbors[index]
-                                                .normalName,
-                                            false),
-                                      ],
-                                    ),
-                                  ),
-                                )),
-                      ],
-                    ),
+                    child: MyWidgets.getListOfNotVisitedExhibit(context, true),
                   ),
                   const Expanded(
                     flex: 6,
@@ -101,8 +60,8 @@ class _TutorialPageNotVisitedTableState
                   flex: 2,
                   child: Column(
                     children: [
-                      MyWidgets.namesOfExhibits(prossimo!),
-                      MyWidgets.imageBox(context, prossimo!),
+                      MyWidgets.namesOfExhibits(context.read<ExhibitProvider>().prossimoForTutorial!),
+                      MyWidgets.imageBox(context, context.read<ExhibitProvider>().prossimoForTutorial!),
                     ],
                   ),
                 ),
@@ -110,7 +69,7 @@ class _TutorialPageNotVisitedTableState
                   flex: 3,
                   child: Center(
                     child: Text(
-                      "Vai al piano ${prossimo!.nPiano}",
+                      "Vai al piano ${context.read<ExhibitProvider>().prossimoForTutorial!.nPiano}",
                       style: const TextStyle(fontSize: 20),
                     ),
                   ),

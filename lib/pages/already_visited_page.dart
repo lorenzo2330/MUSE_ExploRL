@@ -9,7 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../providers/energy_provider.dart';
 import '../res/my_button.dart';
-import '../res/my_int.dart';
 
 class AlreadyVisitedPage extends StatefulWidget {
   const AlreadyVisitedPage({super.key});
@@ -159,14 +158,7 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-          color: MyColors.backgroundYellow,
-          height: MyInt.bottomBarHeight.toDouble(),
-          child: MyWidgets.getBattery(
-              charge: context.watch<EnergyProvider>().energy,
-              batterySize: MyInt.batterySize
-          )
-      ),
+      bottomNavigationBar: MyWidgets.myBottomAppBar(context),
     );
   }
 }

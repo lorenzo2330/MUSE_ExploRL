@@ -1,10 +1,8 @@
 import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/res/my_colors.dart';
-import 'package:app_rl/res/my_int.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/energy_provider.dart';
 import '../res/my_widgets.dart';
 
 class ObjectivePage extends StatefulWidget {
@@ -15,7 +13,6 @@ class ObjectivePage extends StatefulWidget {
 }
 
 class _ObjectivePageState extends State<ObjectivePage> {
-
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -40,22 +37,14 @@ class _ObjectivePageState extends State<ObjectivePage> {
                 style: TextStyle(fontSize: 50),
               ),
               ElevatedButton(
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.pushNamed(context, "/exhibit");
                   },
-                  child: const Text("Avvio")
-              ),
+                  child: const Text("Avvio")),
             ],
           ),
         ),
-          bottomNavigationBar: BottomAppBar(
-              color: MyColors.backgroundYellow,
-              height: MyInt.bottomBarHeight.toDouble(),
-              child: MyWidgets.getBattery(
-                  charge: context.watch<EnergyProvider>().energy,
-                  batterySize: MyInt.batterySize
-              ),
-          ),
+        bottomNavigationBar: MyWidgets.myBottomAppBar(context),
       ),
     );
   }

@@ -76,7 +76,7 @@ class _MyQrState extends State<MyQr> {
                   (result != null)
                       ? context.watch<ExhibitProvider>().scansioneCorretta
                           ? "Trovato QR corretto: ${result!.code}"
-                          : "Trovato QR errato: ${result!.code}"
+                          : "Trovato QR errato"
                       : "Scansiona il QR code",
                   style:
                   (result != null)
