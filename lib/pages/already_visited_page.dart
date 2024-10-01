@@ -66,7 +66,8 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
       backgroundColor: MyColors.backgroundYellow,
       appBar: AppBar(title: const Text("Cosa hai già visitato")),
       body: Padding(
-        padding: const EdgeInsets.all(2.0),
+        //padding: const EdgeInsets.all(2.0),
+        padding: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

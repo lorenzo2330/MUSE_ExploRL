@@ -6,6 +6,7 @@ import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/providers/game_provider.dart';
 import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/my_string.dart';
+import 'package:app_rl/res/my_style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -50,18 +51,19 @@ class _TutorialPageState extends State<TutorialPage> {
             actions: [
               //Mostra il pulsante di avvio solo una volta viste tutte le tab
               if (context.watch<GameProvider>().sezioniVisitate.length == nTab)
-                ElevatedButton(
-                  onPressed: (){
-                    Navigator.pushNamed(context, "/objective");
-                    context.read<ExhibitProvider>().setInTutorial(false);
-                  },
-                  child: const SizedBox(
-                    width: 100,
-                    child: Row(
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: (){
+                      Navigator.pushNamed(context, "/objective");
+                      context.read<ExhibitProvider>().setInTutorial(false);
+                    },
+                    style: MyStyle.tutorialUpButtonStyle,
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Icon(Icons.play_circle_outline),
-                        Text("Inizia", style: TextStyle(fontSize: 25),),
+                        Icon(Icons.play_circle_outline, color: Colors.black),
+                        Text("Inizia", style: TextStyle(fontSize: 25, color: Colors.black)),
                       ],
                     ),
                   ),

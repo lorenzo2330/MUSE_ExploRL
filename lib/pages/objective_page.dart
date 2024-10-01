@@ -1,5 +1,7 @@
 import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/res/my_colors.dart';
+import 'package:app_rl/res/my_string.dart';
+import 'package:app_rl/res/my_style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -40,7 +42,9 @@ class _ObjectivePageState extends State<ObjectivePage> {
                   onPressed: () {
                     Navigator.pushNamed(context, "/exhibit");
                   },
-                  child: const Text("Avvio")),
+                  style: MyStyle.buttonStyleBig,
+                  child: MyString.getBigButtonText("Avvio"),
+              )
             ],
           ),
         ),

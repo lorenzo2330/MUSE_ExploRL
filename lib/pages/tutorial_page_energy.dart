@@ -1,5 +1,7 @@
 import 'package:app_rl/providers/energy_provider.dart';
 import 'package:app_rl/res/my_int.dart';
+import 'package:app_rl/res/my_string.dart';
+import 'package:app_rl/res/my_style.dart';
 import 'package:app_rl/res/my_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +47,8 @@ class _TutorialPageEnergyState extends State<TutorialPageEnergy> {
                     if (energy > 0) energy -= 1;
                   });
                 },
-                child: const Text("Simula una scansione")
+                style: MyStyle.buttonStyleBig,
+                child: MyString.getBigButtonText("Simula una scansione")
             ),
             MyWidgets.getBattery(charge: energy, batterySize: MyInt.batterySize),
             Text(

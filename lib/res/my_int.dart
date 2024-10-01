@@ -9,4 +9,7 @@ class MyInt {
   static const int bottomBarHeight = 75;
   static const Size qrSize = Size(275, 350);                    //Larghezza, Altezza
   static const Size batterySize = Size(300, 50);
+  static const double cardHeight = 120;
+
+  static int getFlex(int index){ return index == 0 ? 1 : index == 3 ? 4 : 3; }
 }

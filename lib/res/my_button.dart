@@ -8,6 +8,7 @@ import '../models/exhibit.dart';
 import '../providers/exhibit_provider.dart';
 import 'my_int.dart';
 import 'my_string.dart';
+import 'my_style.dart';
 
 void saveData(List<Exhibit> visited, int energy) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -29,6 +30,9 @@ void saveData(List<Exhibit> visited, int energy) async {
 }
 
 class MyButton {
+
+
+
   static ElevatedButton homePageBottomButton = ElevatedButton(
       onPressed: () {},
       style: ButtonStyle(
@@ -40,18 +44,15 @@ class MyButton {
             fontSize: MyInt.homePageBottomButtonTextSize.toDouble(),
           )));
 
-  static ElevatedButton alreadyVisitedButton(BuildContext context) {
+  static ElevatedButton alreadyVisitedButton(BuildContext context, bool hasToPop, bool big) {
     return ElevatedButton(
         onPressed: () {
+          if(hasToPop) Navigator.pop(context);
           Navigator.pushNamed(context, "/alreadyVisited");
         },
-        style: ButtonStyle(
-          fixedSize: WidgetStateProperty.all<Size>(const Size(200, 10)),
-        ),
-        child: const Text("Cosa hai già visitato",
-            style: TextStyle(
-              fontSize: 15,
-            )));
+        style: MyStyle.buttonStyleBig,
+        child: MyString.getBigButtonText("Cosa hai già visitato")
+    );
   }
 
   static ElevatedButton notVisitedButton(BuildContext context, bool fromAlreadyVisited) {
@@ -60,13 +61,8 @@ class MyButton {
           if(fromAlreadyVisited) Navigator.pop(context);
           Navigator.pushNamed(context, "/notVisited");
         },
-        style: ButtonStyle(
-          fixedSize: WidgetStateProperty.all<Size>(const Size(200, 10)),
-        ),
-        child: const Text("Cosa puoi visitare ora",
-            style: TextStyle(
-              fontSize: 15,
-            )));
+        style: MyStyle.buttonStyleBig,
+        child: MyString.getBigButtonText("Cosa puoi visitare ora"));
   }
 
   static ElevatedButton restartButton(BuildContext context, bool hasToPop) {
@@ -80,13 +76,8 @@ class MyButton {
 
           if(hasToPop) { Navigator.pop(context); }  //Se siamo in una delle due tabelle
         },
-        style: ButtonStyle(
-          fixedSize: WidgetStateProperty.all<Size>(const Size(200, 10)),
-        ),
-        child: const Text("Nuovo tentativo",
-            style: TextStyle(
-              fontSize: 15,
-            ))
+        style: MyStyle.buttonStyleBig,
+        child: MyString.getBigButtonText("Nuovo tentativo")
     );
   }
 
