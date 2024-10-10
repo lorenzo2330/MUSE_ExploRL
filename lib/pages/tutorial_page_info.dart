@@ -1,4 +1,3 @@
-
 import 'package:app_rl/res/my_int.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +12,6 @@ class TutorialPageInfo extends StatefulWidget {
 }
 
 class _TutorialPageInfoState extends State<TutorialPageInfo> {
-
   @override
   void initState() {
     super.initState();
@@ -28,11 +26,25 @@ class _TutorialPageInfoState extends State<TutorialPageInfo> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Center(
-        child: Text(
-            "Spiegazione app",
-          style: TextStyle(
-            fontSize: MyInt.tutorialStringSize.toDouble(),
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              "Questa app ti supporterà nella tua avventura",
+              style: TextStyle(fontSize: MyInt.tutorialStringSize.toDouble() - 5),
+              textAlign: TextAlign.center,
+            ),
+            Text(
+              "Prima di partire, in questo tutorial scoprirai le funzionalità che ti aiuteranno nell'esplorazione",
+              style: TextStyle(fontSize: MyInt.tutorialStringSize.toDouble() - 7),
+              textAlign: TextAlign.center,
+            ),
+            Text(
+              "Scorri la schermata per iniziare",
+              style: TextStyle(fontSize: MyInt.tutorialStringSize.toDouble()),
+              textAlign: TextAlign.center,
+            )
+          ],
         ),
       ),
     );

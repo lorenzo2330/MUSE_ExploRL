@@ -31,21 +31,28 @@ class _ObjectivePageState extends State<ObjectivePage> {
           title: const Text("Obiettivo"),
         ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              const Text(
-                "**Descrizione obiettivo attività**",
-                style: TextStyle(fontSize: 50),
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, "/exhibit");
-                  },
-                  style: MyStyle.buttonStyleBig,
-                  child: MyString.getBigButtonText("Avvio"),
-              )
-            ],
+          child: SizedBox(
+            width: 300,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const Text(
+                  "Trova un animale specifico raccogliendo indizi dalle caratteristiche degli altri animali.\n"
+                  "Ogni scelta ti consuma risorse, quindi pianifica con attenzione per conservare energia.\n"
+                  "Raggiungi il tuo obiettivo con il minor numero di mosse possibile!\n\n"
+                  "Buona fortuna, esploratore!",
+                  style: TextStyle(fontSize: 23),
+                  textAlign: TextAlign.center,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/exhibit");
+                    },
+                    style: MyStyle.buttonStyleBig,
+                    child: MyString.getBigButtonText("Avvio"),
+                )
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: MyWidgets.myBottomAppBar(context),
