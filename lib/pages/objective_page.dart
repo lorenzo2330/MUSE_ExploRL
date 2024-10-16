@@ -1,7 +1,7 @@
 import 'package:app_rl/providers/exhibit_provider.dart';
+import 'package:app_rl/res/my_button.dart';
 import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/my_style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,7 @@ class _ObjectivePageState extends State<ObjectivePage> {
       child: Scaffold(
         backgroundColor: MyColors.backgroundYellow,
         appBar: AppBar(
-          title: const Text("Obiettivo"),
+          title: MyString.getPlainText("Obiettivo", true),
         ),
         body: Center(
           child: SizedBox(
@@ -36,21 +36,15 @@ class _ObjectivePageState extends State<ObjectivePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Text(
-                  "Trova un animale specifico raccogliendo indizi dalle caratteristiche degli altri animali.\n"
-                  "Ogni scelta ti consuma risorse, quindi pianifica con attenzione per conservare energia.\n"
-                  "Raggiungi il tuo obiettivo con il minor numero di mosse possibile!\n\n"
-                  "Buona fortuna, esploratore!",
-                  style: TextStyle(fontSize: 23),
-                  textAlign: TextAlign.center,
+                MyString.getCenterTextWithSize(
+                    "Trova un animale specifico raccogliendo indizi dalle caratteristiche degli altri animali.\n"
+                    "Ogni scelta ti consuma risorse, quindi pianifica con attenzione per conservare energia.\n"
+                    "Raggiungi il tuo obiettivo con il minor numero di mosse possibile!\n\n"
+                    "Buona fortuna, esploratore!",
+                    20,
+                    false
                 ),
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, "/exhibit");
-                    },
-                    style: MyStyle.buttonStyleBig,
-                    child: MyString.getBigButtonText("Avvio"),
-                )
+                MyButton.objectiveStartingButton(context)
               ],
             ),
           ),

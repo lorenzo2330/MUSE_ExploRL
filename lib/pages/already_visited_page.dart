@@ -2,6 +2,7 @@ import 'package:app_rl/models/exhibit.dart';
 import 'package:app_rl/models/exhibit_list.dart';
 import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/res/my_colors.dart';
+import 'package:app_rl/res/my_string.dart';
 import 'package:app_rl/res/my_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -84,7 +85,7 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
                             Expanded(
                               flex: 5,
                               child: DropdownButton<String>(
-                                hint: const Text("Seleziona una partita"),
+                                hint: MyString.getPlainText("Seleziona una partita", false),
                                 value: selectedMatch,
                                 items: List.generate(
                                     listOfMatch.length + 1,
@@ -93,7 +94,7 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
                                           final gameLabel = index == listOfMatch.length ? "Partita attuale" : "Partita ${index + 1}";
                                           return DropdownMenuItem<String>(
                                             value: index.toString(),
-                                            child: Text(gameLabel),
+                                            child: MyString.getPlainText(gameLabel, false),
                                           );
                                         }),
                                 onChanged: (String? newValue){

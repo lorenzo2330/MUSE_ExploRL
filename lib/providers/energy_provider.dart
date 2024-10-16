@@ -18,4 +18,12 @@ class EnergyProvider extends ChangeNotifier{
   *   che è avvenuta una modifica (ha cambiato stato) */
 
   void prepareToStart(){ _energy = maxEnergy; }
+
+  int _tutorialEnergy = maxEnergy;
+
+  int get tutorialEnergy => _tutorialEnergy;
+
+  void rechargeTutorialEnergy(){ _tutorialEnergy = maxEnergy; notifyListeners(); }
+
+  void decreaseTutorialEnergy(){ if(_tutorialEnergy > 0) { _tutorialEnergy--; notifyListeners(); } }
 }

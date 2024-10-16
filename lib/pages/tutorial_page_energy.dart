@@ -1,7 +1,7 @@
 import 'package:app_rl/providers/energy_provider.dart';
+import 'package:app_rl/res/my_button.dart';
 import 'package:app_rl/res/my_int.dart';
 import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/my_style.dart';
 import 'package:app_rl/res/my_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,13 +17,12 @@ class TutorialPageEnergy extends StatefulWidget {
 
 class _TutorialPageEnergyState extends State<TutorialPageEnergy> {
 
-  int energy = EnergyProvider.maxEnergy;
-
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<GameProvider>().addSezioniVisitate(1);
+      context.read<EnergyProvider>().rechargeTutorialEnergy();
     });
   }
 
@@ -35,28 +34,10 @@ class _TutorialPageEnergyState extends State<TutorialPageEnergy> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(
-              "Tutorial energia",
-              style: TextStyle(
-                fontSize: MyInt.tutorialStringSize.toDouble(),
-              ),
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    if (energy > 0) energy -= 1;
-                  });
-                },
-                style: MyStyle.buttonStyleBig,
-                child: MyString.getBigButtonText("Simula una scansione")
-            ),
-            MyWidgets.getBattery(charge: energy, batterySize: MyInt.batterySize),
-            Text(
-                energy > 0 ? "Sei ancora in gioco" : "Hai esaurito l'energia",
-                style: TextStyle(
-                  fontSize: MyInt.tutorialStringSize.toDouble(),
-                )
-            )
+            MyString.getCenterTextWithSize("Tutorial energia", MyInt.tutorialStringSize.toDouble(), true),
+            MyButton.tutorialDecreaseEnergy(context),
+            MyWidgets.getBattery(charge: context.watch<EnergyProvider>().tutorialEnergy, batterySize: MyInt.batterySize),
+            MyString.getCenterTextWithSize(context.read<EnergyProvider>().tutorialEnergy > 0 ? "Sei ancora in gioco" : "Hai esaurito l'energia", MyInt.tutorialStringSize.toDouble(), false)
           ],
         ),
       ),

@@ -4,9 +4,9 @@ import 'package:app_rl/pages/tutorial_page_qr.dart';
 import 'package:app_rl/pages/tutorial_page_not_visited_table.dart';
 import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/providers/game_provider.dart';
+import 'package:app_rl/res/my_button.dart';
 import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/my_style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -47,26 +47,13 @@ class _TutorialPageState extends State<TutorialPage> {
         child: Scaffold(
           backgroundColor: MyColors.backgroundYellow,
           appBar: AppBar(
-            title: const Text(MyString.tutorial),
+            title: MyString.getPlainText(MyString.tutorial, true),
             actions: [
               //Mostra il pulsante di avvio solo una volta viste tutte le tab
               if (context.watch<GameProvider>().sezioniVisitate.length == nTab)
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: (){
-                      Navigator.pushNamed(context, "/objective");
-                      context.read<ExhibitProvider>().setInTutorial(false);
-                    },
-                    style: MyStyle.tutorialUpButtonStyle,
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Icon(Icons.play_circle_outline, color: Colors.black),
-                        Text("Inizia", style: TextStyle(fontSize: 25, color: Colors.black)),
-                      ],
-                    ),
-                  ),
+                  child: MyButton.tutorialStartingButton(context),
                 )
             ],
             bottom: TabBar(

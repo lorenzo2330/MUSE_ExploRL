@@ -1,6 +1,7 @@
 import 'package:app_rl/providers/energy_provider.dart';
 import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/res/my_int.dart';
+import 'package:app_rl/res/my_string.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -43,10 +44,7 @@ class _MyQrState extends State<MyQr> {
             Expanded(
               flex: 1,
               child: Center(
-                child: Text(
-                  "Vai al piano ${context.read<ExhibitProvider>().nextExhibit.nPiano}",
-                  style: const TextStyle(fontSize: 20),
-                ), //(result != null) ? Text("Trovato QR: ${result!.code}") : const Text("Scansiona un codice QR"),
+                child: MyString.getCenterTextWithSize("Vai al piano ${context.read<ExhibitProvider>().nextExhibit.nPiano.toString()}", 20, false),
               ),
             ),
             Expanded(
@@ -72,17 +70,7 @@ class _MyQrState extends State<MyQr> {
             Expanded(
               flex: 1,
               child: Center(
-                child: Text(
-                  (result != null)
-                      ? context.watch<ExhibitProvider>().scansioneCorretta
-                          ? "Trovato QR corretto: ${result!.code}"
-                          : "Trovato QR errato"
-                      : "Scansiona il QR code",
-                  style:
-                  (result != null)
-                      ? const TextStyle(fontSize: 12)
-                      : const TextStyle(fontSize: 20),
-                ), //(result != null) ? Text("Trovato QR: ${result!.code}") : const Text("Scansiona un codice QR"),
+                child: MyString.qrBottomText(result, context.watch<ExhibitProvider>().scansioneCorretta)
               ),
             )
           ],

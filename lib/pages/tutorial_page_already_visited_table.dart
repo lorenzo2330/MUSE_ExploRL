@@ -1,4 +1,5 @@
 import 'package:app_rl/providers/energy_provider.dart';
+import 'package:app_rl/res/my_string.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -36,15 +37,9 @@ class _TutorialPageAlreadyVisitedTableState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Text(
-              "Cosa hai già visitato",
-              style: TextStyle(
-                fontSize: 30,
-              ),
-              textAlign: TextAlign.center,
-            ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: MyString.getCenterTextWithSize("Cosa hai già visitato", 30, true)
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),
@@ -53,7 +48,7 @@ class _TutorialPageAlreadyVisitedTableState
                 Expanded(
                   flex: 5,
                   child: DropdownButton<String>(
-                    hint: const Text("Seleziona una partita"),
+                    hint: MyString.getPlainText("Seleziona una partita", false),
                     value: selectedMatch,
                     items: List.generate(tutorialList.length + 1, (index) {
                       final gameLabel = index == tutorialList.length
@@ -61,7 +56,7 @@ class _TutorialPageAlreadyVisitedTableState
                           : "Partita ${index + 1}";
                       return DropdownMenuItem<String>(
                         value: index.toString(),
-                        child: Text(gameLabel),
+                        child: MyString.getPlainText(gameLabel, false),
                       );
                     }),
                     onChanged: (String? value) {

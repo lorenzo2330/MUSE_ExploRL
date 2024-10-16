@@ -3,6 +3,7 @@ import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/providers/game_provider.dart';
 import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/my_qr.dart';
+import 'package:app_rl/res/my_string.dart';
 import 'package:app_rl/res/my_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +39,7 @@ class _ExhibitPageState extends State<ExhibitPage> {
           : MyColors.backgroundYellow,
       appBar: AppBar(
         automaticallyImplyLeading: !endGame,
-        title: const Text("Exhibit"),
+        title: MyString.getPlainText("Exhibit", true),
       ),
       body: Center(
         child: Column(
@@ -52,7 +53,7 @@ class _ExhibitPageState extends State<ExhibitPage> {
           ],
         ),
       ),
-/*
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           //Segno che ho: scansionato l'exhibit => visto l'exhibit => "consumato" un'energia,
@@ -64,7 +65,7 @@ class _ExhibitPageState extends State<ExhibitPage> {
         },
         child: const Icon(Icons.qr_code_outlined),
       ),
- */
+
       bottomNavigationBar: hasWin && context.watch<ExhibitProvider>().scansioneCorretta ? null : MyWidgets.myBottomAppBar(context),
     );
   }

@@ -1,5 +1,7 @@
 import 'package:app_rl/providers/exhibit_provider.dart';
+import 'package:app_rl/res/my_button.dart';
 import 'package:app_rl/res/my_int.dart';
+import 'package:app_rl/res/my_string.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -43,32 +45,14 @@ class _TutorialPageQRState extends State<TutorialPageQR> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        const Text(
-                          "Exhibit trovato",
-                          style: TextStyle(
-                            fontSize: 20
-                          )
-                        ),
-                        const Column(
+                        MyString.getCenterTextWithSize("Exhibit trovato", 20, false),
+                        Column(
                           children: [
-                            Text(
-                              "Località geografica: Eurasia",
-                              style: TextStyle(
-                                fontSize: 20
-                              ),
-                            ),
-                            Text(
-                              "Numero di dita appoggiate a terra: 4",
-                              style: TextStyle(
-                                  fontSize: 20
-                              ),
-                            ),
+                            MyString.getCenterTextWithSize("Località geografica: Eurasia", 20, false),
+                            MyString.getCenterTextWithSize("Numero di dita appoggiate a terra: 4", 20, false),
                           ],
                         ),
-                        ElevatedButton(
-                            onPressed: (){ context.read<ExhibitProvider>().setDaScansionare(); },
-                            child: const Text("Riprova scansione")
-                        )
+                        MyButton.tutorialRetryScanButton(context)
                       ],
                     )
                   )//MyWidgets.findedExhibit(context, endGame)

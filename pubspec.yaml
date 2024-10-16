@@ -68,6 +68,17 @@ flutter:
   assets:
     - images/
 
+  fonts:
+    - family: helveticaneueltstd_blk
+      fonts:
+        - asset: fonts/helveticaneueltstd_blk.otf
+    - family: HNLTStd55
+      fonts:
+        - asset: fonts/Helvetica Neue LT Std 55 Roman.otf
+    - family: HNLTStd75
+      fonts:
+        - asset: fonts/Helvetica Neue LT Std 75 Bold.otf
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

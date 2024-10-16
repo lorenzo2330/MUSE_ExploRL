@@ -13,6 +13,7 @@ import 'my_button.dart';
 class MyWidgets {
   static Stack getBattery({required int charge, required Size batterySize}) {
     bool isMini = batterySize.width != MyInt.batterySize.width;
+    String text = isMini ? "$charge   " : "Energia rimanente: $charge   ";
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -20,23 +21,14 @@ class MyWidgets {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              isMini ? "$charge   " : "Energia rimanente: $charge   ",
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.black87,
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            MyString.getCenterTextWithSize(text, 17, false),
+            /*style: const TextStyle(color: Colors.black87, fontSize: 17, fontWeight: FontWeight.bold)*/
             const Icon(Icons.offline_bolt),
           ],
         )
       ],
     );
   }
-
-  //FATTI
 
   static Expanded getAlreadyVisitedField(String text, int index, bool isTitle) {
     double p = isTitle ? 2.0 : 6.0;
@@ -53,11 +45,7 @@ class MyWidgets {
             border: Border.all(color: MyColors.borderColor, width: 0.5)),
         child: Padding(
           padding: EdgeInsets.only(top: p, left: 2.0, right: 2.0, bottom: p),
-          child: Text(
-            text,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: isTitle ? 18 : 16),
-          ),
+          child: MyString.getCenterTextWithSize(text, isTitle ? 18 : 16, isTitle),
         ),
       ),
     );
@@ -69,13 +57,8 @@ class MyWidgets {
     *   grazie all'attributo textAlign: TextAlign.center  */
     return Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Text(
-            text,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 30),
-          ),
-        ));
+        child: Center(child: MyString.getCenterTextWithSize(text, 30, false))
+    );
   }
 
   static SizedBox findedExhibit(BuildContext context, bool noEnergy, bool hasWin) {
@@ -90,8 +73,8 @@ class MyWidgets {
         children: [
           Column(
             children: [
-              MyWidgets.detailsOfExhibit(MyString.getAlimentazione(nextExh.alim)),
-              MyWidgets.detailsOfExhibit(MyString.getLocalitaGeografica(nextExh.loc))
+              MyString.getCenterTextWithSize(MyString.getAlimentazione(nextExh.alim), 25, false),
+              MyString.getCenterTextWithSize(MyString.getLocalitaGeografica(nextExh.loc), 25, false)
             ],
           ),
           SizedBox(
@@ -109,14 +92,14 @@ class MyWidgets {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          MyButton.alreadyVisitedButton(context, false, false),
+                          MyButton.alreadyVisitedButton(context, false),
                           noEnergy || hasWin
                               ? MyButton.restartButton(context, false)
                               : MyButton.notVisitedButton(context, false),
                         ],
                       ),
                     ),
-                    MyString.getFinalEnergyText(hasWin, energy),
+                    MyString.getCenterTextWithSize(hasWin ? "Punti energia finali: $energy" : "", 20, false),
                   ],
                 ),
               ),
@@ -127,21 +110,8 @@ class MyWidgets {
     );
   }
 
-  static Text detailsOfExhibit(String text) {
-    return Text(text, style: const TextStyle(fontSize: 25));
-  }
-
   static Column namesOfExhibits(Exhibit e) {
-    return Column(
-      children: [
-        Text(e.scientificName,
-            style: const TextStyle(
-              fontSize: 22,
-              fontStyle: FontStyle.italic,
-            )),
-        Text(e.normalName, style: const TextStyle(fontSize: 22)),
-      ],
-    );
+    return Column(children: [MyString.getItalicCenterTextWithSize(e.scientificName, 22, false), MyString.getCenterTextWithSize(e.normalName, 22, false)]);
   }
 
   static SizedBox imageBox(BuildContext context, Exhibit e) {
@@ -169,7 +139,7 @@ class MyWidgets {
                               onPressed: () {
                                 Navigator.of(context).pop();
                               }, //Chiude il popup
-                              child: const Text("Chiudi"))
+                              child: MyString.getPlainText("Chiudi", false))
                         ],
                       ),
                     ),
@@ -220,6 +190,22 @@ class MyWidgets {
                     ),
                   ),
                 )),
+      ],
+    );
+  }
+
+  static Column creditList(){
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        MyString.getCenterTextWithSize("Credit 1: credit 1", 20, false),
+        MyString.getCenterTextWithSize("Credit 2: credit 2", 20, false),
+        MyString.getCenterTextWithSize("Credit 3: credit 3", 20, false),
+        MyString.getCenterTextWithSize("Credit 4: credit 4", 20, false),
+        MyString.getCenterTextWithSize("Credit 5: credit 5", 20, false),
+        MyString.getCenterTextWithSize("Credit 6: credit 6", 20, false),
+        MyString.getCenterTextWithSize("Credit 7: credit 7", 20, false),
+        MyString.getCenterTextWithSize("Credit 8: credit 8", 20, false),
       ],
     );
   }

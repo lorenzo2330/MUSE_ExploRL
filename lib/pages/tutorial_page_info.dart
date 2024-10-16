@@ -1,4 +1,5 @@
 import 'package:app_rl/res/my_int.dart';
+import 'package:app_rl/res/my_string.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,21 +30,9 @@ class _TutorialPageInfoState extends State<TutorialPageInfo> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Text(
-              "Questa app ti supporterà nella tua avventura",
-              style: TextStyle(fontSize: MyInt.tutorialStringSize.toDouble() - 5),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              "Prima di partire, in questo tutorial scoprirai le funzionalità che ti aiuteranno nell'esplorazione",
-              style: TextStyle(fontSize: MyInt.tutorialStringSize.toDouble() - 7),
-              textAlign: TextAlign.center,
-            ),
-            Text(
-              "Scorri la schermata per iniziare",
-              style: TextStyle(fontSize: MyInt.tutorialStringSize.toDouble()),
-              textAlign: TextAlign.center,
-            )
+            MyString.getCenterTextWithSize("Questa app ti supporterà nella tua avventura", MyInt.tutorialStringSize.toDouble() - 5, false),
+            MyString.getCenterTextWithSize("Prima di partire, in questo tutorial scoprirai le funzionalità che ti aiuteranno nell'esplorazione", MyInt.tutorialStringSize.toDouble() - 7, false),
+            MyString.getCenterTextWithSize("Scorri la schermata per iniziare", MyInt.tutorialStringSize.toDouble(), false)
           ],
         ),
       ),

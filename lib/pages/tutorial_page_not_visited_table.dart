@@ -1,4 +1,5 @@
 import 'package:app_rl/res/my_int.dart';
+import 'package:app_rl/res/my_string.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,13 +11,10 @@ class TutorialPageNotVisitedTable extends StatefulWidget {
   const TutorialPageNotVisitedTable({super.key});
 
   @override
-  State<TutorialPageNotVisitedTable> createState() =>
-      _TutorialPageNotVisitedTableState();
+  State<TutorialPageNotVisitedTable> createState() => _TutorialPageNotVisitedTableState();
 }
 
-class _TutorialPageNotVisitedTableState
-    extends State<TutorialPageNotVisitedTable> {
-
+class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTable> {
   @override
   void initState() {
     super.initState();
@@ -36,23 +34,17 @@ class _TutorialPageNotVisitedTableState
                 children: [
                   Expanded(
                     flex: 2,
-                    child: Text(
-                      "Cosa puoi visitare ora",
-                      style: TextStyle(
-                        fontSize: MyInt.tutorialStringSize.toDouble(),
-                      ),
-                    ),
+                    child: MyString.getCenterTextWithSize("Cosa puoi visitare ora", MyInt.tutorialStringSize.toDouble(), true),
                   ),
                   Expanded(
                     flex: 8,
                     child: MyWidgets.getListOfNotVisitedExhibit(context, true),
                   ),
-                  const Expanded(
-                    flex: 6,
-                    child: Center(
-                        child: Text("Scegli il prossimo exhibit",
-                            style: TextStyle(fontSize: 20))),
-                  )
+                  Expanded(
+                      flex: 6,
+                      child: Center(
+                        child: MyString.getCenterTextWithSize("Scegli il prossimo exhibit", 20, false),
+                      ))
                 ],
               )
             : Column(children: [
@@ -60,18 +52,21 @@ class _TutorialPageNotVisitedTableState
                   flex: 2,
                   child: Column(
                     children: [
-                      MyWidgets.namesOfExhibits(context.read<ExhibitProvider>().prossimoForTutorial!),
-                      MyWidgets.imageBox(context, context.read<ExhibitProvider>().prossimoForTutorial!),
+                      MyWidgets.namesOfExhibits(
+                          context.read<ExhibitProvider>().prossimoForTutorial!),
+                      MyWidgets.imageBox(
+                          context, context.read<ExhibitProvider>().prossimoForTutorial!),
                     ],
                   ),
                 ),
                 Expanded(
                   flex: 3,
                   child: Center(
-                    child: Text(
-                      "Vai al piano ${context.read<ExhibitProvider>().prossimoForTutorial!.nPiano}",
-                      style: const TextStyle(fontSize: 20),
-                    ),
+                      child: MyString.getCenterTextWithSize(
+                        "Vai al piano ${context.read<ExhibitProvider>().prossimoForTutorial!.nPiano}",
+                        20,
+                        false
+                      )
                   ),
                 ),
               ]));
