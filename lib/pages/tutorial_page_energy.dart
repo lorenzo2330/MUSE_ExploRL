@@ -1,8 +1,9 @@
 import 'package:app_rl/providers/energy_provider.dart';
-import 'package:app_rl/res/my_button.dart';
-import 'package:app_rl/res/my_int.dart';
 import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/my_widgets.dart';
+import 'package:app_rl/res/widgets/my_button.dart';
+import 'package:app_rl/res/my_int.dart';
+import 'package:app_rl/res/my_text.dart';
+import 'package:app_rl/res/widgets/my_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,10 +35,10 @@ class _TutorialPageEnergyState extends State<TutorialPageEnergy> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            MyString.getCenterTextWithSize("Tutorial energia", MyInt.tutorialStringSize.toDouble(), true),
+            MyText.getCenterTextWithSize(MyString.tutorialEnergia, MyInt.tutorialStringSize.toDouble(), true),
             MyButton.tutorialDecreaseEnergy(context),
-            MyWidgets.getBattery(charge: context.watch<EnergyProvider>().tutorialEnergy, batterySize: MyInt.batterySize),
-            MyString.getCenterTextWithSize(context.read<EnergyProvider>().tutorialEnergy > 0 ? "Sei ancora in gioco" : "Hai esaurito l'energia", MyInt.tutorialStringSize.toDouble(), false)
+            MyStack.getBattery(charge: context.watch<EnergyProvider>().tutorialEnergy, batterySize: MyInt.batterySize),
+            MyText.getCenterTextWithSize(MyString.tutorialEnergiaInfo(context.read<EnergyProvider>().tutorialEnergy), MyInt.tutorialStringSize.toDouble(), false)
           ],
         ),
       ),

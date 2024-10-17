@@ -2,6 +2,7 @@ import 'package:app_rl/providers/energy_provider.dart';
 import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/res/my_int.dart';
 import 'package:app_rl/res/my_string.dart';
+import 'package:app_rl/res/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -20,7 +21,7 @@ class _MyQrState extends State<MyQr> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result; //Contiene il risultato della scansione (null || QR)
   QRViewController?
-      controller; //Permette il controllo della fotocamera, ascoltando i risultati della scansione in _onQRViewCreated
+  controller; //Permette il controllo della fotocamera, ascoltando i risultati della scansione in _onQRViewCreated
 
   //Permette di ricostruire la fotocamera nel caso si cambi la rotazione del cell
   @override
@@ -35,16 +36,19 @@ class _MyQrState extends State<MyQr> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SizedBox(
-        height: MyInt.qrSize.height,
-        width: MyInt.qrSize.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Expanded(
+        child: SizedBox(
+            height: MyInt.qrSize.height,
+            width: MyInt.qrSize.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+              Expanded(
               flex: 1,
               child: Center(
-                child: MyString.getCenterTextWithSize("Vai al piano ${context.read<ExhibitProvider>().nextExhibit.nPiano.toString()}", 20, false),
+                child: MyText.getCenterTextWithSize(MyString.nPiano(context
+                    .read<ExhibitProvider>()
+                    .nextExhibit
+                    .nPiano), 20, false),
               ),
             ),
             Expanded(
@@ -68,14 +72,18 @@ class _MyQrState extends State<MyQr> {
               ),
             ),
             Expanded(
-              flex: 1,
-              child: Center(
-                child: MyString.qrBottomText(result, context.watch<ExhibitProvider>().scansioneCorretta)
-              ),
+                flex: 1,
+                child: Center(
+                    child: MyText.getCenterTextWithSize(
+                        MyString.qrResult(context.watch<ExhibitProvider>().scansioneCorretta, result?.code),
+                        (result != null) ? 12 : 20,
+                        false
+                    )
+                )
             )
-          ],
-        ),
-      ),
+            ]
+        )
+    )
     );
   }
 
@@ -89,18 +97,20 @@ class _MyQrState extends State<MyQr> {
 
     //Permette di decrementare comunque l'energia per l'opossum nel caso ci si ritorni
     bool firstScan =
-        exProv.nextExhibit == ExhibitList.startingExhibit &&  //Scansiono il primo exhibit
-        enProv.energy == EnergyProvider.maxEnergy;            //Sono ancora full energia
+        exProv.nextExhibit == ExhibitList.startingExhibit && //Scansiono il primo exhibit
+            enProv.energy == EnergyProvider.maxEnergy; //Sono ancora full energia
 
     bool noDecrease = exProv.inTutorial || firstScan;
 
     //Ascolta i dati ricevuti e verifica se "vede" un QR
     controller.scannedDataStream.listen((scanData) {
       setState(() {
-        if(ExhibitList.scannedExhibit(scanData.code ?? "retFalse")){
+        if (ExhibitList.scannedExhibit(scanData.code ?? "retFalse")) {
           if (scanData.code == exProv.nextExhibit.normalName) {
             exProv.setScansioneCorretta();
-            exProv.visit(context.read<ExhibitProvider>().nextExhibit);
+            exProv.visit(context
+                .read<ExhibitProvider>()
+                .nextExhibit);
             if (!noDecrease) {
               enProv.decreaseEnergy();
             }

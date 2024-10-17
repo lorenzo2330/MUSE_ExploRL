@@ -3,13 +3,16 @@ import 'package:app_rl/models/exhibit_list.dart';
 import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/my_widgets.dart';
+import 'package:app_rl/res/my_text.dart';
+import 'package:app_rl/res/widgets/my_bottom_app_bar.dart';
+import 'package:app_rl/res/widgets/my_expanded.dart';
+import 'package:app_rl/res/widgets/my_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../providers/energy_provider.dart';
-import '../res/my_button.dart';
+import '../res/widgets/my_button.dart';
 
 class AlreadyVisitedPage extends StatefulWidget {
   const AlreadyVisitedPage({super.key});
@@ -19,7 +22,7 @@ class AlreadyVisitedPage extends StatefulWidget {
 }
 
 class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
-  List<String> headers = ["N°", "Nome", "Ambiente", "Alimentazione"];
+  List<String> headers = [MyString.N, MyString.nome, MyString.ambiente, MyString.alimentazione];
   late int nPartitaAttuale = 0;
 
   late List<List<String>> listOfMatch = [];
@@ -35,10 +38,10 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     setState(() {
-      late int nPartite = prefs.getInt("nMatch") ?? 0;  //Recupero il numero di partite
+      late int nPartite = prefs.getInt(MyString.nMatch) ?? 0;  //Recupero il numero di partite
       for(int i = 1; i <= nPartite; i++){ //La prima partita viene salvata come Game-1
-        match = prefs.getStringList("Game-$i-match") ?? []; //se è null non prendo niente
-        listOfEnergy.add(prefs.getInt("Game-$i-energy") ?? EnergyProvider.maxEnergy - match.length);
+        match = prefs.getStringList(MyString.gameMatch(i)) ?? []; //se è null non prendo niente
+        listOfEnergy.add(prefs.getInt(MyString.gameEnergy(i)) ?? EnergyProvider.maxEnergy - match.length);
         listOfMatch.add(match);
       }
       nPartitaAttuale = listOfMatch.length ;
@@ -65,7 +68,7 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.backgroundYellow,
-      appBar: AppBar(title: const Text("Cosa hai già visitato")),
+      appBar: AppBar(title: const Text(MyString.cosaHaiVisitato)),
       body: Padding(
         //padding: const EdgeInsets.all(2.0),
         padding: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 20),
@@ -85,16 +88,16 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
                             Expanded(
                               flex: 5,
                               child: DropdownButton<String>(
-                                hint: MyString.getPlainText("Seleziona una partita", false),
+                                hint: MyText.getPlainText(MyString.selezionaPartita, false),
                                 value: selectedMatch,
                                 items: List.generate(
                                     listOfMatch.length + 1,
                                         (index)
                                         {
-                                          final gameLabel = index == listOfMatch.length ? "Partita attuale" : "Partita ${index + 1}";
+                                          final gameLabel = MyString.gameLabel(index, listOfMatch.length);
                                           return DropdownMenuItem<String>(
                                             value: index.toString(),
-                                            child: MyString.getPlainText(gameLabel, false),
+                                            child: MyText.getPlainText(gameLabel, false),
                                           );
                                         }),
                                 onChanged: (String? newValue){
@@ -115,7 +118,7 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
                             ),
                             Expanded(
                               flex: 2,
-                              child: MyWidgets.getBattery(
+                              child: MyStack.getBattery(
                                   charge: energyToDisplay,
                                   batterySize: const Size(100, 45)
                               ),
@@ -126,10 +129,10 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          MyWidgets.getAlreadyVisitedField("N°", 0, true),
-                          MyWidgets.getAlreadyVisitedField("Nome", 1, true),
-                          MyWidgets.getAlreadyVisitedField("Ambiente", 2, true),
-                          MyWidgets.getAlreadyVisitedField("Alimentazione", 3, true),
+                          MyExpanded.getAlreadyVisitedField(MyString.N, 0, true),
+                          MyExpanded.getAlreadyVisitedField(MyString.nome, 1, true),
+                          MyExpanded.getAlreadyVisitedField(MyString.ambiente, 2, true),
+                          MyExpanded.getAlreadyVisitedField(MyString.alimentazione, 3, true),
                         ]),
 
                     //Animali visti
@@ -141,10 +144,10 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
                               l.length,
                               (index) => Row(
                                     children: [
-                                      MyWidgets.getAlreadyVisitedField(index.toString(), 0, false),
-                                      MyWidgets.getAlreadyVisitedField(l[index].normalName, 1, false),
-                                      MyWidgets.getAlreadyVisitedField(l[index].loc, 2, false),
-                                      MyWidgets.getAlreadyVisitedField(l[index].alim, 3, false),
+                                      MyExpanded.getAlreadyVisitedField(index.toString(), 0, false),
+                                      MyExpanded.getAlreadyVisitedField(l[index].normalName, 1, false),
+                                      MyExpanded.getAlreadyVisitedField(l[index].loc, 2, false),
+                                      MyExpanded.getAlreadyVisitedField(l[index].alim, 3, false),
                                     ],
                                   )),
                         ),
@@ -160,7 +163,7 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
           ],
         ),
       ),
-      bottomNavigationBar: MyWidgets.myBottomAppBar(context),
+      bottomNavigationBar: MyBottomAppBar.myBottomAppBar(context),
     );
   }
 }

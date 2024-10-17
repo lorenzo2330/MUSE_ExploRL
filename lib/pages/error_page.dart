@@ -1,5 +1,5 @@
-
 import 'package:app_rl/res/my_string.dart';
+import 'package:app_rl/res/my_text.dart';
 import 'package:flutter/material.dart';
 
 class ErrorPage extends StatelessWidget {
@@ -8,16 +8,16 @@ class ErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: MyString.getPlainText("Flutter demo app", true)),
+      appBar: AppBar(title: MyText.getPlainText(MyString.errorPage, true)),
       body: Center(
         child: Column(
           children: [
-            MyString.getCenterTextWithSize("Pagina di errore", 50, true),
+            MyText.getCenterTextWithSize(MyString.errorPage, 50, true),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, "/home");
+                  Navigator.pushNamed(context, MyString.routeHome);
                 },
-                child: MyString.getPlainText("Torna alla home page", false))
+                child: MyText.getPlainText(MyString.tornaAllaHome, false))
           ],
         ),
       ),

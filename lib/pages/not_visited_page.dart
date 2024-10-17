@@ -1,7 +1,9 @@
-import 'package:app_rl/res/my_button.dart';
-import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/my_widgets.dart';
+import 'package:app_rl/res/widgets/my_button.dart';
+import 'package:app_rl/res/my_colors.dart';
+import 'package:app_rl/res/my_text.dart';
+import 'package:app_rl/res/widgets/my_bottom_app_bar.dart';
+import 'package:app_rl/res/widgets/my_list_view.dart';
 import 'package:flutter/material.dart';
 
 class NotVisitedPage extends StatefulWidget {
@@ -16,14 +18,14 @@ class _NotVisitedPageState extends State<NotVisitedPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: MyColors.backgroundYellow,
-        appBar: AppBar(title: MyString.getPlainText("Cosa puoi visitare ora", true)),
+        appBar: AppBar(title: MyText.getPlainText(MyString.cosaPuoiVisitare, true)),
         body: Padding(
           padding: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 20),
           child: Column(children: [
-            Expanded(child: MyWidgets.getListOfNotVisitedExhibit(context, false)),
+            Expanded(child: MyListView.getListOfNotVisitedExhibit(context, false)),
             MyButton.alreadyVisitedButton(context, true),
           ]),
         ),
-        bottomNavigationBar: MyWidgets.myBottomAppBar(context));
+        bottomNavigationBar: MyBottomAppBar.myBottomAppBar(context));
   }
 }

@@ -1,10 +1,11 @@
-import 'package:app_rl/res/my_button.dart';
+import 'package:app_rl/res/widgets/my_button.dart';
 import 'package:app_rl/res/my_colors.dart';
-import 'package:app_rl/res/my_widgets.dart';
+import 'package:app_rl/res/my_string.dart';
+import 'package:app_rl/res/widgets/my_column.dart';
 import 'package:flutter/material.dart';
 
 import '../res/my_int.dart';
-import '../res/my_string.dart';
+import '../res/my_text.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,7 +15,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: MyColors.backgroundYellow,
       appBar: AppBar(
-        title: MyString.getPlainText(MyString.appName, true),
+        title: MyText.getPlainText(MyString.appName, true),
         actions: [
           IconButton(
             icon: const Icon(Icons.copyright),
@@ -30,15 +31,17 @@ class HomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          MyString.getCenterTextWithSize("Credits:", 30, true),
-                          MyWidgets.creditList(),
+                          MyText.getCenterTextWithSize(MyString.creditTitle, 30, true),
+                          MyColumn.creditList(),
                         ],
                       ),
                     ),
                     actions: [
                       TextButton(
-                        child: const Text("Chiudi"),
-                        onPressed: () { Navigator.of(context).pop(); },
+                        child: const Text(MyString.chiudi),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
                       ),
                     ],
                   );
@@ -64,9 +67,9 @@ class HomePage extends StatelessWidget {
               /*MyString.getCenterTextWithSize(
                   MyString.nomeAttivita, MyInt.titleSize.toDouble(), true),*/
               Text(
-                "Nome attività",
+                MyString.nomeAttivita,
                 style: TextStyle(
-                    fontFamily: "HNLTStd75",
+                    fontFamily: MyText.font75,
                     color: Colors.white,
                     fontSize: MyInt.titleSize.toDouble()),
               ),

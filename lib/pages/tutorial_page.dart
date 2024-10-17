@@ -4,9 +4,10 @@ import 'package:app_rl/pages/tutorial_page_qr.dart';
 import 'package:app_rl/pages/tutorial_page_not_visited_table.dart';
 import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/providers/game_provider.dart';
-import 'package:app_rl/res/my_button.dart';
+import 'package:app_rl/res/widgets/my_button.dart';
 import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/my_string.dart';
+import 'package:app_rl/res/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -47,7 +48,7 @@ class _TutorialPageState extends State<TutorialPage> {
         child: Scaffold(
           backgroundColor: MyColors.backgroundYellow,
           appBar: AppBar(
-            title: MyString.getPlainText(MyString.tutorial, true),
+            title: MyText.getPlainText(MyString.tutorial, true),
             actions: [
               //Mostra il pulsante di avvio solo una volta viste tutte le tab
               if (context.watch<GameProvider>().sezioniVisitate.length == nTab)

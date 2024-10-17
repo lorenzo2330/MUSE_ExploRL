@@ -1,11 +1,14 @@
 import 'package:app_rl/res/my_int.dart';
 import 'package:app_rl/res/my_string.dart';
+import 'package:app_rl/res/my_text.dart';
+import 'package:app_rl/res/widgets/my_column.dart';
+import 'package:app_rl/res/widgets/my_list_view.dart';
+import 'package:app_rl/res/widgets/my_sized_box.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/exhibit_provider.dart';
 import '../providers/game_provider.dart';
-import '../res/my_widgets.dart';
 
 class TutorialPageNotVisitedTable extends StatefulWidget {
   const TutorialPageNotVisitedTable({super.key});
@@ -34,16 +37,16 @@ class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTabl
                 children: [
                   Expanded(
                     flex: 2,
-                    child: MyString.getCenterTextWithSize("Cosa puoi visitare ora", MyInt.tutorialStringSize.toDouble(), true),
+                    child: MyText.getCenterTextWithSize(MyString.cosaPuoiVisitare, MyInt.tutorialStringSize.toDouble(), true),
                   ),
                   Expanded(
                     flex: 8,
-                    child: MyWidgets.getListOfNotVisitedExhibit(context, true),
+                    child: MyListView.getListOfNotVisitedExhibit(context, true),
                   ),
                   Expanded(
                       flex: 6,
                       child: Center(
-                        child: MyString.getCenterTextWithSize("Scegli il prossimo exhibit", 20, false),
+                        child: MyText.getCenterTextWithSize(MyString.scegliAnimale, 20, false),
                       ))
                 ],
               )
@@ -52,9 +55,9 @@ class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTabl
                   flex: 2,
                   child: Column(
                     children: [
-                      MyWidgets.namesOfExhibits(
+                      MyColumn.namesOfExhibits(
                           context.read<ExhibitProvider>().prossimoForTutorial!),
-                      MyWidgets.imageBox(
+                      MySizedBox.imageBox(
                           context, context.read<ExhibitProvider>().prossimoForTutorial!),
                     ],
                   ),
@@ -62,8 +65,8 @@ class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTabl
                 Expanded(
                   flex: 3,
                   child: Center(
-                      child: MyString.getCenterTextWithSize(
-                        "Vai al piano ${context.read<ExhibitProvider>().prossimoForTutorial!.nPiano}",
+                      child: MyText.getCenterTextWithSize(
+                        MyString.nPiano(context.read<ExhibitProvider>().prossimoForTutorial!.nPiano),
                         20,
                         false
                       )

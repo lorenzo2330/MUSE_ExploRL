@@ -1,18 +1,76 @@
-import 'package:app_rl/res/my_colors.dart';
-import 'package:flutter/material.dart';
-
-import 'package:qr_code_scanner/qr_code_scanner.dart';
-
 class MyString {
-  static const String appName = "AppRL";
-  static const String scanQr = "Scansiona il codice QR";
   static const String placeholder = "TODO";
-  static const String nomeAttivita = "Nome Attività";
-  static const String tutorial = "Tutorial";
 
-  static const String myFont = "helveticaneueltstd_blk";
-  static const String font55 = "HNLTStd55";
-  static const String font75 = "HNLTStd75";
+  static const String alimentazione = "Alimentazione";
+  static const String ambiente = "Ambiente";
+  static const String animale = "Animale";
+  static const String animaleTrovato = "Animale trovato";
+  static const String appName = "AppRL";
+  static const String avvio = "Avvio";
+  static const String cancellaDati = "Cancella dati";
+  static const String chiudi = "Chiudi";
+  static const String cosaPuoiVisitare = "Cosa puoi visitare ora";
+  static const String cosaHaiVisitato = "Cosa hai già visitato";
+  static const String creditAltro = "Credit altro";
+  static const String creditDipartimento = "Credit dipartimento";
+  static const String creditFont = "Credit font";
+  static const String creditFotografo = "Credit fotografo";
+  static const String creditIdeatrice = "Credit ideatrice";
+  static const String creditMuse = "Credit MUSE";
+  static const String creditSviluppatore = "Credit sviluppatore";
+  static const String creditTitle = "Credits:";
+  static const String descrizioneObiettivo =
+      "Trova un animale specifico raccogliendo indizi dalle caratteristiche degli altri animali.\n"
+      "Ogni scelta ti consuma risorse, quindi pianifica con attenzione per conservare energia.\n"
+      "Raggiungi il tuo obiettivo con il minor numero di mosse possibile!\n\n"
+      "Buona fortuna, esploratore!";
+  static const String errorPage = "Error page";
+  static const String iniziamo = "Iniziamo";
+  static const String obiettivo = "Obiettivo";
+  static const String N = "N°";
+  static const String nDita = "Numero dita";
+  static const String nMatch = "nMatch";
+  static const String nome = "Nome";
+  static const String nomeAttivita = "Nome Attività";
+  static const String nuovoTentativo = "Nuovo tentativo";
+  static const String riprovaScansione = "Riprova scansione";
+  static const String routeAlreadyVisited = "/alreadyVisited";
+  static const String routeExhibit = "/exhibit";
+  static const String routeHome = "/home";
+  static const String routeObjective = "/objective";
+  static const String routeNotVisited = "/notVisited";
+  static const String routeTutorial = "/tutorial";
+
+  static const String scanQr = "Scansiona il codice QR";
+  static const String scegliAnimale = "Scegli il prossimo animale";
+  static const String selezionaPartita = "Seleziona una partita";
+  static const String simulaScansione = "Simula una scansione";
+  static const String tornaAllaHome = "Torna alla Home Page";
+  static const String tutorial = "Tutorial";
+  static const String tutorialEnergia = "Tutorial energia";
+  static const String tutorialInfo1 = "Questa app ti supporterà nella tua avventura";
+  static const String tutorialInfo2 = "Prima di partire, in questo tutorial scoprirai le funzionalità che ti aiuteranno nell'esplorazione";
+  static const String tutorialInfo3 = "Scorri la schermata per iniziare";
+
+  static String energy(bool isMini, int charge){
+    return isMini ? "$charge   " : "Energia rimanente: $charge   ";
+  }
+
+  static String finalEnergy(bool hasWin, int energy){
+    return hasWin ? "Punti energia finali: $energy" : "";
+  }
+
+  static String gameEnergy(int i){
+    return "Game-$i-energy";
+  }
+
+  static String gameLabel(int index, int length){
+    return index == length ? "Partita attuale" : "Partita ${index + 1}";
+  }
+
+  static String gameMatch(int i){
+    return "Game-$i-match";
+  }
 
   static String getAlimentazione(String alim) {
     return "Alimentazione: $alim";
@@ -22,58 +80,27 @@ class MyString {
     return "Località geografica: $locGeo";
   }
 
-  static Text getResultText(bool noEnergy, bool hasWin) {
-    String resString = "";
-
-    if (noEnergy) {
-      resString = "Hai esaurito tutti i punti energia";
-    }
-    if (hasWin) {
-      resString = "Hai trovato l'exhibit vincente!";
-    }
-
-    return getCenterTextWithSize(resString, noEnergy || hasWin ? 25 : 1, false);
+  static String nPiano(int nPiano) {
+    return "Vai al piano $nPiano";
   }
 
-  static Text qrBottomText(Barcode? result, bool scansioneCorretta) {
-    String text = (result != null)
+  static String qrResult(bool scansioneCorretta, String? result) {
+    return (result != null)
         ? scansioneCorretta
-            ? "Trovato QR corretto: ${result.code}"
-            : "Trovato QR errato"
+        ? "Trovato QR corretto: $result"
+        : "Trovato QR errato"
         : "Scansiona il QR code";
-    double size = (result != null) ? 12 : 20;
-    return getCenterTextWithSize(text, size, false);
   }
 
-  /* ---- FONT ---- */
-
-  static Text getText(String text, TextStyle style) {
-    return Text(text, style: style, textAlign: TextAlign.center);
+  static String result(bool noEnergy, bool hasWin) {
+    return noEnergy
+        ? "Hai esaurito tutti i punti energia"
+        : hasWin
+            ? "Hai trovato l'animale vincente!"
+            : "";
   }
 
-  static Text getPlainText(String text, bool title) {
-    TextStyle style = TextStyle(fontFamily: title ? font75 : font55);
-    return getText(text, style);
-  }
-
-  static Text getCenterTextWithSize(String text, double size, bool title) {
-    TextStyle style = TextStyle(fontSize: size, fontFamily: title ? font75 : font55);
-    return getText(text, style);
-  }
-
-  static Text getItalicCenterTextWithSize(String text, double size, bool title) {
-    TextStyle style =
-        TextStyle(fontSize: size, fontFamily: title ? font75 : font55, fontStyle: FontStyle.italic);
-    return getText(text, style);
-  }
-
-  static Text getButtonText(String text, double? size) {
-    TextStyle style;
-    if (size != null) {
-      style = TextStyle(fontSize: size, fontFamily: font55, color: MyColors.textOfButtonColor);
-    } else {
-      style = TextStyle(fontFamily: font55, color: MyColors.textOfButtonColor);
-    }
-    return getText(text, style);
+  static String tutorialEnergiaInfo(int e){
+    return e > 0 ? "Sei ancora in gioco" : "Hai esaurito l'energia";
   }
 }

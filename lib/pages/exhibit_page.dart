@@ -4,7 +4,10 @@ import 'package:app_rl/providers/game_provider.dart';
 import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/my_qr.dart';
 import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/my_widgets.dart';
+import 'package:app_rl/res/my_text.dart';
+import 'package:app_rl/res/widgets/my_bottom_app_bar.dart';
+import 'package:app_rl/res/widgets/my_column.dart';
+import 'package:app_rl/res/widgets/my_sized_box.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,16 +42,16 @@ class _ExhibitPageState extends State<ExhibitPage> {
           : MyColors.backgroundYellow,
       appBar: AppBar(
         automaticallyImplyLeading: !endGame,
-        title: MyString.getPlainText("Exhibit", true),
+        title: MyText.getPlainText(MyString.animale, true),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            MyWidgets.namesOfExhibits(context.read<ExhibitProvider>().nextExhibit),
-            MyWidgets.imageBox(context, context.read<ExhibitProvider>().nextExhibit),
+            MyColumn.namesOfExhibits(context.read<ExhibitProvider>().nextExhibit),
+            MySizedBox.imageBox(context, context.read<ExhibitProvider>().nextExhibit),
             context.watch<ExhibitProvider>().scansioneCorretta
-                ? MyWidgets.findedExhibit(context, noEnergy, hasWin)
+                ? MySizedBox.findedExhibit(context, noEnergy, hasWin)
                 : MyQr(context: context)
           ],
         ),
@@ -66,7 +69,7 @@ class _ExhibitPageState extends State<ExhibitPage> {
         child: const Icon(Icons.qr_code_outlined),
       ),
 
-      bottomNavigationBar: hasWin && context.watch<ExhibitProvider>().scansioneCorretta ? null : MyWidgets.myBottomAppBar(context),
+      bottomNavigationBar: hasWin && context.watch<ExhibitProvider>().scansioneCorretta ? null : MyBottomAppBar.myBottomAppBar(context),
     );
   }
 }

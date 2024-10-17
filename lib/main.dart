@@ -3,6 +3,7 @@ import 'package:app_rl/pages/route_generator.dart';
 import 'package:app_rl/providers/energy_provider.dart';
 import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/providers/game_provider.dart';
+import 'package:app_rl/res/my_string.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'models/exhibit_list.dart';
@@ -24,9 +25,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: MyString.appName,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
       ),
       home: const HomePage(),

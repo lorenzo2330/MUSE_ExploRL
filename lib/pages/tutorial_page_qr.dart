@@ -1,14 +1,16 @@
 import 'package:app_rl/providers/exhibit_provider.dart';
-import 'package:app_rl/res/my_button.dart';
-import 'package:app_rl/res/my_int.dart';
 import 'package:app_rl/res/my_string.dart';
+import 'package:app_rl/res/widgets/my_button.dart';
+import 'package:app_rl/res/my_int.dart';
+import 'package:app_rl/res/my_text.dart';
+import 'package:app_rl/res/widgets/my_column.dart';
+import 'package:app_rl/res/widgets/my_sized_box.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../models/exhibit_list.dart';
 import '../providers/game_provider.dart';
 import '../res/my_qr.dart';
-import '../res/my_widgets.dart';
 
 class TutorialPageQR extends StatefulWidget {
   const TutorialPageQR({super.key});
@@ -37,19 +39,19 @@ class _TutorialPageQRState extends State<TutorialPageQR> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            MyWidgets.namesOfExhibits(ExhibitList.lupoGrigio),
-            MyWidgets.imageBox(context, ExhibitList.lupoGrigio),
+            MyColumn.namesOfExhibits(ExhibitList.lupoGrigio),
+            MySizedBox.imageBox(context, ExhibitList.lupoGrigio),
             context.watch<ExhibitProvider>().scansioneCorrettaTutorial
                 ? SizedBox(
                     height: MyInt.qrSize.height,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        MyString.getCenterTextWithSize("Exhibit trovato", 20, false),
+                        MyText.getCenterTextWithSize(MyString.animaleTrovato, 20, false),
                         Column(
                           children: [
-                            MyString.getCenterTextWithSize("Località geografica: Eurasia", 20, false),
-                            MyString.getCenterTextWithSize("Numero di dita appoggiate a terra: 4", 20, false),
+                            MyText.getCenterTextWithSize("Località geografica: Eurasia", 20, false),
+                            MyText.getCenterTextWithSize("Numero di dita appoggiate a terra: 4", 20, false),
                           ],
                         ),
                         MyButton.tutorialRetryScanButton(context)
