@@ -1,11 +1,10 @@
-import 'package:app_rl/providers/energy_provider.dart';
 import 'package:app_rl/res/my_string.dart';
 import 'package:app_rl/res/my_text.dart';
 import 'package:app_rl/res/widgets/my_expanded.dart';
-import 'package:app_rl/res/widgets/my_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../providers/energy_provider.dart';
 import '../providers/game_provider.dart';
 
 class TutorialPageAlreadyVisitedTable extends StatefulWidget {
@@ -20,8 +19,6 @@ class _TutorialPageAlreadyVisitedTableState
     extends State<TutorialPageAlreadyVisitedTable> {
   List<String> tutorialList = ["1", "2", "3"];
 
-  String? selectedMatch;
-
   @override
   void initState() {
     super.initState();
@@ -33,6 +30,7 @@ class _TutorialPageAlreadyVisitedTableState
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding:
           const EdgeInsets.only(top: 8.0, bottom: 18.0, left: 8.0, right: 8.0),
@@ -47,32 +45,8 @@ class _TutorialPageAlreadyVisitedTableState
             padding: const EdgeInsets.all(10.0),
             child: Row(
               children: [
-                Expanded(
-                  flex: 5,
-                  child: DropdownButton<String>(
-                    hint: MyText.getPlainText(MyString.selezionaPartita, false),
-                    value: selectedMatch,
-                    items: List.generate(tutorialList.length + 1, (index) {
-                      final gameLabel = MyString.gameLabel(index, tutorialList.length);
-                      return DropdownMenuItem<String>(
-                        value: index.toString(),
-                        child: MyText.getPlainText(gameLabel, false),
-                      );
-                    }),
-                    onChanged: (String? value) {
-                      setState(() {
-                        selectedMatch = value;
-                      });
-                    },
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: MyStack.getBattery(
-                    charge: EnergyProvider.maxEnergy,
-                    batterySize: const Size(100, 45)
-                  ),
-                )
+                MyExpanded.sceltaPartita(context, tutorialList.length),
+                MyExpanded.miniBattery(EnergyProvider.maxEnergy)
               ],
             ),
           ),

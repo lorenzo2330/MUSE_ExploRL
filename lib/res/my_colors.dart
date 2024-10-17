@@ -16,4 +16,8 @@ class MyColors {
     }
     return backgroundYellow;
   }
+
+  static Color getTableColor(bool isTitle){
+    return isTitle ? MyColors.firstRowTable : MyColors.otherRowTable;
+  }
 }

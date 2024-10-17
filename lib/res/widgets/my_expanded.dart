@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/game_provider.dart';
 import '../my_colors.dart';
 import '../my_int.dart';
+import '../my_string.dart';
 import '../my_text.dart';
+import 'my_stack.dart';
 
 class MyExpanded {
   /*  Expanded bilancia lo spazio disponibile tra le colonne,
@@ -18,13 +22,42 @@ class MyExpanded {
         height: isTitle ? 40 : 80,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-            color: isTitle ? MyColors.firstRowTable : MyColors.otherRowTable,
+            color: MyColors.getTableColor(isTitle),
             border: Border.all(color: MyColors.borderColor, width: 0.5)),
         child: Padding(
           padding: EdgeInsets.only(top: p, left: 2.0, right: 2.0, bottom: p),
-          child: MyText.getCenterTextWithSize(text, isTitle ? 18 : 16, isTitle),
+          child: MyText.getCenterTextWithSize(text, isTitle ? 14 : 16, isTitle),
         ),
       ),
+    );
+  }
+
+  static Expanded sceltaPartita(BuildContext context, int listLength) {
+    var gProvR = context.read<GameProvider>();
+
+    return Expanded(
+      flex: 5,
+      child: DropdownButton<String>(
+        hint: MyText.getPlainText(MyString.selezionaPartita, false),
+        value: gProvR.tutSelectedMatch,
+        items: List.generate(listLength + 1, (index) {
+          final gameLabel = MyString.gameLabel(index, listLength);
+          return DropdownMenuItem<String>(
+            value: index.toString(),
+            child: MyText.getPlainText(gameLabel, false),
+          );
+        }),
+        onChanged: (String? value) {
+          gProvR.setTutSelectedMatch(value);
+        },
+      ),
+    );
+  }
+
+  static Expanded miniBattery(int e) {
+    return Expanded(
+      flex: 2,
+      child: MyStack.getBattery(charge: e, batterySize: const Size(100, 45)),
     );
   }
 }

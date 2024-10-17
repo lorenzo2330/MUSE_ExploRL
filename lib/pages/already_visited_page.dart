@@ -93,13 +93,13 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
                                 items: List.generate(
                                     listOfMatch.length + 1,
                                         (index)
-                                        {
-                                          final gameLabel = MyString.gameLabel(index, listOfMatch.length);
-                                          return DropdownMenuItem<String>(
-                                            value: index.toString(),
-                                            child: MyText.getPlainText(gameLabel, false),
-                                          );
-                                        }),
+                                    {
+                                      final gameLabel = MyString.gameLabel(index, listOfMatch.length);
+                                      return DropdownMenuItem<String>(
+                                        value: index.toString(),
+                                        child: MyText.getPlainText(gameLabel, false),
+                                      );
+                                    }),
                                 onChanged: (String? newValue){
                                   setState(() {
                                     selectedMatch = newValue;
@@ -142,14 +142,14 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
                         child: Column(
                           children: List.generate(
                               l.length,
-                              (index) => Row(
-                                    children: [
-                                      MyExpanded.getAlreadyVisitedField(index.toString(), 0, false),
-                                      MyExpanded.getAlreadyVisitedField(l[index].normalName, 1, false),
-                                      MyExpanded.getAlreadyVisitedField(l[index].loc, 2, false),
-                                      MyExpanded.getAlreadyVisitedField(l[index].alim, 3, false),
-                                    ],
-                                  )),
+                                  (index) => Row(
+                                children: [
+                                  MyExpanded.getAlreadyVisitedField(index.toString(), 0, false),
+                                  MyExpanded.getAlreadyVisitedField(l[index].normalName, 1, false),
+                                  MyExpanded.getAlreadyVisitedField(l[index].loc, 2, false),
+                                  MyExpanded.getAlreadyVisitedField(l[index].alim, 3, false),
+                                ],
+                              )),
                         ),
                       ),
                     ),

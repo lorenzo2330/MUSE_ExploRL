@@ -78,6 +78,47 @@ flutter:
     - family: HNLTStd75
       fonts:
         - asset: fonts/Helvetica Neue LT Std 75 Bold.otf
+    - family: HelveticaNeue
+      fonts:
+        - asset: fonts/HelveticaNeueLTStd-Ex.otf
+        - asset: fonts/HelveticaNeueLTStd-ExO.otf
+        - asset: fonts/HelveticaNeueLTStd-Lt.otf
+        - asset: fonts/HelveticaNeueLTStd-LtCn.otf
+        - asset: fonts/HelveticaNeueLTStd-LtCnO.otf
+        - asset: fonts/HelveticaNeueLTStd-LtEx.otf
+        - asset: fonts/HelveticaNeueLTStd-LtExO.otf
+        - asset: fonts/HelveticaNeueLTStd-Md.otf
+        - asset: fonts/HelveticaNeueLTStd-MdCn.otf
+        - asset: fonts/HelveticaNeueLTStd-MdCnO.otf
+        - asset: fonts/HelveticaNeueLTStd-MdEx.otf
+        - asset: fonts/HelveticaNeueLTStd-MdExO.otf
+        - asset: fonts/HelveticaNeueLTStd-Roman.otf
+          weight: 400  # 55 Regular
+        - asset: fonts/HelveticaNeueLTStd-Th.otf
+        - asset: fonts/HelveticaNeueLTStd-ThCn.otf
+        - asset: fonts/HelveticaNeueLTStd-ThCnO.otf
+        - asset: fonts/HelveticaNeueLTStd-ThEx.otf
+        - asset: fonts/HelveticaNeueLTStd-ThExO.otf
+        - asset: fonts/HelveticaNeueLTStd-UltLt.otf
+        - asset: fonts/HelveticaNeueLTStd-UltLtCn.otf
+        - asset: fonts/HelveticaNeueLTStd-UltLtCnO.otf
+        - asset: fonts/HelveticaNeueLTStd-UltLtEx.otf
+        - asset: fonts/HelveticaNeueLTStd-UltLtExO.otf
+        - asset: fonts/HelveticaNeueLTStd-XBlkCn.otf
+        - asset: fonts/HelveticaNeueLTStd-BdEx.otf
+          weight: 800  # 75 Bold
+        - asset: fonts/HelveticaNeueLTStd-BdExO.otf
+          style: italic
+        - asset: fonts/HelveticaNeueLTStd-BdOu.otf
+        - asset: fonts/HelveticaNeueLTStd-Blk.otf
+        - asset: fonts/HelveticaNeueLTStd-BlkCn.otf
+        - asset: fonts/HelveticaNeueLTStd-BlkCnO.otf
+        - asset: fonts/HelveticaNeueLTStd-BlkEx.otf
+        - asset: fonts/HelveticaNeueLTStd-BlkExO.otf
+        - asset: fonts/HelveticaNeueLTStd-Cn.otf
+        - asset: fonts/HelveticaNeueLTStd-CnO.otf
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

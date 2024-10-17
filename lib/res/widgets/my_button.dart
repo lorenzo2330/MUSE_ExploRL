@@ -47,7 +47,7 @@ class MyButton {
   static ElevatedButton notVisitedButton(BuildContext context, bool fromAlreadyVisited) {
     f() {
       if (fromAlreadyVisited) Navigator.pop(context);
-      Navigator.pushNamed(context, MyString.routeAlreadyVisited);
+      Navigator.pushNamed(context, MyString.routeNotVisited);
     }
 
     return getButton(MyString.cosaPuoiVisitare, 23, f);

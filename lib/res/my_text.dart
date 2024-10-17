@@ -2,12 +2,12 @@ import 'package:app_rl/res/my_colors.dart';
 import 'package:flutter/material.dart';
 
 class MyText {
-  static const String font1 = "helveticaneueltstd_blk";
-  static const String font55 = "HNLTStd55";
-  static const String font75 = "HNLTStd75";
+  static const String fontMuse = "HelveticaNeue";
+  static const FontWeight fontNorm = FontWeight.w400; //55 Regular
+  static const FontWeight fontTitle = FontWeight.w800;  //75 Bold
 
-  static String getFont(bool title) {
-    return title ? font75 : font55;
+  static FontWeight getFontWeight(bool title) {
+    return title ? fontTitle : fontNorm;
   }
 
   /* ---- FONT ---- */
@@ -17,29 +17,29 @@ class MyText {
   }
 
   static Text getPlainText(String text, bool title) {
-    TextStyle style = TextStyle(fontFamily: getFont(title));
+    TextStyle style = TextStyle(fontFamily: fontMuse, fontWeight: getFontWeight(title));
     return getText(text, style);
   }
 
   static Text getCenterTextWithSize(String text, double size, bool title) {
-    TextStyle style = TextStyle(fontSize: size, fontFamily: getFont(title));
+    TextStyle style = TextStyle(fontSize: size, fontFamily: fontMuse, fontWeight: getFontWeight(title));
     return getText(text, style);
   }
 
   static Text getItalicCenterTextWithSize(String text, double size, bool title) {
     TextStyle style =
-        TextStyle(fontSize: size, fontFamily: getFont(title), fontStyle: FontStyle.italic);
+        TextStyle(fontSize: size, fontFamily: fontMuse, fontWeight: getFontWeight(title), fontStyle: FontStyle.italic);
     return getText(text, style);
   }
 
   static Text getButtonText(String text, double? size) {
-    String f = getFont(false);
+    FontWeight f = getFontWeight(false);
     Color c = MyColors.textOfButtonColor;
     TextStyle style;
     if (size != null) {
-      style = TextStyle(fontSize: size, fontFamily: f, color: c);
+      style = TextStyle(fontSize: size, fontFamily: fontMuse, fontWeight: f, color: c);
     } else {
-      style = TextStyle(fontFamily: f, color: c);
+      style = TextStyle(fontFamily: fontMuse, fontWeight: f, color: c);
     }
     return getText(text, style);
   }

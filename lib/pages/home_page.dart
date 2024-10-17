@@ -69,7 +69,8 @@ class HomePage extends StatelessWidget {
               Text(
                 MyString.nomeAttivita,
                 style: TextStyle(
-                    fontFamily: MyText.font75,
+                    fontFamily: MyText.fontMuse,
+                    fontWeight: MyText.fontTitle,
                     color: Colors.white,
                     fontSize: MyInt.titleSize.toDouble()),
               ),
