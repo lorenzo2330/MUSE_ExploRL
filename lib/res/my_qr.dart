@@ -2,7 +2,7 @@ import 'package:app_rl/providers/energy_provider.dart';
 import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/res/my_int.dart';
 import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/my_text.dart';
+import 'package:app_rl/res/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -76,7 +76,7 @@ class _MyQrState extends State<MyQr> {
                 child: Center(
                     child: MyText.getCenterTextWithSize(
                         MyString.qrResult(context.watch<ExhibitProvider>().scansioneCorretta, result?.code),
-                        (result != null) ? 12 : 20,
+                        20,
                         false
                     )
                 )

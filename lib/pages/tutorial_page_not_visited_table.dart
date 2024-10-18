@@ -1,6 +1,7 @@
 import 'package:app_rl/res/my_int.dart';
 import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/my_text.dart';
+import 'package:app_rl/res/widgets/my_text.dart';
+import 'package:app_rl/res/widgets/my_button.dart';
 import 'package:app_rl/res/widgets/my_column.dart';
 import 'package:app_rl/res/widgets/my_list_view.dart';
 import 'package:app_rl/res/widgets/my_sized_box.dart';
@@ -38,18 +39,18 @@ class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTabl
     Text sceltaAnimale = MyText.getCenterTextWithSize(MyString.scegliAnimale, 20, false);
 
     return Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(30.0),
         child: exProvW.prossimoForTutorial == null
             ? Column(
                 children: [
-                  Expanded(flex: 2, child: cosaVisitare),
+                  Expanded(flex: 3, child: cosaVisitare),
                   Expanded(flex: 8, child: listOfExhibits),
                   Expanded(flex: 6, child: Center(child: sceltaAnimale))
                 ],
               )
-            : Column(children: [
+            : Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
                 Expanded(
-                  flex: 2,
+                  flex: 4,
                   child: Column(
                     children: [
                       MyColumn.namesOfExhibits(exProvR.prossimoForTutorial!),
@@ -58,11 +59,12 @@ class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTabl
                   ),
                 ),
                 Expanded(
-                  flex: 3,
+                  flex: 4,
                   child: Center(
                       child: MyText.getCenterTextWithSize(
                           MyString.nPiano(exProvR.prossimoForTutorial!.nPiano), 20, false)),
                 ),
+                Expanded(flex: 1, child: MyButton.tutorialRetryNotVisitedButton(context))
               ]));
   }
 }

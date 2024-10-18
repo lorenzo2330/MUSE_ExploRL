@@ -1,7 +1,7 @@
 import 'package:app_rl/res/my_string.dart';
 import 'package:app_rl/res/widgets/my_button.dart';
 import 'package:app_rl/res/my_colors.dart';
-import 'package:app_rl/res/my_text.dart';
+import 'package:app_rl/res/widgets/my_text.dart';
 import 'package:app_rl/res/widgets/my_bottom_app_bar.dart';
 import 'package:app_rl/res/widgets/my_list_view.dart';
 import 'package:flutter/material.dart';

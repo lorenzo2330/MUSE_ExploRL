@@ -6,7 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/exhibit.dart';
 import '../../providers/exhibit_provider.dart';
-import '../my_text.dart';
+import 'my_column.dart';
+import 'my_text.dart';
 import '../my_style.dart';
 
 void saveData(List<Exhibit> visited, int energy) async {
@@ -16,7 +17,8 @@ void saveData(List<Exhibit> visited, int energy) async {
 
   nPartite++; //Aggiorno aggiungendo la partita appena conclusa
 
-  prefs.setInt(MyString.nMatch, nPartite); //Salvo nuovamente il numero di partite che sono state fatte
+  prefs.setInt(
+      MyString.nMatch, nPartite); //Salvo nuovamente il numero di partite che sono state fatte
 
   List<String> match = [];
   for (Exhibit ex in visited) {
@@ -30,8 +32,19 @@ class MyButton {
   static ElevatedButton getButton(String text, double? size, void Function()? f) {
     return ElevatedButton(
       onPressed: f,
-      style: MyStyle.buttonStyleBig,
+      style: MyStyle.bigButtonStyle,
       child: MyText.getButtonText(text, size),
+    );
+  }
+
+  static ElevatedButton getMiniButton(Text text, IconData? icon, void Function()? f) {
+    return ElevatedButton(
+      onPressed: f,
+      style: MyStyle.smallButtonStyle,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[Icon(icon, color: Colors.black), text],
+      ),
     );
   }
 
@@ -94,12 +107,28 @@ class MyButton {
     return getButton(MyString.riprovaScansione, 25, f);
   }
 
+  static ElevatedButton tutorialRetryNotVisitedButton(BuildContext context) {
+    f() {
+      context.read<ExhibitProvider>().setProssimoForTutorial(null);
+    }
+
+    return getButton(MyString.riprova, 25, f);
+  }
+
   static ElevatedButton tutorialDecreaseEnergy(BuildContext context) {
     f() {
       context.read<EnergyProvider>().decreaseTutorialEnergy();
     }
 
     return getButton(MyString.simulaScansione, 23, f);
+  }
+
+  static ElevatedButton tutorialRechargeEnergy(BuildContext context) {
+    f() {
+      context.read<EnergyProvider>().rechargeTutorialEnergy();
+    }
+
+    return getButton(MyString.ricaricaEnergia, 23, f);
   }
 
   static ElevatedButton objectiveStartingButton(BuildContext context) {
@@ -113,19 +142,51 @@ class MyButton {
   ////////////////////////////////////////////////////////////////////////////////////////////////
 
   static ElevatedButton tutorialStartingButton(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.pushNamed(context, MyString.routeObjective);
-        context.read<ExhibitProvider>().setInTutorial(false);
-      },
-      style: MyStyle.tutorialUpButtonStyle,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          const Icon(Icons.play_circle_outline, color: Colors.black),
-          MyText.getButtonText(MyString.iniziamo, 20)
-        ],
-      ),
-    );
+    f() {
+      Navigator.pushNamed(context, MyString.routeObjective);
+      context.read<ExhibitProvider>().setInTutorial(false);
+    }
+
+    Text text = MyText.getButtonText(MyString.iniziamo, 20);
+
+    return getMiniButton(text, Icons.play_circle_outline, f);
+  }
+
+  static ElevatedButton creditsButton(BuildContext context) {
+
+    Text text = MyText.getButtonText(MyString.credits, 20);
+
+    Text text2 = MyText.getButtonText(MyString.chiudi, 20);
+
+    f2() {
+      Navigator.of(context).pop();
+    }
+
+    f() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: Colors.white,
+            content: SizedBox(
+              height: 400,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MyText.getCenterTextWithSize(MyString.creditTitle, 30, true),
+                  MyColumn.creditList(),
+                ],
+              ),
+            ),
+            actions: [getMiniButton(text2, Icons.close, f2)],
+          );
+        },
+      );
+    }
+
+
+
+    return getMiniButton(text, Icons.copyright, f);
   }
 }

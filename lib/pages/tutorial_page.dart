@@ -7,7 +7,7 @@ import 'package:app_rl/providers/game_provider.dart';
 import 'package:app_rl/res/widgets/my_button.dart';
 import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/my_text.dart';
+import 'package:app_rl/res/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

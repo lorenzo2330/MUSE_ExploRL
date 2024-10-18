@@ -11,7 +11,7 @@ class MyBottomAppBar {
 
   static BottomAppBar myBottomAppBar(BuildContext context) {
     return BottomAppBar(
-        color: MyColors.backgroundYellow,
+        color: MyColors.bottomAppBarColor,
         height: MyInt.bottomBarHeight.toDouble(),
         child: MyStack.getBattery(
             charge: context.watch<EnergyProvider>().energy, batterySize: MyInt.batterySize));

@@ -1,5 +1,5 @@
 import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/my_text.dart';
+import 'package:app_rl/res/widgets/my_text.dart';
 import 'package:app_rl/res/widgets/my_expanded.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

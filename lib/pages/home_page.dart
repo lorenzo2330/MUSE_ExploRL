@@ -1,11 +1,11 @@
 import 'package:app_rl/res/widgets/my_button.dart';
 import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/widgets/my_column.dart';
+import 'package:app_rl/res/widgets/my_sized_box.dart';
 import 'package:flutter/material.dart';
 
 import '../res/my_int.dart';
-import '../res/my_text.dart';
+import '../res/widgets/my_text.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,38 +17,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: MyText.getPlainText(MyString.appName, true),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.copyright),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    backgroundColor: Colors.white,
-                    content: SizedBox(
-                      height: 400,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          MyText.getCenterTextWithSize(MyString.creditTitle, 30, true),
-                          MyColumn.creditList(),
-                        ],
-                      ),
-                    ),
-                    actions: [
-                      TextButton(
-                        child: const Text(MyString.chiudi),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-          ),
+          MyButton.creditsButton(context),
         ],
       ),
       body: Stack(children: [
@@ -64,51 +33,28 @@ class HomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              /*MyString.getCenterTextWithSize(
-                  MyString.nomeAttivita, MyInt.titleSize.toDouble(), true),*/
-              Text(
-                MyString.nomeAttivita,
-                style: TextStyle(
-                    fontFamily: MyText.fontMuse,
-                    fontWeight: MyText.fontTitle,
-                    color: Colors.white,
-                    fontSize: MyInt.titleSize.toDouble()),
+              Column(
+                children: [
+                  MyText.homePageText(MyString.titoloAttivita, MyInt.titleSize.toDouble()),
+                  const Text(""),
+                  MyText.homePageText(MyString.sottotitoloAttivita, MyInt.subtitleSize.toDouble()),
+                ],
               ),
               MyButton.homePageStartingButton(context),
-              MyButton.deleteDataButton()
+              //MyButton.deleteDataButton()
             ],
           ),
         ),
       ]),
       bottomNavigationBar: BottomAppBar(
+        color: MyColors.bottomAppBarColor,
         height: MyInt.bottomBarHeight.toDouble(),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ClipOval(
-              child: Image.asset(
-                "images/logoTondo.png",
-                width: 50,
-                height: 50,
-                fit: BoxFit.cover,
-              ),
-            ),
-            ClipRect(
-              child: Image.asset(
-                "images/logoRettangolare.png",
-                width: 100,
-                height: 50,
-                fit: BoxFit.cover,
-              ),
-            ),
-            ClipRect(
-              child: Image.asset(
-                "images/logoMuseAzzurro.jpg",
-                width: 150,
-                height: 50,
-                fit: BoxFit.fitHeight,
-              ),
-            ),
+            MySizedBox.boxLogo("images/logoDISI.png"),
+            MySizedBox.boxLogo("images/logoPOPMAT.jpg"),
+            MySizedBox.boxLogo("images/logoMuseAzzurro.jpg"),
           ],
         ),
       ),

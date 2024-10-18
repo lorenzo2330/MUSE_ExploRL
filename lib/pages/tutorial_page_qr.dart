@@ -2,7 +2,7 @@ import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/res/my_string.dart';
 import 'package:app_rl/res/widgets/my_button.dart';
 import 'package:app_rl/res/my_int.dart';
-import 'package:app_rl/res/my_text.dart';
+import 'package:app_rl/res/widgets/my_text.dart';
 import 'package:app_rl/res/widgets/my_column.dart';
 import 'package:app_rl/res/widgets/my_sized_box.dart';
 import 'package:flutter/material.dart';

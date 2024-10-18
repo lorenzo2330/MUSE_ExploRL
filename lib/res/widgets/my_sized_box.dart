@@ -9,7 +9,7 @@ import 'my_button.dart';
 import '../my_colors.dart';
 import '../my_int.dart';
 import '../my_string.dart';
-import '../my_text.dart';
+import 'my_text.dart';
 
 class MySizedBox {
   static SizedBox findedExhibit(BuildContext context, bool noEnergy, bool hasWin) {
@@ -97,5 +97,14 @@ class MySizedBox {
           },
           child: Image.asset(imgPath, scale: 2)),
     );
+  }
+
+  static SizedBox boxLogo(String src) {
+    return SizedBox(
+      //width: 105,
+      height: 35,
+      child: ClipRect(child: Image.asset(src, fit: BoxFit.contain)),
+    );
+    /* BoxFit.contain permette di visualizzare l'intera immagine senza tagliarla */
   }
 }

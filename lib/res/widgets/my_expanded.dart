@@ -8,7 +8,7 @@ import '../../providers/game_provider.dart';
 import '../my_colors.dart';
 import '../my_int.dart';
 import '../my_string.dart';
-import '../my_text.dart';
+import 'my_text.dart';
 import 'my_stack.dart';
 
 List<Exhibit> getRelativeListOfExhibit(List<String> l) {
@@ -37,7 +37,7 @@ class MyExpanded {
             border: Border.all(color: MyColors.borderColor, width: 0.5)),
         child: Padding(
           padding: EdgeInsets.only(top: p, left: 2.0, right: 2.0, bottom: p),
-          child: MyText.getCenterTextWithSize(text, isTitle ? 14 : 16, isTitle),
+          child: MyText.getCenterTextWithSize(text, isTitle ? 14 : 15, isTitle),
         ),
       ),
     );

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/battery.dart';
 import '../my_int.dart';
-import '../my_text.dart';
+import 'my_text.dart';
 
 class MyStack {
   static Stack getBattery({required int charge, required Size batterySize}) {

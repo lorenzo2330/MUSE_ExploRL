@@ -2,7 +2,7 @@ import 'package:app_rl/providers/energy_provider.dart';
 import 'package:app_rl/res/my_string.dart';
 import 'package:app_rl/res/widgets/my_button.dart';
 import 'package:app_rl/res/my_int.dart';
-import 'package:app_rl/res/my_text.dart';
+import 'package:app_rl/res/widgets/my_text.dart';
 import 'package:app_rl/res/widgets/my_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +40,8 @@ class _TutorialPageEnergyState extends State<TutorialPageEnergy> {
             MyText.getCenterTextWithSize(MyString.tutorialEnergia, s, true),
             MyButton.tutorialDecreaseEnergy(context),
             MyStack.getBattery(charge: enProvW.tutorialEnergy, batterySize: MyInt.batterySize),
-            MyText.getCenterTextWithSize(MyString.tutEnergyInfo(enProvR.tutorialEnergy), s, false)
+            MyText.getCenterTextWithSize(MyString.tutEnergyInfo(enProvR.tutorialEnergy), s, false),
+            enProvR.tutorialEnergy == 0 ? MyButton.tutorialRechargeEnergy(context) : const Text(""),
           ],
         ),
       ),

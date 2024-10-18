@@ -4,7 +4,7 @@ import 'package:app_rl/providers/game_provider.dart';
 import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/my_qr.dart';
 import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/my_text.dart';
+import 'package:app_rl/res/widgets/my_text.dart';
 import 'package:app_rl/res/widgets/my_bottom_app_bar.dart';
 import 'package:app_rl/res/widgets/my_column.dart';
 import 'package:app_rl/res/widgets/my_sized_box.dart';

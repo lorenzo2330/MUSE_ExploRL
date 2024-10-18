@@ -1,5 +1,5 @@
 import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/my_text.dart';
+import 'package:app_rl/res/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 
 class ErrorPage extends StatelessWidget {

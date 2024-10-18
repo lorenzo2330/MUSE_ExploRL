@@ -2,7 +2,7 @@ import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/res/my_string.dart';
 import 'package:app_rl/res/widgets/my_button.dart';
 import 'package:app_rl/res/my_colors.dart';
-import 'package:app_rl/res/my_text.dart';
+import 'package:app_rl/res/widgets/my_text.dart';
 import 'package:app_rl/res/widgets/my_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +26,7 @@ class _ObjectivePageState extends State<ObjectivePage> {
         return;
       },
       child: Scaffold(
+
         backgroundColor: MyColors.backgroundYellow,
         appBar: AppBar(
           title: MyText.getPlainText(MyString.obiettivo, true),

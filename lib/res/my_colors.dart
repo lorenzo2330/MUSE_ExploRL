@@ -9,6 +9,7 @@ class MyColors {
   static Color loseColor = Colors.deepOrange[300]!;
   static Color buttonColor = firstRowTable;
   static Color textOfButtonColor = Colors.black;
+  static Color bottomAppBarColor = Colors.white;
 
   static Color getResultColor(bool noEnergy, bool hasWin) {
     if (noEnergy || hasWin) {
