@@ -31,7 +31,8 @@ class GameProvider extends ChangeNotifier{
   String? get selectedMatch => _selectedMatch;
 
   void setSelectedMatch(String? value) {
-    _selectedMatch ??= value; //Se è nullo => assegno la partita attuale
+    //_selectedMatch ??= value; //Se è nullo => assegno la partita attuale
+    _selectedMatch = value;
     notifyListeners();
   }
 

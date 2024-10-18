@@ -30,24 +30,21 @@ class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTabl
 
   @override
   Widget build(BuildContext context) {
+    double s = MyInt.tutorialStringSize.toDouble();
+    ExhibitProvider exProvR = context.read<ExhibitProvider>();
+    ExhibitProvider exProvW = context.watch<ExhibitProvider>();
+    Text cosaVisitare = MyText.getCenterTextWithSize(MyString.cosaPuoiVisitare, s, true);
+    ListView listOfExhibits = MyListView.getListOfNotVisitedExhibit(context, true);
+    Text sceltaAnimale = MyText.getCenterTextWithSize(MyString.scegliAnimale, 20, false);
+
     return Padding(
         padding: const EdgeInsets.all(20.0),
-        child: context.watch<ExhibitProvider>().prossimoForTutorial == null
+        child: exProvW.prossimoForTutorial == null
             ? Column(
                 children: [
-                  Expanded(
-                    flex: 2,
-                    child: MyText.getCenterTextWithSize(MyString.cosaPuoiVisitare, MyInt.tutorialStringSize.toDouble(), true),
-                  ),
-                  Expanded(
-                    flex: 8,
-                    child: MyListView.getListOfNotVisitedExhibit(context, true),
-                  ),
-                  Expanded(
-                      flex: 6,
-                      child: Center(
-                        child: MyText.getCenterTextWithSize(MyString.scegliAnimale, 20, false),
-                      ))
+                  Expanded(flex: 2, child: cosaVisitare),
+                  Expanded(flex: 8, child: listOfExhibits),
+                  Expanded(flex: 6, child: Center(child: sceltaAnimale))
                 ],
               )
             : Column(children: [
@@ -55,10 +52,8 @@ class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTabl
                   flex: 2,
                   child: Column(
                     children: [
-                      MyColumn.namesOfExhibits(
-                          context.read<ExhibitProvider>().prossimoForTutorial!),
-                      MySizedBox.imageBox(
-                          context, context.read<ExhibitProvider>().prossimoForTutorial!),
+                      MyColumn.namesOfExhibits(exProvR.prossimoForTutorial!),
+                      MySizedBox.imageBox(context, exProvR.prossimoForTutorial!),
                     ],
                   ),
                 ),
@@ -66,11 +61,7 @@ class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTabl
                   flex: 3,
                   child: Center(
                       child: MyText.getCenterTextWithSize(
-                        MyString.nPiano(context.read<ExhibitProvider>().prossimoForTutorial!.nPiano),
-                        20,
-                        false
-                      )
-                  ),
+                          MyString.nPiano(exProvR.prossimoForTutorial!.nPiano), 20, false)),
                 ),
               ]));
   }

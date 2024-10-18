@@ -25,15 +25,16 @@ class _TutorialPageInfoState extends State<TutorialPageInfo> {
 
   @override
   Widget build(BuildContext context) {
+    double s = MyInt.tutorialStringSize.toDouble();
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            MyText.getCenterTextWithSize(MyString.tutorialInfo1, MyInt.tutorialStringSize.toDouble() - 5, false),
-            MyText.getCenterTextWithSize(MyString.tutorialInfo2, MyInt.tutorialStringSize.toDouble() - 7, false),
-            MyText.getCenterTextWithSize(MyString.tutorialInfo3, MyInt.tutorialStringSize.toDouble(), false)
+            MyText.getCenterTextWithSize(MyString.tutorialInfo1, s - 5, false),
+            MyText.getCenterTextWithSize(MyString.tutorialInfo2, s - 7, false),
+            MyText.getCenterTextWithSize(MyString.tutorialInfo3, s, false)
           ],
         ),
       ),

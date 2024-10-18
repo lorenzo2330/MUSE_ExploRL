@@ -100,7 +100,7 @@ class MyString {
             : "";
   }
 
-  static String tutorialEnergiaInfo(int e){
+  static String tutEnergyInfo(int e){
     return e > 0 ? "Sei ancora in gioco" : "Hai esaurito l'energia";
   }
 }

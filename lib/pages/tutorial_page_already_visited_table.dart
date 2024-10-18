@@ -45,7 +45,7 @@ class _TutorialPageAlreadyVisitedTableState
             padding: const EdgeInsets.all(10.0),
             child: Row(
               children: [
-                MyExpanded.sceltaPartita(context, tutorialList.length),
+                MyExpanded.sceltaPartita(context, tutorialList.length, true),
                 MyExpanded.miniBattery(EnergyProvider.maxEnergy)
               ],
             ),

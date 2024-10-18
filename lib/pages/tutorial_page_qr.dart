@@ -33,6 +33,8 @@ class _TutorialPageQRState extends State<TutorialPageQR> {
 
   @override
   Widget build(BuildContext context) {
+    String tut1 = "Località geografica: Eurasia";
+    String tut2 = "Numero di dita appoggiate a terra: 4";
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: Center(
@@ -50,8 +52,8 @@ class _TutorialPageQRState extends State<TutorialPageQR> {
                         MyText.getCenterTextWithSize(MyString.animaleTrovato, 20, false),
                         Column(
                           children: [
-                            MyText.getCenterTextWithSize("Località geografica: Eurasia", 20, false),
-                            MyText.getCenterTextWithSize("Numero di dita appoggiate a terra: 4", 20, false),
+                            MyText.getCenterTextWithSize(tut1, 20, false),
+                            MyText.getCenterTextWithSize(tut2, 20, false),
                           ],
                         ),
                         MyButton.tutorialRetryScanButton(context)

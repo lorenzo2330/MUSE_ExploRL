@@ -11,7 +11,7 @@ class ExhibitProvider extends ChangeNotifier {
 
   bool get inTutorial => _inTutorial;
 
-  void setInTutorial(bool mode) { _inTutorial = mode; notifyListeners();  }
+  void setInTutorial(bool mode) { _inTutorial = mode; notifyListeners(); }
 
   Exhibit _nextExhibit = ExhibitList.startingExhibit;
 

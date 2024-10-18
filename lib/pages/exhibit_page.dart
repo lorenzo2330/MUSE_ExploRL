@@ -24,12 +24,12 @@ class _ExhibitPageState extends State<ExhibitPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
     /*  Invocato subito dopo initState(), permette l'utilizzo di context
     *   (cosa non possibile in initState) */
     hasWin = context.watch<ExhibitProvider>().nextIsWinnerExhibit();
     noEnergy = context.watch<EnergyProvider>().energy == 0;
     endGame = hasWin || noEnergy;
+    context.read<ExhibitProvider>().setInTutorial(false);
   }
 
   @override

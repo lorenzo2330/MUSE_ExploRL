@@ -17,7 +17,6 @@ class TutorialPageEnergy extends StatefulWidget {
 }
 
 class _TutorialPageEnergyState extends State<TutorialPageEnergy> {
-
   @override
   void initState() {
     super.initState();
@@ -29,16 +28,19 @@ class _TutorialPageEnergyState extends State<TutorialPageEnergy> {
 
   @override
   Widget build(BuildContext context) {
+    double s = MyInt.tutorialStringSize.toDouble();
+    EnergyProvider enProvR = context.read<EnergyProvider>();
+    EnergyProvider enProvW = context.watch<EnergyProvider>();
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            MyText.getCenterTextWithSize(MyString.tutorialEnergia, MyInt.tutorialStringSize.toDouble(), true),
+            MyText.getCenterTextWithSize(MyString.tutorialEnergia, s, true),
             MyButton.tutorialDecreaseEnergy(context),
-            MyStack.getBattery(charge: context.watch<EnergyProvider>().tutorialEnergy, batterySize: MyInt.batterySize),
-            MyText.getCenterTextWithSize(MyString.tutorialEnergiaInfo(context.read<EnergyProvider>().tutorialEnergy), MyInt.tutorialStringSize.toDouble(), false)
+            MyStack.getBattery(charge: enProvW.tutorialEnergy, batterySize: MyInt.batterySize),
+            MyText.getCenterTextWithSize(MyString.tutEnergyInfo(enProvR.tutorialEnergy), s, false)
           ],
         ),
       ),
