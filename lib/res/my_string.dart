@@ -15,7 +15,7 @@ class MyString {
   static const String creditDipartimento = "Credit dipartimento";
   static const String creditFont = "Credit font";
   static const String creditFoto = "Fotografie:";
-  static const String creditFotografo = "- Nome Cognome";
+  static const String creditFotografo = "- © ph. Osvaldo Negra";
   static const String creditPopmat = "- Laboratorio di comunicazione,\n   storia e filosofia della\n   matematica del Dipartimento di\n   Matematica dell'Università di\n   Trento";
   static const String creditProgetto = "Attività progettata da:";
   static const String creditMuse = "- MUSE - Museo delle Scienze di\n   Trento";
@@ -24,7 +24,7 @@ class MyString {
   static const String creditTitle = "Credits:";
   static const String descrizioneObiettivo =
       "Trova un animale specifico raccogliendo indizi dalle caratteristiche degli altri animali.\n"
-      "Ogni scelta ti consuma risorse, quindi pianifica con attenzione per conservare energia.\n"
+      "Ogni scelta consuma risorse, quindi pianifica con attenzione per conservare energia.\n"
       "Raggiungi il tuo obiettivo con il minor numero di mosse possibile!\n\n"
       "Buona fortuna, esploratore!";
   static const String errorPage = "Error page";
