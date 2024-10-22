@@ -63,7 +63,12 @@ class MySizedBox {
     );
   }
 
-  static SizedBox imageBox(BuildContext context, Exhibit e) {
+  static SizedBox imageBox(BuildContext context) {
+    ExhibitProvider exProvR = context.read<ExhibitProvider>();
+    Exhibit e;
+    if(exProvR.inTutorial){ e = exProvR.prossimoForTutorial!; }
+    else { e = exProvR.nextExhibit; }
+
     var imgPath = "images/${e.resPhoto}";
     return SizedBox(
       height: 150,
@@ -82,7 +87,7 @@ class MySizedBox {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           //Immagine più grande
-                          MyColumn.namesOfExhibits(e),
+                          MyColumn.namesOfExhibits(context),
                           Image.asset(imgPath),
                           TextButton(
                               onPressed: () {

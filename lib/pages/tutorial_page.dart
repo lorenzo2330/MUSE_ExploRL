@@ -33,15 +33,6 @@ class _TutorialPageState extends State<TutorialPage> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Funzione chiamata ogni volta che si ritorna a questa pagina (ad es. con Navigator.pop)
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ExhibitProvider>().setInTutorial(true);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: nTab,

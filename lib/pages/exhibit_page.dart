@@ -22,20 +22,21 @@ class _ExhibitPageState extends State<ExhibitPage> {
   late bool endGame, noEnergy, hasWin;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    /*  Invocato subito dopo initState(), permette l'utilizzo di context
-    *   (cosa non possibile in initState) */
-    hasWin = context.watch<ExhibitProvider>().nextIsWinnerExhibit();
-    noEnergy = context.watch<EnergyProvider>().energy == 0;
-    endGame = hasWin || noEnergy;
-    context.read<ExhibitProvider>().setInTutorial(false);
+  void initState() {
+    super.initState();
+
   }
+
 
   @override
   Widget build(BuildContext context) {
+    hasWin = context.read<ExhibitProvider>().nextIsWinnerExhibit();
+    noEnergy = context.read<EnergyProvider>().energy == 0;
+    endGame = hasWin || noEnergy;
+    GameProvider gProvR = context.read<GameProvider>();
+    ExhibitProvider exProvW = context.watch<ExhibitProvider>();
     return Scaffold(
-      backgroundColor: context.watch<GameProvider>().trovato && endGame
+      backgroundColor: gProvR.trovato && endGame
           ? hasWin
               ? Colors.greenAccent
               : Colors.red
@@ -48,9 +49,9 @@ class _ExhibitPageState extends State<ExhibitPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            MyColumn.namesOfExhibits(context.read<ExhibitProvider>().nextExhibit),
-            MySizedBox.imageBox(context, context.read<ExhibitProvider>().nextExhibit),
-            context.watch<ExhibitProvider>().scansioneCorretta
+            MyColumn.namesOfExhibits(context),
+            MySizedBox.imageBox(context),
+            exProvW.scansioneCorretta
                 ? MySizedBox.findedExhibit(context, noEnergy, hasWin)
                 : MyQr(context: context)
           ],

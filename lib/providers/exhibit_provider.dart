@@ -56,7 +56,7 @@ class ExhibitProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Exhibit? _prossimoForTutorial;
+  Exhibit? _prossimoForTutorial = ExhibitList.tutorialExhibit;
 
   Exhibit? get prossimoForTutorial => _prossimoForTutorial;
 

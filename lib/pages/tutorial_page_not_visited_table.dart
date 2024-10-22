@@ -53,8 +53,8 @@ class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTabl
                   flex: 4,
                   child: Column(
                     children: [
-                      MyColumn.namesOfExhibits(exProvR.prossimoForTutorial!),
-                      MySizedBox.imageBox(context, exProvR.prossimoForTutorial!),
+                      MyColumn.namesOfExhibits(context),
+                      MySizedBox.imageBox(context),
                     ],
                   ),
                 ),

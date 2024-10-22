@@ -8,7 +8,6 @@ import 'package:app_rl/res/widgets/my_sized_box.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/exhibit_list.dart';
 import '../providers/game_provider.dart';
 import '../res/my_qr.dart';
 
@@ -41,8 +40,8 @@ class _TutorialPageQRState extends State<TutorialPageQR> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            MyColumn.namesOfExhibits(ExhibitList.lupoGrigio),
-            MySizedBox.imageBox(context, ExhibitList.lupoGrigio),
+            MyColumn.namesOfExhibits(context),
+            MySizedBox.imageBox(context),
             context.watch<ExhibitProvider>().scansioneCorrettaTutorial
                 ? SizedBox(
                     height: MyInt.qrSize.height,

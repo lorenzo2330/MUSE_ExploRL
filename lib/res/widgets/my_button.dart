@@ -134,6 +134,7 @@ class MyButton {
   static ElevatedButton objectiveStartingButton(BuildContext context) {
     f() {
       Navigator.pushNamed(context, MyString.routeExhibit);
+      context.read<ExhibitProvider>().setInTutorial(false);
     }
 
     return getButton(MyString.avvio, 30, f);
