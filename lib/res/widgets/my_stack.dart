@@ -1,3 +1,4 @@
+import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/my_string.dart';
 import 'package:flutter/material.dart';
 
@@ -16,11 +17,11 @@ class MyStack {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            MyText.getCenterTextWithSize(text, 17, false),
+            MyText.getLeftTextWithSizeWhite(text, 17, false),
             /*style: const TextStyle(color: Colors.black87, fontSize: 17, fontWeight: FontWeight.bold)*/
-            const Icon(Icons.offline_bolt),
+            Icon(Icons.offline_bolt, color: MyColors.appBarTextColor,),
           ],
-        )
+        ),
       ],
     );
   }

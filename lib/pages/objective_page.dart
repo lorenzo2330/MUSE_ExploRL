@@ -3,7 +3,7 @@ import 'package:app_rl/res/my_string.dart';
 import 'package:app_rl/res/widgets/my_button.dart';
 import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/widgets/my_text.dart';
-import 'package:app_rl/res/widgets/my_bottom_app_bar.dart';
+import 'package:app_rl/res/widgets/my_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,23 +27,21 @@ class _ObjectivePageState extends State<ObjectivePage> {
       },
       child: Scaffold(
 
-        backgroundColor: MyColors.backgroundYellow,
-        appBar: AppBar(
-          title: MyText.getPlainText(MyString.obiettivo, true),
-        ),
+        backgroundColor: MyColors.bgColor,
+        appBar: MyAppBar.myAppBar(MyString.obiettivo, null, null, true),
         body: Center(
           child: SizedBox(
             width: 300,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                MyText.getCenterTextWithSize(MyString.descrizioneObiettivo, 20, false),
+                MyText.getLeftTextWithSize(MyString.descrizioneObiettivo, 20, false),
                 MyButton.objectiveStartingButton(context)
               ],
             ),
           ),
         ),
-        bottomNavigationBar: MyBottomAppBar.myBottomAppBar(context),
+        bottomNavigationBar: MyAppBar.myBottomAppBar(context),
       ),
     );
   }

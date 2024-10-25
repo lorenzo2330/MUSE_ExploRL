@@ -1,8 +1,6 @@
 import 'package:app_rl/providers/energy_provider.dart';
 import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/res/my_int.dart';
-import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -21,7 +19,7 @@ class _MyQrState extends State<MyQr> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result; //Contiene il risultato della scansione (null || QR)
   QRViewController?
-  controller; //Permette il controllo della fotocamera, ascoltando i risultati della scansione in _onQRViewCreated
+      controller; //Permette il controllo della fotocamera, ascoltando i risultati della scansione in _onQRViewCreated
 
   //Permette di ricostruire la fotocamera nel caso si cambi la rotazione del cell
   @override
@@ -35,56 +33,24 @@ class _MyQrState extends State<MyQr> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: SizedBox(
-            height: MyInt.qrSize.height,
-            width: MyInt.qrSize.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-              Expanded(
-              flex: 1,
-              child: Center(
-                child: MyText.getCenterTextWithSize(MyString.nPiano(context
-                    .read<ExhibitProvider>()
-                    .nextExhibit
-                    .nPiano), 20, false),
-              ),
-            ),
-            Expanded(
-              flex: 8,
-              //Widget che visualizza la telecamera e permette la scansione del QR
-              child: QRView(
-                key: qrKey, //Usata per reassemble
-                onQRViewCreated: _onQRViewCreated,
-                //Bordo che indica dove scannerizzare
-                overlay: QrScannerOverlayShape(
-                  borderColor: Colors.green,
-                  //Colore bordo
-                  borderRadius: 10,
-                  //Quanto arrotondare i bordi
-                  borderLength: 50,
-                  //Lunghezza bordo (parte colorata)
-                  borderWidth: 10,
-                  //Spessore bordo (parte colorata)
-                  cutOutSize: 350, //Dimensione del riquadro (non sfora)
-                ),
-              ),
-            ),
-            Expanded(
-                flex: 1,
-                child: Center(
-                    child: MyText.getCenterTextWithSize(
-                        MyString.qrResult(context.watch<ExhibitProvider>().scansioneCorretta, result?.code),
-                        20,
-                        false
-                    )
-                )
-            )
-            ]
-        )
-    )
-    );
+    return Padding(
+        padding: MyInt.allPadding,
+        child: QRView(
+          key: qrKey, //Usata per reassemble
+          onQRViewCreated: _onQRViewCreated,
+          //Bordo che indica dove scannerizzare
+          overlay: QrScannerOverlayShape(
+            borderColor: Colors.green,
+            //Colore bordo
+            borderRadius: 10,
+            //Quanto arrotondare i bordi
+            borderLength: 50,
+            //Lunghezza bordo (parte colorata)
+            borderWidth: 10,
+            //Spessore bordo (parte colorata)
+            cutOutSize: 350, //Dimensione del riquadro (non sfora)
+          ),
+        ));
   }
 
   //Monitora lo stream di dati scansionati
@@ -108,9 +74,7 @@ class _MyQrState extends State<MyQr> {
         if (ExhibitList.scannedExhibit(scanData.code ?? "retFalse")) {
           if (scanData.code == exProv.nextExhibit.normalName) {
             exProv.setScansioneCorretta();
-            exProv.visit(context
-                .read<ExhibitProvider>()
-                .nextExhibit);
+            exProv.visit(context.read<ExhibitProvider>().nextExhibit);
             if (!noDecrease) {
               enProv.decreaseEnergy();
             }

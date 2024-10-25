@@ -4,10 +4,10 @@ import 'package:app_rl/pages/tutorial_page_qr.dart';
 import 'package:app_rl/pages/tutorial_page_not_visited_table.dart';
 import 'package:app_rl/providers/exhibit_provider.dart';
 import 'package:app_rl/providers/game_provider.dart';
+import 'package:app_rl/res/widgets/my_app_bar.dart';
 import 'package:app_rl/res/widgets/my_button.dart';
 import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/widgets/my_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,31 +34,35 @@ class _TutorialPageState extends State<TutorialPage> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget>? actions = [
+      //Mostra il pulsante di avvio solo una volta viste tutte le tab
+      if (context
+          .watch<GameProvider>()
+          .sezioniVisitate
+          .length == nTab)
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: MyButton.tutorialStartingButton(context),
+        )
+    ];
+
+    TabBar bottom = TabBar(
+      indicatorColor: MyColors.textOfButtonColor,
+      tabs: [
+        Tab(icon: Icon(Icons.info_outline, color: MyColors.textOfButtonColor)),
+        Tab(icon: Icon(Icons.battery_5_bar_outlined, color: MyColors.textOfButtonColor)),
+        Tab(icon: Icon(Icons.qr_code_outlined, color: MyColors.textOfButtonColor)),
+        Tab(icon: Icon(Icons.playlist_add_check, color: MyColors.textOfButtonColor)),
+        Tab(icon: Icon(Icons.playlist_add, color: MyColors.textOfButtonColor)),
+      ],
+      onTap: (index) {},
+    );
+
     return DefaultTabController(
         length: nTab,
         child: Scaffold(
-          backgroundColor: MyColors.backgroundYellow,
-          appBar: AppBar(
-            title: MyText.getPlainText(MyString.tutorial, true),
-            actions: [
-              //Mostra il pulsante di avvio solo una volta viste tutte le tab
-              if (context.watch<GameProvider>().sezioniVisitate.length == nTab)
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: MyButton.tutorialStartingButton(context),
-                )
-            ],
-            bottom: TabBar(
-              tabs: const [
-                Tab(icon: Icon(Icons.info_outline)),
-                Tab(icon: Icon(Icons.battery_5_bar_outlined)),
-                Tab(icon: Icon(Icons.qr_code_outlined)),
-                Tab(icon: Icon(Icons.playlist_add_check)),
-                Tab(icon: Icon(Icons.playlist_add)),
-              ],
-              onTap: (index) { },
-            ),
-          ),
+          backgroundColor: MyColors.bgColor,
+          appBar: MyAppBar.myAppBar(MyString.tutorial, actions, bottom, true),
           body: const TabBarView(
             children: [
               TutorialPageInfo(),

@@ -12,7 +12,7 @@ class ErrorPage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            MyText.getCenterTextWithSize(MyString.errorPage, 50, true),
+            MyText.getLeftTextWithSize(MyString.errorPage, 50, true),
             ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, MyString.routeHome);

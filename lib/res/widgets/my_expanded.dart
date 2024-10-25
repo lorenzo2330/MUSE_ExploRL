@@ -105,4 +105,11 @@ class MyExpanded {
       ),
     );
   }
+
+  static Expanded boxLogo(String src) {
+    return Expanded(
+      child: ClipRect(child: Image.asset(src, fit: BoxFit.contain)),
+    );
+    /* BoxFit.contain permette di visualizzare l'intera immagine senza tagliarla */
+  }
 }

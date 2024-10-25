@@ -1,4 +1,5 @@
 import 'package:app_rl/providers/energy_provider.dart';
+import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/my_string.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,11 +30,11 @@ void saveData(List<Exhibit> visited, int energy) async {
 }
 
 class MyButton {
-  static ElevatedButton getButton(String text, double? size, void Function()? f) {
+  static ElevatedButton getButton(String text, void Function()? f) {
     return ElevatedButton(
       onPressed: f,
       style: MyStyle.bigButtonStyle,
-      child: MyText.getButtonText(text, size),
+      child: MyText.getNormalButtonText(text),
     );
   }
 
@@ -43,7 +44,14 @@ class MyButton {
       style: MyStyle.smallButtonStyle,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[Icon(icon, color: Colors.black), text],
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Icon(icon, color: MyColors.textOfButtonColor),
+          Padding(
+            padding: const EdgeInsets.only(top: 4.0, left: 3.0),
+            child: text,
+          )
+        ],
       ),
     );
   }
@@ -54,7 +62,7 @@ class MyButton {
       Navigator.pushNamed(context, MyString.routeAlreadyVisited);
     }
 
-    return getButton(MyString.cosaHaiVisitato, 23, f);
+    return getButton(MyString.cosaHaiVisitato, f);
   }
 
   static ElevatedButton notVisitedButton(BuildContext context, bool fromAlreadyVisited) {
@@ -63,7 +71,7 @@ class MyButton {
       Navigator.pushNamed(context, MyString.routeNotVisited);
     }
 
-    return getButton(MyString.cosaPuoiVisitare, 23, f);
+    return getButton(MyString.cosaPuoiVisitare, f);
   }
 
   static ElevatedButton restartButton(BuildContext context, bool hasToPop) {
@@ -79,7 +87,7 @@ class MyButton {
       } //Se siamo in una delle due tabelle
     }
 
-    return getButton(MyString.nuovoTentativo, 18, f);
+    return getButton(MyString.nuovoTentativo, f);
   }
 
   static ElevatedButton homePageStartingButton(BuildContext context) {
@@ -87,7 +95,7 @@ class MyButton {
       Navigator.pushNamed(context, MyString.routeTutorial);
     }
 
-    return getButton(MyString.iniziamo, 35, f);
+    return getButton(MyString.iniziamo, f);
   }
 
   static ElevatedButton deleteDataButton() {
@@ -96,7 +104,7 @@ class MyButton {
       await prefs.clear(); // Questo cancellerà tutti i dati salvati nello SharedPreferences
     }
 
-    return getButton(MyString.cancellaDati, 25, f);
+    return getButton(MyString.cancellaDati, f);
   }
 
   static ElevatedButton tutorialRetryScanButton(BuildContext context) {
@@ -104,15 +112,7 @@ class MyButton {
       context.read<ExhibitProvider>().setDaScansionare();
     }
 
-    return getButton(MyString.riprovaScansione, 25, f);
-  }
-
-  static ElevatedButton tutorialRetryNotVisitedButton(BuildContext context) {
-    f() {
-      context.read<ExhibitProvider>().setProssimoForTutorial(null);
-    }
-
-    return getButton(MyString.riprova, 25, f);
+    return getButton(MyString.riprovaScansione, f);
   }
 
   static ElevatedButton tutorialDecreaseEnergy(BuildContext context) {
@@ -120,7 +120,7 @@ class MyButton {
       context.read<EnergyProvider>().decreaseTutorialEnergy();
     }
 
-    return getButton(MyString.simulaScansione, 23, f);
+    return getButton(MyString.simulaScansione, f);
   }
 
   static ElevatedButton tutorialRechargeEnergy(BuildContext context) {
@@ -128,7 +128,7 @@ class MyButton {
       context.read<EnergyProvider>().rechargeTutorialEnergy();
     }
 
-    return getButton(MyString.ricaricaEnergia, 23, f);
+    return getButton(MyString.ricaricaEnergia, f);
   }
 
   static ElevatedButton objectiveStartingButton(BuildContext context) {
@@ -137,7 +137,7 @@ class MyButton {
       context.read<ExhibitProvider>().setInTutorial(false);
     }
 
-    return getButton(MyString.avvio, 30, f);
+    return getButton(MyString.parti, f);
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -148,16 +148,15 @@ class MyButton {
       context.read<ExhibitProvider>().setInTutorial(false);
     }
 
-    Text text = MyText.getButtonText(MyString.iniziamo, 20);
+    Text text = MyText.getMiniButtonText(MyString.iniziamo);
 
     return getMiniButton(text, Icons.play_circle_outline, f);
   }
 
   static ElevatedButton creditsButton(BuildContext context) {
+    Text text = MyText.getMiniButtonText(MyString.credits);
 
-    Text text = MyText.getButtonText(MyString.credits, 20);
-
-    Text text2 = MyText.getButtonText(MyString.chiudi, 20);
+    Text text2 = MyText.getMiniButtonText(MyString.chiudi);
 
     f2() {
       Navigator.of(context).pop();
@@ -168,25 +167,12 @@ class MyButton {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            backgroundColor: Colors.white,
-            content: SizedBox(
-              height: 400,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MyText.getCenterTextWithSize(MyString.creditTitle, 30, true),
-                  MyColumn.creditList(),
-                ],
-              ),
-            ),
+            content: MyColumn.creditList(),
             actions: [getMiniButton(text2, Icons.close, f2)],
           );
         },
       );
     }
-
-
 
     return getMiniButton(text, Icons.copyright, f);
   }

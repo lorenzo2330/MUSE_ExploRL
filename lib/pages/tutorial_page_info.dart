@@ -27,16 +27,20 @@ class _TutorialPageInfoState extends State<TutorialPageInfo> {
   Widget build(BuildContext context) {
     double s = MyInt.tutorialStringSize.toDouble();
     return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            MyText.getCenterTextWithSize(MyString.tutorialInfo1, s - 5, false),
-            MyText.getCenterTextWithSize(MyString.tutorialInfo2, s - 7, false),
-            MyText.getCenterTextWithSize(MyString.tutorialInfo3, s, false)
-          ],
-        ),
+      padding: MyInt.allPadding,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(flex: 2, child: MyText.getLeftTextWithSize(MyString.tutorialInfo1, s, true),),
+          Expanded(flex: 6, child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              MyText.getLeftTextWithSize(MyString.tutorialInfo2, s, false),
+              MyText.getLeftTextWithSize(MyString.tutorialInfo3, s, false),
+            ],
+          ))
+
+        ],
       ),
     );
   }

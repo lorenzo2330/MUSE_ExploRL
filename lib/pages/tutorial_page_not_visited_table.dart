@@ -1,15 +1,16 @@
 import 'package:app_rl/res/my_int.dart';
+import 'package:app_rl/res/my_qr.dart';
 import 'package:app_rl/res/my_string.dart';
 import 'package:app_rl/res/widgets/my_text.dart';
-import 'package:app_rl/res/widgets/my_button.dart';
 import 'package:app_rl/res/widgets/my_column.dart';
 import 'package:app_rl/res/widgets/my_list_view.dart';
-import 'package:app_rl/res/widgets/my_sized_box.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/exhibit_list.dart';
 import '../providers/exhibit_provider.dart';
 import '../providers/game_provider.dart';
+import '../res/widgets/my_gesture_detector.dart';
 
 class TutorialPageNotVisitedTable extends StatefulWidget {
   const TutorialPageNotVisitedTable({super.key});
@@ -25,46 +26,41 @@ class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTabl
     // Funzione chiamata al caricamento iniziale della pagina
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<GameProvider>().addSezioniVisitate(4);
-      context.read<ExhibitProvider>().setProssimoForTutorial(null);
+      context.read<ExhibitProvider>().setProssimoForTutorial(ExhibitList.tutorialExhibit);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     double s = MyInt.tutorialStringSize.toDouble();
-    ExhibitProvider exProvR = context.read<ExhibitProvider>();
     ExhibitProvider exProvW = context.watch<ExhibitProvider>();
-    Text cosaVisitare = MyText.getCenterTextWithSize(MyString.cosaPuoiVisitare, s, true);
+    Text cosaVisitare = MyText.getLeftTextWithSize(MyString.cosaPuoiVisitare, s, true);
     ListView listOfExhibits = MyListView.getListOfNotVisitedExhibit(context, true);
-    Text sceltaAnimale = MyText.getCenterTextWithSize(MyString.scegliAnimale, 20, false);
+    Text sceltaAnimale = MyText.getLeftTextWithSize(MyString.scegliAnimale, 20, false);
 
     return Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: exProvW.prossimoForTutorial == null
+        padding: MyInt.allPadding,
+        child: exProvW.prossimoForTutorial == ExhibitList.tutorialExhibit
             ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(flex: 3, child: cosaVisitare),
                   Expanded(flex: 8, child: listOfExhibits),
-                  Expanded(flex: 6, child: Center(child: sceltaAnimale))
+                  Expanded(flex: 3, child: Center(child: sceltaAnimale))
                 ],
               )
-            : Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Expanded(flex: 1, child: cosaVisitare),
                 Expanded(
                   flex: 4,
-                  child: Column(
+                  child: Row(
                     children: [
-                      MyColumn.namesOfExhibits(context),
-                      MySizedBox.imageBox(context),
+                      Expanded(flex: 4, child: MyColumn.namesOfExhibits(context)),
+                      Expanded(flex: 2, child: MyGestureDetector.imageBox(context)),
                     ],
                   ),
                 ),
-                Expanded(
-                  flex: 4,
-                  child: Center(
-                      child: MyText.getCenterTextWithSize(
-                          MyString.nPiano(exProvR.prossimoForTutorial!.nPiano), 20, false)),
-                ),
-                Expanded(flex: 1, child: MyButton.tutorialRetryNotVisitedButton(context))
+                Expanded(flex: 5, child: Center(child: MyQr(context: context))),
               ]));
   }
 }

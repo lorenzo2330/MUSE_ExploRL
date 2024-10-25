@@ -6,7 +6,6 @@ class MyString {
   static const String animale = "Animale";
   static const String animaleTrovato = "Animale trovato";
   static const String appName = "MUSE ExploRL";
-  static const String avvio = "Avvio";
   static const String cancellaDati = "Cancella dati";
   static const String chiudi = "Chiudi";
   static const String cosaPuoiVisitare = "Cosa puoi visitare ora";
@@ -15,11 +14,11 @@ class MyString {
   static const String creditDipartimento = "Credit dipartimento";
   static const String creditFont = "Credit font";
   static const String creditFoto = "Fotografie:";
-  static const String creditFotografo = "- © ph. Osvaldo Negra";
-  static const String creditPopmat = "- Laboratorio di comunicazione,\n   storia e filosofia della\n   matematica del Dipartimento di\n   Matematica dell'Università di\n   Trento";
+  static const String creditFotografo = "© ph. Osvaldo Negra";
+  static const String creditPopmat = "PopMat - Laboratorio di comunicazione, storia e filosofia della matematica del Dipartimento di Matematica dell'Università di Trento";
   static const String creditProgetto = "Attività progettata da:";
-  static const String creditMuse = "- MUSE - Museo delle Scienze di\n   Trento";
-  static const String creditNomeSviluppatore = "- Lorenzo D'Ambrosio (DISI\n   UniTrento)";
+  static const String creditMuse = "MUSE - Museo delle Scienze di Trento";
+  static const String creditNomeSviluppatore = "Lorenzo D'Ambrosio (Dipartimento di Ingegneria e Scienza dell'Informazione dell'Università di Trento)";
   static const String creditSviluppatore = "App sviluppata da:";
   static const String creditTitle = "Credits:";
   static const String descrizioneObiettivo =
@@ -28,13 +27,15 @@ class MyString {
       "Raggiungi il tuo obiettivo con il minor numero di mosse possibile!\n\n"
       "Buona fortuna, esploratore!";
   static const String errorPage = "Error page";
+  static const String esplorazione = "Esplorazione";
   static const String iniziamo = "Iniziamo";
   static const String obiettivo = "Obiettivo";
   static const String N = "N°";
-  static const String nDita = "Numero dita";
+  static const String nDita = "Numero dita che appoggia";
   static const String nMatch = "nMatch";
   static const String nome = "Nome";
   static const String nuovoTentativo = "Nuovo tentativo";
+  static const String parti = "Parti";
   static const String ricaricaEnergia = "Ricarica energia";
   static const String riprova = "Riprova";
   static const String riprovaScansione = "Riprova scansione";
@@ -46,7 +47,7 @@ class MyString {
   static const String routeTutorial = "/tutorial";
 
   static const String scanQr = "Scansiona il codice QR";
-  static const String scegliAnimale = "Scegli il prossimo animale";
+  static const String scegliAnimale = "Clicca sul prossimo animale che vuoi visitare";
   static const String selezionaPartita = "Seleziona una partita";
   static const String simulaScansione = "Simula una scansione";
   static const String sottotitoloAttivita = "Come impara l'intelligenza artificiale?";
@@ -87,7 +88,7 @@ class MyString {
   }
 
   static String nPiano(int nPiano) {
-    return "Vai al piano $nPiano";
+    return "Vai al piano $nPiano e scansiona il QR code";
   }
 
   static String qrResult(bool scansioneCorretta, String? result) {
@@ -103,7 +104,7 @@ class MyString {
         ? "Hai esaurito tutti i punti energia"
         : hasWin
             ? "Hai trovato l'animale vincente!"
-            : "";
+            : "Seleziona la prossima azione";
   }
 
   static String tutEnergyInfo(int e){

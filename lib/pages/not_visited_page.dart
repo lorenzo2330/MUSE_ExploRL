@@ -1,10 +1,12 @@
 import 'package:app_rl/res/my_string.dart';
 import 'package:app_rl/res/widgets/my_button.dart';
 import 'package:app_rl/res/my_colors.dart';
-import 'package:app_rl/res/widgets/my_text.dart';
-import 'package:app_rl/res/widgets/my_bottom_app_bar.dart';
+import 'package:app_rl/res/widgets/my_app_bar.dart';
 import 'package:app_rl/res/widgets/my_list_view.dart';
 import 'package:flutter/material.dart';
+
+import '../res/my_int.dart';
+import '../res/widgets/my_text.dart';
 
 class NotVisitedPage extends StatefulWidget {
   const NotVisitedPage({super.key});
@@ -16,16 +18,30 @@ class NotVisitedPage extends StatefulWidget {
 class _NotVisitedPageState extends State<NotVisitedPage> {
   @override
   Widget build(BuildContext context) {
+    double s = MyInt.tutorialStringSize.toDouble();
+    ListView listOfExhibits = MyListView.getListOfNotVisitedExhibit(context, false);
+    ElevatedButton b = MyButton.alreadyVisitedButton(context, true);
+
+    Text cosaVisitare = MyText.getLeftTextWithSize(MyString.cosaPuoiVisitare, s, true);
     return Scaffold(
-        backgroundColor: MyColors.backgroundYellow,
-        appBar: AppBar(title: MyText.getPlainText(MyString.cosaPuoiVisitare, true)),
+        backgroundColor: MyColors.bgColor,
+        appBar: MyAppBar.myAppBar(MyString.cosaPuoiVisitare, null, null, true),
         body: Padding(
-          padding: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 20),
-          child: Column(children: [
-            Expanded(child: MyListView.getListOfNotVisitedExhibit(context, false)),
-            MyButton.alreadyVisitedButton(context, true),
-          ]),
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(flex: 1, child: cosaVisitare),
+              Expanded(flex: 10, child: listOfExhibits),
+              Expanded(flex: 2, child: Center(child: b))
+            ],
+          ),
         ),
-        bottomNavigationBar: MyBottomAppBar.myBottomAppBar(context));
+        bottomNavigationBar: MyAppBar.myBottomAppBar(context));
   }
 }
+/*
+* Column(children: [
+            Expanded(child: MyListView.getListOfNotVisitedExhibit(context, false)),
+            MyButton.alreadyVisitedButton(context, true),
+          ])*/

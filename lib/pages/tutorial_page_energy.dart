@@ -32,18 +32,28 @@ class _TutorialPageEnergyState extends State<TutorialPageEnergy> {
     EnergyProvider enProvR = context.read<EnergyProvider>();
     EnergyProvider enProvW = context.watch<EnergyProvider>();
     return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            MyText.getCenterTextWithSize(MyString.tutorialEnergia, s, true),
-            MyButton.tutorialDecreaseEnergy(context),
-            MyStack.getBattery(charge: enProvW.tutorialEnergy, batterySize: MyInt.batterySize),
-            MyText.getCenterTextWithSize(MyString.tutEnergyInfo(enProvR.tutorialEnergy), s, false),
-            enProvR.tutorialEnergy == 0 ? MyButton.tutorialRechargeEnergy(context) : const Text(""),
-          ],
-        ),
+      padding: MyInt.allPadding,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(flex: 1, child: MyText.getLeftTextWithSize(MyString.tutorialEnergia, s, true)),
+          Expanded(
+            flex: 6,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  enProvR.tutorialEnergy == 0
+                      ? MyButton.tutorialRechargeEnergy(context)
+                      : MyButton.tutorialDecreaseEnergy(context),
+                  MyStack.getBattery(
+                      charge: enProvW.tutorialEnergy, batterySize: MyInt.batterySize),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

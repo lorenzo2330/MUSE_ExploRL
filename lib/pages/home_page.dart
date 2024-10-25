@@ -1,7 +1,8 @@
+import 'package:app_rl/res/widgets/my_app_bar.dart';
 import 'package:app_rl/res/widgets/my_button.dart';
 import 'package:app_rl/res/my_colors.dart';
 import 'package:app_rl/res/my_string.dart';
-import 'package:app_rl/res/widgets/my_sized_box.dart';
+import 'package:app_rl/res/widgets/my_expanded.dart';
 import 'package:flutter/material.dart';
 
 import '../res/my_int.dart';
@@ -13,13 +14,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.backgroundYellow,
-      appBar: AppBar(
-        title: MyText.getPlainText(MyString.appName, true),
-        actions: [
-          MyButton.creditsButton(context),
-        ],
-      ),
+      backgroundColor: MyColors.bgColor,
+      appBar: MyAppBar.myAppBar(MyString.appName, [MyButton.creditsButton(context)], null, true),
       body: Stack(children: [
         Container(
           decoration: const BoxDecoration(
@@ -29,32 +25,37 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-        Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                children: [
-                  MyText.homePageText(MyString.titoloAttivita, MyInt.titleSize.toDouble()),
-                  const Text(""),
-                  MyText.homePageText(MyString.sottotitoloAttivita, MyInt.subtitleSize.toDouble()),
-                ],
-              ),
-              MyButton.homePageStartingButton(context),
-              //MyButton.deleteDataButton()
-            ],
-          ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Expanded(
+                flex: 3,
+                child: Padding(
+                  padding: MyInt.allPadding,
+                  child: MyText.homePageText(MyString.titoloAttivita, MyInt.titleSize.toDouble()),
+                )),
+            Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: MyInt.leftPadding,
+                  child: MyText.homePageText(
+                      MyString.sottotitoloAttivita, MyInt.subtitleSize.toDouble()),
+                )),
+            Expanded(flex: 2, child: Center(child: MyButton.homePageStartingButton(context))),
+            //MyButton.deleteDataButton()
+          ],
         ),
       ]),
       bottomNavigationBar: BottomAppBar(
-        color: MyColors.bottomAppBarColor,
+        color: MyColors.logoAppBar,
         height: MyInt.bottomBarHeight.toDouble(),
+        padding: const EdgeInsets.all(4.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            MySizedBox.boxLogo("images/logoDISI.png"),
-            MySizedBox.boxLogo("images/logoPOPMAT.jpg"),
-            MySizedBox.boxLogo("images/logoMuseAzzurro.jpg"),
+            MyExpanded.boxLogo("images/logoDISI.png"),
+            MyExpanded.boxLogo("images/logoPOPMAT.jpg"),
+            MyExpanded.boxLogo("images/logoMuseAzzurro.jpg"),
           ],
         ),
       ),

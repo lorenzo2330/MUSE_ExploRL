@@ -12,7 +12,7 @@ class MyListView {
     var exProvR = context.read<ExhibitProvider>();
     var nextExhW = exProvW.nextExhibit;
     var nextExhR = exProvR.nextExhibit;
-    double pTop = tutorial ? 8.0 : 20;
+    double pTop = tutorial ? 8.0 : 13;
 
     return ListView(
       children: [
@@ -33,7 +33,7 @@ class MyListView {
                     child: SizedBox(
                       height: MyInt.cardHeight,
                       child: Card(
-                        color: MyColors.otherRowTable,
+                        color: MyColors.firstRowTable,
                         child: MyPadding.getNotVisitedField(nextExhW.neighbors[index].normalName),
                       ),
                     ),
