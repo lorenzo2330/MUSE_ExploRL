@@ -50,7 +50,6 @@ class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTabl
                 ],
               )
             : Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Expanded(flex: 1, child: cosaVisitare),
                 Expanded(
                   flex: 4,
                   child: Row(
