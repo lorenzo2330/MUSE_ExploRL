@@ -7,6 +7,8 @@ import 'package:app_rl/res/widgets/my_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../res/widgets/my_padding.dart';
+
 class ObjectivePage extends StatefulWidget {
   const ObjectivePage({super.key});
 
@@ -28,7 +30,7 @@ class _ObjectivePageState extends State<ObjectivePage> {
       child: Scaffold(
 
         backgroundColor: MyColors.bgColor,
-        appBar: MyAppBar.myAppBar(MyString.obiettivo, null, null, true),
+        appBar: MyAppBar.myAppBar(MyString.obiettivo, [MyPadding.timerScreen(context)], null, true),
         body: Center(
           child: SizedBox(
             width: 300,

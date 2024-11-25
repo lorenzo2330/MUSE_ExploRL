@@ -63,7 +63,7 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
 
     return Scaffold(
       backgroundColor: MyColors.bgColor,
-      appBar: MyAppBar.myAppBar(MyString.esplorazione, null, null, true),
+      appBar: MyAppBar.myAppBar(MyString.esplorazione, [MyPadding.timerScreen(context)], null, true),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

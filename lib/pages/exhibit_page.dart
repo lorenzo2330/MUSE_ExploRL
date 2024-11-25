@@ -6,6 +6,7 @@ import 'package:app_rl/res/my_int.dart';
 import 'package:app_rl/res/my_qr.dart';
 import 'package:app_rl/res/my_string.dart';
 import 'package:app_rl/res/widgets/my_app_bar.dart';
+import 'package:app_rl/res/widgets/my_padding.dart';
 import 'package:app_rl/res/widgets/my_row.dart';
 import 'package:app_rl/res/widgets/my_sized_box.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,8 @@ class ExhibitPage extends StatefulWidget {
 class _ExhibitPageState extends State<ExhibitPage> {
   late bool endGame, noEnergy, hasWin;
 
+  bool isShown = false;
+
   @override
   void initState() {
     super.initState();
@@ -28,18 +31,46 @@ class _ExhibitPageState extends State<ExhibitPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    GameProvider gameProvider = context.watch<GameProvider>();
+
+    //Mostra il pop-up quando finisce il tempo
+    if (gameProvider.nMinuti == 0 && gameProvider.nSecondi == 0 && !isShown) {
+      isShown = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+          context: context,
+          barrierDismissible: false, // Impedisce di chiudere toccando fuori dal dialogo
+          builder: (context) => AlertDialog(
+            title: const Text("Tempo scaduto"),
+            content: const Text("Hai esaurito il tempo disponibile!"),
+            actions: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Chiude il dialogo
+                  Navigator.pushNamed(context, MyString.routeAlreadyVisited); // Naviga alla pagina desiderata
+                },
+                child: const Text("OK"),
+              ),
+            ],
+          ),
+        );
+      });
+    }
+
     hasWin = context.read<ExhibitProvider>().nextIsWinnerExhibit();
     noEnergy = context.read<EnergyProvider>().energy == 0;
     endGame = hasWin || noEnergy;
     GameProvider gProvR = context.read<GameProvider>();
     ExhibitProvider exProvW = context.watch<ExhibitProvider>();
+
     return Scaffold(
       backgroundColor: gProvR.trovato && endGame
           ? hasWin
               ? Colors.greenAccent
               : Colors.red
           : MyColors.bgColor,
-      appBar: MyAppBar.myAppBar(MyString.animale, null, null, !endGame),
+      appBar: MyAppBar.myAppBar(MyString.animale, [MyPadding.timerScreen(context)], null, !endGame),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -67,6 +98,7 @@ class _ExhibitPageState extends State<ExhibitPage> {
           )
         ],
       ),
+
       /*
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -77,7 +109,7 @@ class _ExhibitPageState extends State<ExhibitPage> {
         },
         child: const Icon(Icons.qr_code_outlined),
       ),
-       */
+      */
 
       bottomNavigationBar: MyAppBar.myBottomAppBar(context),
     );

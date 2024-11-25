@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/game_provider.dart';
 import '../my_int.dart';
 import '../my_string.dart';
 import 'my_expanded.dart';
@@ -12,7 +14,7 @@ class MyPadding {
         child: Center(child: MyText.getCenterTextWithSize(text, 28, false)));
   }
 
-  static Padding alreadyVisitedTitle(){
+  static Padding alreadyVisitedTitle() {
     double s = MyInt.tutorialStringSize.toDouble();
     return Padding(
       padding: MyInt.allPadding,
@@ -20,8 +22,9 @@ class MyPadding {
     );
   }
 
-  static Padding alreadyVisitedCombo(BuildContext context, int length, int energy){
-    return  Padding(
+  static Padding alreadyVisitedCombo(
+      BuildContext context, int length, int energy) {
+    return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Row(
         children: [
@@ -30,5 +33,20 @@ class MyPadding {
         ],
       ),
     );
+  }
+
+  static Padding timerScreen(BuildContext context) {
+    int m = context.watch<GameProvider>().nMinuti;
+
+    int s = context.watch<GameProvider>().nSecondi;
+
+    String addZero = s < 10 ? "0" : "";
+
+    return Padding(
+        padding: const EdgeInsets.only(right: 20.0, bottom: 5),
+        child: Text(
+          "$m : $addZero$s",
+          style: const TextStyle(fontSize: 30),
+        ));
   }
 }

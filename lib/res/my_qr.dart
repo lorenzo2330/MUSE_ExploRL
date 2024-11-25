@@ -1,5 +1,6 @@
 import 'package:app_rl/providers/energy_provider.dart';
 import 'package:app_rl/providers/exhibit_provider.dart';
+import 'package:app_rl/providers/game_provider.dart';
 import 'package:app_rl/res/my_int.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -68,11 +69,16 @@ class _MyQrState extends State<MyQr> {
 
     bool noDecrease = exProv.inTutorial || firstScan;
 
+
+
     //Ascolta i dati ricevuti e verifica se "vede" un QR
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         if (ExhibitList.scannedExhibit(scanData.code ?? "retFalse")) {
           if (scanData.code == exProv.nextExhibit.normalName) {
+            if(!exProv.inTutorial && firstScan){
+              context.read<GameProvider>().startCountdown();  //Dopo la prima scansione parte il timer
+            }
             exProv.setScansioneCorretta();
             exProv.visit(context.read<ExhibitProvider>().nextExhibit);
             if (!noDecrease) {

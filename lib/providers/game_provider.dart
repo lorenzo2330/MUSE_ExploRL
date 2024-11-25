@@ -1,10 +1,36 @@
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../models/exhibit.dart';
 import 'energy_provider.dart';
 
 class GameProvider extends ChangeNotifier{
+
+  int _nMinuti = 30;
+
+  int _nSecondi = 0;
+
+  int get nMinuti => _nMinuti;
+
+  int get nSecondi => _nSecondi;
+
+  bool decrease(){
+    if(nMinuti == 0 && nSecondi == 0){ notifyListeners(); return false; }
+    if(nSecondi == 0){ _nMinuti--; _nSecondi = 59; }
+    else{ _nSecondi--; }
+    notifyListeners();
+    return true;
+  }
+
+  void startCountdown(){
+    Timer.periodic(const Duration(seconds: 1), (timer){
+      decrease();
+      notifyListeners();
+    });
+  }
+
 
   bool _trovato = false;
 

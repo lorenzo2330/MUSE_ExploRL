@@ -6,6 +6,7 @@ import 'package:app_rl/res/widgets/my_list_view.dart';
 import 'package:flutter/material.dart';
 
 import '../res/my_int.dart';
+import '../res/widgets/my_padding.dart';
 import '../res/widgets/my_text.dart';
 
 class NotVisitedPage extends StatefulWidget {
@@ -25,7 +26,7 @@ class _NotVisitedPageState extends State<NotVisitedPage> {
     Text cosaVisitare = MyText.getLeftTextWithSize(MyString.cosaPuoiVisitare, s, true);
     return Scaffold(
         backgroundColor: MyColors.bgColor,
-        appBar: MyAppBar.myAppBar(MyString.cosaPuoiVisitare, null, null, true),
+        appBar: MyAppBar.myAppBar(MyString.cosaPuoiVisitare, [MyPadding.timerScreen(context)], null, true),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
