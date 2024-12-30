@@ -20,9 +20,15 @@ class AlreadyVisitedPage extends StatefulWidget {
 }
 
 class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
-  List<String> headers = [MyString.N, MyString.nome, MyString.ambiente, MyString.alimentazione];
+  List<String> headers = [
+    MyString.N,
+    MyString.nome,
+    MyString.ambiente,
+    MyString.alimentazione
+  ];
 
-  void loadData(GameProvider gProvR, EnergyProvider enProvR, ExhibitProvider exProvR) async {
+  void loadData(GameProvider gProvR, EnergyProvider enProvR,
+      ExhibitProvider exProvR) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     gProvR.initListOfMatch();
@@ -32,13 +38,17 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
     late List<String> match = [];
 
     setState(() {
-      late int nPartite = prefs.getInt(MyString.nMatch) ?? 0; //Recupero il numero di partite
+      late int nPartite =
+          prefs.getInt(MyString.nMatch) ?? 0; //Recupero il numero di partite
       for (int i = 1; i <= nPartite; i++) {
         //La prima partita viene salvata come Game-1
-        match = prefs.getStringList(MyString.gameMatch(i)) ?? []; //se è null non prendo niente
-        int remainingEnergy = EnergyProvider.maxEnergy - match.length; //enMax - 1 * nExhVisitati
+        match = prefs.getStringList(MyString.gameMatch(i)) ??
+            []; //se è null non prendo niente
+        int remainingEnergy =
+            EnergyProvider.maxEnergy - match.length; //enMax - 1 * nExhVisitati
         gProvR.addToListOfMatch(match);
-        gProvR.addToListOfEnergy(prefs.getInt(MyString.gameEnergy(i)) ?? remainingEnergy);
+        gProvR.addToListOfEnergy(
+            prefs.getInt(MyString.gameEnergy(i)) ?? remainingEnergy);
       }
       gProvR.setSelectedMatch(gProvR.listOfMatch.length.toString());
       gProvR.setListOfThisRound(context.read<ExhibitProvider>().visited);
@@ -61,40 +71,55 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
     var enProvW = context.watch<EnergyProvider>();
     var exProvW = context.watch<ExhibitProvider>();
 
-    return Scaffold(
-      backgroundColor: MyColors.bgColor,
-      appBar: MyAppBar.myAppBar(MyString.esplorazione, [MyPadding.timerScreen(context)], null, true),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          MyPadding.alreadyVisitedTitle(),
-          MyPadding.alreadyVisitedCombo(context, gProvR.listOfMatch.length, gProvR.energyToDisplay),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-                    MyExpanded.getAlreadyVisitedField(MyString.N, 0, true),
-                    MyExpanded.getAlreadyVisitedField(MyString.nome, 1, true),
-                    MyExpanded.getAlreadyVisitedField(MyString.ambiente, 2, true),
-                    MyExpanded.getAlreadyVisitedField(MyString.alimentazione, 3, true),
-                  ]),
-                  MyExpanded.alreadyVisitedList(gProvR.listToDisplay),
-                ],
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        backgroundColor: MyColors.bgColor,
+        appBar: MyAppBar.myAppBar(MyString.esplorazione,
+            [MyPadding.timerScreen(context)], null, true),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            MyPadding.alreadyVisitedTitle(),
+            MyPadding.alreadyVisitedCombo(
+                context, gProvR.listOfMatch.length, gProvR.energyToDisplay),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          MyExpanded.getAlreadyVisitedField(
+                              MyString.N, 0, true),
+                          MyExpanded.getAlreadyVisitedField(
+                              MyString.nome, 1, true),
+                          MyExpanded.getAlreadyVisitedField(
+                              MyString.ambiente, 2, true),
+                          MyExpanded.getAlreadyVisitedField(
+                              MyString.alimentazione, 3, true),
+                        ]),
+                    MyExpanded.alreadyVisitedList(gProvR.listToDisplay),
+                  ],
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
-            child: Center(child: exProvW.nextIsWinnerExhibit() || enProvW.energy == 0
-                ? MyButton.restartButton(context, true)
-                : MyButton.notVisitedButton(context, true),),
-          )
-
-        ],
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
+              child: gProvR.nSecondi + gProvR.nMinuti > 0
+                  ? Center(
+                      child:
+                          exProvW.nextIsWinnerExhibit() || enProvW.energy == 0
+                              ? MyButton.restartButton(context, true)
+                              : MyButton.notVisitedButton(context, true),
+                    )
+                  : const Text(""),
+            )
+          ],
+        ),
+        bottomNavigationBar: MyAppBar.myBottomAppBar(context),
       ),
-      bottomNavigationBar: MyAppBar.myBottomAppBar(context),
     );
   }
 }

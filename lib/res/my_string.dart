@@ -18,14 +18,14 @@ class MyString {
   static const String creditPopmat = "PopMat - Laboratorio di comunicazione, storia e filosofia della matematica del Dipartimento di Matematica dell'Università di Trento";
   static const String creditProgetto = "Attività progettata da:";
   static const String creditMuse = "MUSE - Museo delle Scienze di Trento";
-  static const String creditNomeSviluppatore = "Lorenzo D'Ambrosio (Dipartimento di Ingegneria e Scienza dell'Informazione dell'Università di Trento)";
+  static const String creditNomeSviluppatore = "Lorenzo D'Ambrosio - Dipartimento di Ingegneria e Scienza dell'Informazione dell'Università di Trento";
   static const String creditSviluppatore = "App sviluppata da:";
   static const String creditTitle = "Credits:";
   static const String descrizioneObiettivo =
       "Trova un animale specifico raccogliendo indizi dalle caratteristiche degli altri animali.\n"
-      "Ogni scelta consuma risorse, quindi pianifica con attenzione per conservare energia.\n"
+      "Ogni scelta consuma risorse, quindi pianifica la partita con attenzione per conservare energia.\n"
       "Raggiungi il tuo obiettivo con il minor numero di mosse possibile!\n\n"
-      "Buona fortuna, esploratore!";
+      "Buona esplorazione!";
   static const String errorPage = "Error page";
   static const String esplorazione = "Esplorazione";
   static const String iniziamo = "Iniziamo";
@@ -47,7 +47,7 @@ class MyString {
   static const String routeTutorial = "/tutorial";
 
   static const String scanQr = "Scansiona il codice QR";
-  static const String scegliAnimale = "Clicca sul prossimo animale che vuoi visitare";
+  static const String scegliAnimale = "Clicca l'animale che vuoi visitare";
   static const String selezionaPartita = "Seleziona una partita";
   static const String simulaScansione = "Simula una scansione";
   static const String sottotitoloAttivita = "Come impara l'intelligenza artificiale?";
