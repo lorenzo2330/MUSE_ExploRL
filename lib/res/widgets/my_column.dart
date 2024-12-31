@@ -10,11 +10,18 @@ import 'my_text.dart';
 class MyColumn {
   static Column namesOfExhibits(BuildContext context) {
     ExhibitProvider exProvR = context.read<ExhibitProvider>();
+
     Exhibit e;
+
+    bool b;
+
     if (exProvR.inTutorial) {
       e = exProvR.prossimoForTutorial!;
+      b = exProvR.scansioneCorrettaTutorial;
+
     } else {
       e = exProvR.nextExhibit;
+      b = exProvR.scansioneCorretta;
     }
     return Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -28,7 +35,12 @@ class MyColumn {
               MyText.getLeftTextWithSize(e.normalName, 22, false),
             ],
           ),
-          MyText.getLeftTextWithSize(MyString.nPiano(exProvR.nextExhibit.nPiano), 22, false),
+          MyText.getLeftTextWithSize(MyString.nPiano(exProvR.nextExhibit.nPiano), 20, false),
+          MyText.getLeftTextWithSize(
+            b ? MyString.scansioneCorretta : MyString.scanQr,
+              20,
+              false,
+          ),
         ]);
   }
 

@@ -52,7 +52,7 @@ class _TutorialPageQRState extends State<TutorialPageQR> {
                       MyColumn.exhibitInfo(tut1, tut2),
                       Center(child: MyButton.tutorialRetryScanButton(context))
                     ],
-                  ) //MyWidgets.findedExhibit(context, endGame)
+                  )
                 : Center(child: MyQr(context: context)),
           ),
         ],

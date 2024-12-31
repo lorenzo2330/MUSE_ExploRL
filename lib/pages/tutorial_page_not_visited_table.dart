@@ -27,6 +27,7 @@ class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTabl
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<GameProvider>().addSezioniVisitate(4);
       context.read<ExhibitProvider>().setProssimoForTutorial(ExhibitList.tutorialExhibit);
+      context.read<ExhibitProvider>().setDaScansionare();
     });
   }
 
@@ -54,8 +55,8 @@ class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTabl
                   flex: 4,
                   child: Row(
                     children: [
-                      Expanded(flex: 4, child: MyColumn.namesOfExhibits(context)),
-                      Expanded(flex: 2, child: MyGestureDetector.imageBox(context)),
+                      Expanded(flex: 16, child: MyColumn.namesOfExhibits(context)),
+                      Expanded(flex: 6, child: MyGestureDetector.imageBox(context)),
                     ],
                   ),
                 ),

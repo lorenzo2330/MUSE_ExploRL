@@ -8,8 +8,8 @@ class MyRow {
   static Row exhibitRow(BuildContext context){
     return Row(
       children: [
-        Expanded(flex: 4, child: MyColumn.namesOfExhibits(context)),
-        Expanded(flex: 2, child: MyGestureDetector.imageBox(context)),
+        Expanded(flex: 16, child: MyColumn.namesOfExhibits(context)),
+        Expanded(flex: 6, child: MyGestureDetector.imageBox(context)),
       ],
     );
   }

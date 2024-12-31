@@ -46,8 +46,9 @@ class MyString {
   static const String routeNotVisited = "/notVisited";
   static const String routeTutorial = "/tutorial";
 
-  static const String scanQr = "Scansiona il codice QR";
-  static const String scegliAnimale = "Clicca l'animale che vuoi visitare";
+  static const String scansioneCorretta = "Scansione corretta!";
+  static const String scanQr = "Scansiona il codice QR:";
+  static const String scegliAnimale = "Clicca l'animale che vuoi visitare.";
   static const String selezionaPartita = "Seleziona una partita";
   static const String simulaScansione = "Simula una scansione";
   static const String sottotitoloAttivita = "Come impara l'intelligenza artificiale?";
@@ -55,9 +56,9 @@ class MyString {
   static const String tornaAllaHome = "Torna alla Home Page";
   static const String tutorial = "Tutorial";
   static const String tutorialEnergia = "Tutorial energia";
-  static const String tutorialInfo1 = "Questa app ti supporterà nella tua avventura";
-  static const String tutorialInfo2 = "Prima di partire, in questo tutorial scoprirai le funzionalità che ti aiuteranno nell'esplorazione";
-  static const String tutorialInfo3 = "Scorri la schermata per iniziare";
+  static const String tutorialInfo1 = "Questa app ti supporterà nella tua avventura.";
+  static const String tutorialInfo2 = "Prima di partire, in questo tutorial scoprirai le funzionalità che ti aiuteranno nell'esplorazione.";
+  static const String tutorialInfo3 = "Scorri la schermata per iniziare.";
 
   static String energy(bool isMini, int charge){
     return isMini ? "$charge   " : "Energia rimanente: $charge   ";
@@ -88,7 +89,7 @@ class MyString {
   }
 
   static String nPiano(int nPiano) {
-    return "Vai al piano $nPiano e scansiona il QR code";
+    return "Vai al piano $nPiano";
   }
 
   static String qrResult(bool scansioneCorretta, String? result) {
@@ -101,13 +102,13 @@ class MyString {
 
   static String result(bool noEnergy, bool hasWin) {
     return noEnergy
-        ? "Hai esaurito tutti i punti energia"
+        ? "Hai esaurito tutti i punti energia!"
         : hasWin
             ? "Hai trovato l'animale vincente!"
-            : "Seleziona la prossima azione";
+            : "Seleziona la prossima azione:";
   }
 
   static String tutEnergyInfo(int e){
-    return e > 0 ? "Sei ancora in gioco" : "Hai esaurito l'energia";
+    return e > 0 ? "Sei ancora in gioco!" : "Hai esaurito l'energia!";
   }
 }

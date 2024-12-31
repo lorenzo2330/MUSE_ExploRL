@@ -16,6 +16,8 @@ class GameProvider extends ChangeNotifier{
 
   int get nSecondi => _nSecondi;
 
+  bool alreadyStartedCountdown = false;
+
   bool decrease(){
     if(nMinuti == 0 && nSecondi == 0){ notifyListeners(); return false; }
     if(nSecondi == 0){ _nMinuti--; _nSecondi = 59; }
@@ -25,10 +27,14 @@ class GameProvider extends ChangeNotifier{
   }
 
   void startCountdown(){
-    Timer.periodic(const Duration(seconds: 1), (timer){
-      decrease();
-      notifyListeners();
-    });
+    if(!alreadyStartedCountdown){
+      Timer.periodic(const Duration(seconds: 1), (timer){
+        decrease();
+        notifyListeners();
+      });
+      alreadyStartedCountdown = true;
+    }
+
   }
 
 
