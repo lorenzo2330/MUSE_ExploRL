@@ -35,7 +35,7 @@ class MyPadding {
     );
   }
 
-  static Padding timerScreen(BuildContext context) {
+  static Padding oldTimerScreen(BuildContext context) {
     int m = context.watch<GameProvider>().nMinuti;
 
     int s = context.watch<GameProvider>().nSecondi;

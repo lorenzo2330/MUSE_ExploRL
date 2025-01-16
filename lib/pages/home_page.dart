@@ -53,9 +53,9 @@ class HomePage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            MyExpanded.boxLogo("images/logoDISI.png"),
-            MyExpanded.boxLogo("images/logoPOPMAT.jpg"),
-            MyExpanded.boxLogo("images/logoMuseAzzurro.jpg"),
+            MyExpanded.boxLogo("images/logoDISI.png", 3),
+            MyExpanded.boxLogo("images/logoPOPMAT.jpg", 4),
+            MyExpanded.boxLogo("images/logoMuseAzzurro.jpg", 2),
           ],
         ),
       ),

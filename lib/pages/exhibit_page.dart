@@ -6,7 +6,6 @@ import 'package:app_rl/res/my_int.dart';
 import 'package:app_rl/res/my_qr.dart';
 import 'package:app_rl/res/my_string.dart';
 import 'package:app_rl/res/widgets/my_app_bar.dart';
-import 'package:app_rl/res/widgets/my_padding.dart';
 import 'package:app_rl/res/widgets/my_row.dart';
 import 'package:app_rl/res/widgets/my_sized_box.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +69,7 @@ class _ExhibitPageState extends State<ExhibitPage> {
               ? Colors.greenAccent
               : Colors.red
           : MyColors.bgColor,
-      appBar: MyAppBar.myAppBar(MyString.animale, [MyPadding.timerScreen(context)], null, !endGame),
+      appBar: MyAppBar.myAppBar(MyString.animale, [], null, !endGame),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

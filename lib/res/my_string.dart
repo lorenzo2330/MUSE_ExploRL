@@ -89,7 +89,7 @@ class MyString {
   }
 
   static String nPiano(int nPiano) {
-    return "Vai al piano $nPiano";
+    return "Vai al piano $nPiano.";
   }
 
   static String qrResult(bool scansioneCorretta, String? result) {
@@ -105,7 +105,7 @@ class MyString {
         ? "Hai esaurito tutti i punti energia!"
         : hasWin
             ? "Hai trovato l'animale vincente!"
-            : "Seleziona la prossima azione:";
+            : "Seleziona la prossima azione.";
   }
 
   static String tutEnergyInfo(int e){

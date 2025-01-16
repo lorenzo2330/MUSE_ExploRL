@@ -23,7 +23,7 @@ class ExhibitList {
       scientificName: "Cervus elaphus",
       alim: "Erbivoro",
       loc: "Eurasia",
-      nPiano: 1,
+      nPiano: 3,
       resPhoto: "imgCervoNobile.png");
 
   static Exhibit wallabyDalColloRosso = Exhibit(
