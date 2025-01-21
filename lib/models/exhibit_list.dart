@@ -177,7 +177,7 @@ class ExhibitList {
     ornitorinco.neighbors = [oritteropo, riccioComune];
 
     //Tutorial
-    lupoGrigio.neighbors = [bradipoDidattilo, leoneAfricano];
+    lupoGrigio.neighbors = [bradipoDidattilo, dingo];
   }
 
   static Exhibit winnerExhibit = leoneMarinoSudamericano;
