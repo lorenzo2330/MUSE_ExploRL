@@ -27,9 +27,9 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
     MyString.alimentazione
   ];
 
-  void loadData(GameProvider gProvR, EnergyProvider enProvR,
-      ExhibitProvider exProvR) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+  void loadData(GameProvider gProvR, EnergyProvider enProvR,AnimalProvider exProvR) async {
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();      //Istanza di sharedPreferences
 
     gProvR.initListOfMatch();
     gProvR.initListOfEnergy();
@@ -38,20 +38,15 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
     late List<String> match = [];
 
     setState(() {
-      late int nPartite =
-          prefs.getInt(MyString.nMatch) ?? 0; //Recupero il numero di partite
-      for (int i = 1; i <= nPartite; i++) {
-        //La prima partita viene salvata come Game-1
-        match = prefs.getStringList(MyString.gameMatch(i)) ??
-            []; //se è null non prendo niente
-        int remainingEnergy =
-            EnergyProvider.maxEnergy - match.length; //enMax - 1 * nExhVisitati
+      late int nPartite = prefs.getInt(MyString.nMatch) ?? 0;                   //Recupero il numero di partite (0 se è la prima)
+      for (int i = 1; i <= nPartite; i++) {                                     //La prima partita viene salvata come Game-1
+        match = prefs.getStringList(MyString.gameMatch(i)) ?? [];               //Se è null non prendo niente
+        int remainingEnergy = EnergyProvider.maxEnergy - match.length;          //enMax - 1 * nExhVisitati
         gProvR.addToListOfMatch(match);
-        gProvR.addToListOfEnergy(
-            prefs.getInt(MyString.gameEnergy(i)) ?? remainingEnergy);
+        gProvR.addToListOfEnergy(prefs.getInt(MyString.gameEnergy(i)) ?? remainingEnergy);
       }
       gProvR.setSelectedMatch(gProvR.listOfMatch.length.toString());
-      gProvR.setListOfThisRound(context.read<ExhibitProvider>().visited);
+      gProvR.setListOfThisRound(context.read<AnimalProvider>().visited);
       gProvR.setListToDisplay(gProvR.listOfThisRound);
     });
   }
@@ -61,7 +56,7 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
     super.initState();
     var gProvR = context.read<GameProvider>();
     var enProvR = context.read<EnergyProvider>();
-    var exProvR = context.read<ExhibitProvider>();
+    var exProvR = context.read<AnimalProvider>();
     loadData(gProvR, enProvR, exProvR);
   }
 
@@ -69,7 +64,7 @@ class _AlreadyVisitedPageState extends State<AlreadyVisitedPage> {
   Widget build(BuildContext context) {
     var gProvR = context.read<GameProvider>();
     var enProvW = context.watch<EnergyProvider>();
-    var exProvW = context.watch<ExhibitProvider>();
+    var exProvW = context.watch<AnimalProvider>();
 
     return PopScope(
       canPop: false,

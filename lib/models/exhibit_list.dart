@@ -2,162 +2,176 @@ import 'package:app_rl/models/exhibit.dart';
 
 class ExhibitList {
 
-  static Exhibit springbok = Exhibit(
+  /*  Esempio di creazione di un nuovo animale
+  static Animale nome = Animale(
+      normalName: "nome animale", //Dev'essere uguale al QR-code
+      scientificName: "nome scientifico",
+      alimentazione: "...",
+      ambiente: "...",
+      nPiano: ...,
+      resPhoto: "..."     //Dev'essere uguale all'immagine nella cartella images
+      );
+   */
+
+
+
+  static Animale springbok = Animale(
       normalName: "Springbok",
       scientificName: "Antidorcas marsupialis",
-      alim: "Erbivoro",
-      loc: "Africa",
+      alimentazione: "Erbivoro",
+      ambiente: "Africa",
       nPiano: -1,
       resPhoto: "imgSpringbok.png");
 
-  static Exhibit capibara = Exhibit(
+  static Animale capibara = Animale(
       normalName: "Capibara",
       scientificName: "Hydrochoerus hydrochaeris",
-      alim: "Erbivoro",
-      loc: "Americhe",
+      alimentazione: "Erbivoro",
+      ambiente: "Americhe",
       nPiano: -1,
       resPhoto: "imgCapibara.png");
 
-  static Exhibit cervoNobile = Exhibit(
+  static Animale cervoNobile = Animale(
       normalName: "Cervo nobile",
       scientificName: "Cervus elaphus",
-      alim: "Erbivoro",
-      loc: "Eurasia",
+      alimentazione: "Erbivoro",
+      ambiente: "Eurasia",
       nPiano: 3,
       resPhoto: "imgCervoNobile.png");
 
-  static Exhibit wallabyDalColloRosso = Exhibit(
+  static Animale wallabyDalColloRosso = Animale(
       normalName: "Wallaby dal collo rosso",
       scientificName: "Macropus rufogriseus",
-      alim: "Erbivoro",
-      loc: "Oceania",
+      alimentazione: "Erbivoro",
+      ambiente: "Oceania",
       nPiano: -1,
       resPhoto: "imgWallabyDalColloRosso.png");
 
-  static Exhibit lemureCatta = Exhibit(
+  static Animale lemureCatta = Animale(
       normalName: "Lemure catta",
       scientificName: "Lemur catta",
-      alim: "Onnivoro",
-      loc: "Africa",
+      alimentazione: "Onnivoro",
+      ambiente: "Africa",
       nPiano: -1,
       resPhoto: "imgLemureCatta.png");
 
-  static Exhibit opossumDellaVirginia = Exhibit(
+  static Animale opossumDellaVirginia = Animale(
       normalName: "Opossum della Virginia",
       scientificName: "Didelphis virginiana",
-      alim: "Onnivoro",
-      loc: "Americhe",
+      alimentazione: "Onnivoro",
+      ambiente: "Americhe",
       nPiano: -1,
       resPhoto: "imgOpossumDellaVirginia.png");
 
-  static Exhibit tasso = Exhibit(
+  static Animale tasso = Animale(
       normalName: "Tasso",
       scientificName: "Meles meles",
-      alim: "Onnivoro",
-      loc: "Eurasia",
+      alimentazione: "Onnivoro",
+      ambiente: "Eurasia",
       nPiano: 3,
       resPhoto: "imgTasso.png");
 
-  static Exhibit leoneAfricano = Exhibit(
+  static Animale leoneAfricano = Animale(
       normalName: "Leone (africano)",
       scientificName: "Panthera leo",
-      alim: "Carnivoro",
-      loc: "Africa",
+      alimentazione: "Carnivoro",
+      ambiente: "Africa",
       nPiano: -1,
       resPhoto: "imgLeoneAfricano.png");
 
-  static Exhibit linceEurasiatica = Exhibit(
+  static Animale linceEurasiatica = Animale(
       normalName: "Lince eurasiatica",
       scientificName: "Lynx lynx",
-      alim: "Carnivoro",
-      loc: "Eurasia",
+      alimentazione: "Carnivoro",
+      ambiente: "Eurasia",
       nPiano: 3,
       resPhoto: "imgLinceEurasiatica.png");
 
-  static Exhibit dingo = Exhibit(
+  static Animale dingo = Animale(
       normalName: "Dingo",
       scientificName: "Canis lupus dingo",
-      alim: "Carnivoro",
-      loc: "Oceania",
+      alimentazione: "Carnivoro",
+      ambiente: "Oceania",
       nPiano: 0,
       resPhoto: "imgDingo.png");
 
-  static Exhibit otariaOrsinaDelCapo = Exhibit(
+  static Animale otariaOrsinaDelCapo = Animale(
       normalName: "Otaria orsina del Capo",
       scientificName: "Arctocephalus pusillus",
-      alim: "Piscivoro",
-      loc: "Africa",
+      alimentazione: "Piscivoro",
+      ambiente: "Africa",
       nPiano: -1,
       resPhoto: "imgOtariaOrsinaDelCapo.png");
 
-  static Exhibit leoneMarinoSudamericano = Exhibit(
+  static Animale leoneMarinoSudamericano = Animale(
       normalName: "Leone marino sudamericano",
       scientificName: "Otaria flavescens",
-      alim: "Piscivoro",
-      loc: "Americhe",
+      alimentazione: "Piscivoro",
+      ambiente: "Americhe",
       nPiano: -1,
       resPhoto: "imgLeoneMarinoSudamericano.png");
 
-  static Exhibit tricheco = Exhibit(
+  static Animale tricheco = Animale(
       normalName: "Tricheco",
       scientificName: "Odobenus rosmarus",
-      alim: "Piscivoro",
-      loc: "Eurasia",
+      alimentazione: "Piscivoro",
+      ambiente: "Eurasia",
       nPiano: -1,
       resPhoto: "imgTricheco.png");
 
-  static Exhibit oritteropo = Exhibit(
+  static Animale oritteropo = Animale(
       normalName: "Oritteropo",
       scientificName: "Orycteropus afer",
-      alim: "Insettivoro",
-      loc: "Africa",
+      alimentazione: "Insettivoro",
+      ambiente: "Africa",
       nPiano: -1,
       resPhoto: "imgOritteropo.png");
 
-  static Exhibit formichiereGigante = Exhibit(
+  static Animale formichiereGigante = Animale(
       normalName: "Formichiere gigante",
       scientificName: "Myrmecophaga tridactyla",
-      alim: "Insettivoro",
-      loc: "Americhe",
+      alimentazione: "Insettivoro",
+      ambiente: "Americhe",
       nPiano: -1,
       resPhoto: "imgFormichiereGigante.png");
 
-  static Exhibit riccioComune = Exhibit(
+  static Animale riccioComune = Animale(
       normalName: "Riccio comune",
       scientificName: "Erinaceus europaeus",
-      alim: "Insettivoro",
-      loc: "Eurasia",
+      alimentazione: "Insettivoro",
+      ambiente: "Eurasia",
       nPiano: 3,
       resPhoto: "imgRiccioComune.png");
 
-  static Exhibit ornitorinco = Exhibit(
+  static Animale ornitorinco = Animale(
       normalName: "Ornitorinco",
       scientificName: "Ornithorhynchus anatinus",
-      alim: "Insettivoro",
-      loc: "Oceania",
+      alimentazione: "Insettivoro",
+      ambiente: "Oceania",
       nPiano: -1,
       resPhoto: "imgOrnitorinco.png");
 
-  static Exhibit lupoGrigio = Exhibit(
+  static Animale lupoGrigio = Animale(
       normalName: "Lupo (grigio)",
       scientificName: "Canis lupus",
-      alim: "4(*)",
-      loc: "Eurasia",
+      alimentazione: "4(*)",
+      ambiente: "Eurasia",
       nPiano: 0,
       resPhoto: "imgLupoGrigio.png"
   );
 
-  static Exhibit bradipoDidattilo = Exhibit(
+  static Animale bradipoDidattilo = Animale(
       normalName: "Bradipo didattilo",
       scientificName: "Choloepus didactylus",
-      alim: "2(*)",
-      loc: "Americhe",
+      alimentazione: "2(*)",
+      ambiente: "Americhe",
       nPiano: 0,
       resPhoto: "imgBradipoDidattilo.png"
   );
 
   static void setNeighbors() {
     //Game
+    //Nome.neighbors = [neighbor1, neighbor2, ...];
     springbok.neighbors = [lemureCatta, wallabyDalColloRosso];
     capibara.neighbors = [cervoNobile, opossumDellaVirginia];
     cervoNobile.neighbors = [capibara, tasso, wallabyDalColloRosso];
@@ -180,13 +194,13 @@ class ExhibitList {
     lupoGrigio.neighbors = [bradipoDidattilo, dingo];
   }
 
-  static Exhibit winnerExhibit = leoneMarinoSudamericano;
+  static Animale startingExhibit = opossumDellaVirginia;
 
-  static Exhibit startingExhibit = opossumDellaVirginia;
+  static Animale winnerExhibit = leoneMarinoSudamericano;
 
-  static Exhibit tutorialExhibit = lupoGrigio;
+  static Animale tutorialExhibit = lupoGrigio;
 
-  static Exhibit getExhibitByName(String name){
+  static Animale getExhibitByName(String name){
     switch(name){
     case "Springbok" : return springbok;
     case "Capibara" : return capibara;

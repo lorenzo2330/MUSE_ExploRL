@@ -1,6 +1,6 @@
 
 import 'package:app_rl/pages/already_visited_page.dart';
-import 'package:app_rl/pages/exhibit_page.dart';
+import 'package:app_rl/pages/animal_page.dart';
 import 'package:app_rl/pages/home_page.dart';
 import 'package:app_rl/pages/not_visited_page.dart';
 import 'package:app_rl/pages/objective_page.dart';
@@ -22,7 +22,7 @@ class RouteGenerator {
       case MyString.routeObjective:
         return MaterialPageRoute(builder: (context) => const ObjectivePage());
       case MyString.routeExhibit:
-        return MaterialPageRoute(builder: (context) => const ExhibitPage());
+        return MaterialPageRoute(builder: (context) => const AnimalPage());
       case MyString.routeAlreadyVisited:
         return MaterialPageRoute(builder: (context) => const AlreadyVisitedPage());
       case MyString.routeNotVisited:

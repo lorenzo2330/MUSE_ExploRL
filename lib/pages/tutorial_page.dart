@@ -28,7 +28,7 @@ class _TutorialPageState extends State<TutorialPage> {
     super.initState();
     // Funzione chiamata al caricamento iniziale della pagina
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<ExhibitProvider>().setInTutorial(true);
+      context.read<AnimalProvider>().setInTutorial(true);
     });
   }
 

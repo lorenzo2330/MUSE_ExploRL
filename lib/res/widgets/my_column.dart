@@ -9,9 +9,9 @@ import 'my_text.dart';
 
 class MyColumn {
   static Column namesOfExhibits(BuildContext context) {
-    ExhibitProvider exProvR = context.read<ExhibitProvider>();
+    AnimalProvider exProvR = context.read<AnimalProvider>();
 
-    Exhibit e;
+    Animale e;
 
     bool b;
 

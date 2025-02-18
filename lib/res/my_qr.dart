@@ -59,7 +59,7 @@ class _MyQrState extends State<MyQr> {
     this.controller = controller;
     /*  Serve usare questa sintassi poichè, non trovandoci in un metodo
         di build, non è possibile usare direttamente context.watch<...>() */
-    var exProv = context.read<ExhibitProvider>();
+    var exProv = context.read<AnimalProvider>();
     var enProv = context.read<EnergyProvider>();
 
     //Permette di decrementare comunque l'energia per l'opossum nel caso ci si ritorni
@@ -80,7 +80,7 @@ class _MyQrState extends State<MyQr> {
               context.read<GameProvider>().startCountdown();  //Dopo la prima scansione parte il timer
             }
             exProv.setScansioneCorretta();
-            exProv.visit(context.read<ExhibitProvider>().nextExhibit);
+            exProv.visit(context.read<AnimalProvider>().nextExhibit);
             if (!noDecrease) {
               enProv.decreaseEnergy();
             }

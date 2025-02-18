@@ -11,7 +11,7 @@ import 'my_column.dart';
 import 'my_text.dart';
 import '../my_style.dart';
 
-void saveData(List<Exhibit> visited, int energy) async {
+void saveData(List<Animale> visited, int energy) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
 
   late int nPartite = prefs.getInt(MyString.nMatch) ?? 0; //Recupero il numero di partite
@@ -22,7 +22,7 @@ void saveData(List<Exhibit> visited, int energy) async {
       MyString.nMatch, nPartite); //Salvo nuovamente il numero di partite che sono state fatte
 
   List<String> match = [];
-  for (Exhibit ex in visited) {
+  for (Animale ex in visited) {
     match.add(ex.normalName);
   }
   prefs.setStringList(MyString.gameMatch(nPartite), match);
@@ -77,9 +77,9 @@ class MyButton {
   static ElevatedButton restartButton(BuildContext context, bool hasToPop) {
     f() {
       //Salvo i dati della partita
-      saveData(context.read<ExhibitProvider>().visited, context.read<EnergyProvider>().energy);
+      saveData(context.read<AnimalProvider>().visited, context.read<EnergyProvider>().energy);
 
-      context.read<ExhibitProvider>().prepareToStart();
+      context.read<AnimalProvider>().prepareToStart();
       context.read<EnergyProvider>().prepareToStart();
 
       if (hasToPop) {
@@ -109,7 +109,7 @@ class MyButton {
 
   static ElevatedButton tutorialRetryScanButton(BuildContext context) {
     f() {
-      context.read<ExhibitProvider>().setDaScansionare();
+      context.read<AnimalProvider>().setDaScansionare();
     }
 
     return getButton(MyString.riprovaScansione, f);
@@ -134,7 +134,7 @@ class MyButton {
   static ElevatedButton objectiveStartingButton(BuildContext context) {
     f() {
       Navigator.pushNamed(context, MyString.routeExhibit);
-      context.read<ExhibitProvider>().setInTutorial(false);
+      context.read<AnimalProvider>().setInTutorial(false);
     }
 
     return getButton(MyString.parti, f);
@@ -145,7 +145,7 @@ class MyButton {
   static ElevatedButton tutorialStartingButton(BuildContext context) {
     f() {
       Navigator.pushNamed(context, MyString.routeObjective);
-      context.read<ExhibitProvider>().setInTutorial(false);
+      context.read<AnimalProvider>().setInTutorial(false);
     }
 
     Text text = MyText.getMiniButtonText(MyString.iniziamo);

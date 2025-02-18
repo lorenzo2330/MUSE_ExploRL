@@ -1,22 +1,17 @@
 
-class Exhibit {
+class Animale {
 
-  Exhibit({
-    required this.normalName,
-    required this.scientificName,
-    required this.alim,
-    required this.loc,
-    required this.nPiano,
-    required this.resPhoto,
-  });
-
-  String normalName;
-  String scientificName;
-  String alim;
-  String loc;
+  String normalName, scientificName, alimentazione, ambiente, resPhoto;
   int nPiano;
-  String resPhoto;
-  List<Exhibit> neighbors = [];
+  List<Animale> neighbors = [];
+  //TipoAttributo nomeAttributo = valoreAttributo;    //Aggiungere un parametro
+
+  Animale({
+    required this.normalName, required this.scientificName,
+    required this.alimentazione, required this.ambiente,
+    required this.nPiano, required this.resPhoto,
+    //required this.nomeAttributo                     //Aggiungere un parametro
+  });
 }
 
 

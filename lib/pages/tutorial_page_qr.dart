@@ -26,7 +26,7 @@ class _TutorialPageQRState extends State<TutorialPageQR> {
     // Funzione chiamata al caricamento iniziale della pagina
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<GameProvider>().addSezioniVisitate(2);
-      context.read<ExhibitProvider>().setProssimoForTutorial(ExhibitList.tutorialExhibit);
+      context.read<AnimalProvider>().setProssimoForTutorial(ExhibitList.tutorialExhibit);
     });
   }
 
@@ -44,7 +44,7 @@ class _TutorialPageQRState extends State<TutorialPageQR> {
           Expanded(flex: 4, child: MyRow.exhibitRow(context)),
           Expanded(
             flex: 5,
-            child: context.watch<ExhibitProvider>().scansioneCorrettaTutorial
+            child: context.watch<AnimalProvider>().scansioneCorrettaTutorial
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,

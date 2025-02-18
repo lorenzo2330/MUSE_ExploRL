@@ -11,11 +11,11 @@ import 'my_text.dart';
 
 class MySizedBox {
   static SizedBox exhibitInfo(BuildContext context) {
-    var exProv = context.read<ExhibitProvider>();
+    var exProv = context.read<AnimalProvider>();
     var nextExh = exProv.nextExhibit;
 
-    String al = MyString.getAlimentazione(nextExh.alim);
-    String loc = MyString.getLocalitaGeografica(nextExh.loc);
+    String al = MyString.getAlimentazione(nextExh.alimentazione);
+    String loc = MyString.getLocalitaGeografica(nextExh.ambiente);
 
     return SizedBox(
       width: double.infinity,

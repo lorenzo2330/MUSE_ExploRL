@@ -8,9 +8,9 @@ import 'energy_provider.dart';
 
 class GameProvider extends ChangeNotifier{
 
-  int _nMinuti = 30;
+  int _nMinuti = 30;  //Modificare a piacimento
 
-  int _nSecondi = 0;
+  int _nSecondi = 0;  //Modificare a piacimento
 
   int get nMinuti => _nMinuti;
 
@@ -84,21 +84,21 @@ class GameProvider extends ChangeNotifier{
 
   void addToListOfEnergy(int e){ _listOfEnergy.add(e); notifyListeners(); }
 
-  late List<Exhibit> _listToDisplay = [];
+  late List<Animale> _listToDisplay = [];
 
-  List<Exhibit> get listToDisplay => _listToDisplay;
+  List<Animale> get listToDisplay => _listToDisplay;
 
   void initListToDisplay() { _listToDisplay = []; notifyListeners(); }
 
-  void setListToDisplay(List<Exhibit> l){ _listToDisplay = l; notifyListeners(); }
+  void setListToDisplay(List<Animale> l){ _listToDisplay = l; notifyListeners(); }
 
-  late List<Exhibit> _listOfThisRound = [];
+  late List<Animale> _listOfThisRound = [];
 
-  List<Exhibit> get listOfThisRound => _listOfThisRound;
+  List<Animale> get listOfThisRound => _listOfThisRound;
 
   void initListOfThisRound() { _listOfThisRound = []; notifyListeners(); }
 
-  void setListOfThisRound(List<Exhibit> l){ _listOfThisRound = l; notifyListeners(); }
+  void setListOfThisRound(List<Animale> l){ _listOfThisRound = l; notifyListeners(); }
 
   int _energyToDisplay = EnergyProvider.maxEnergy;
 

@@ -8,8 +8,8 @@ import 'my_padding.dart';
 
 class MyListView {
   static ListView getListOfNotVisitedExhibit(BuildContext context, bool tutorial) {
-    var exProvW = context.watch<ExhibitProvider>();
-    var exProvR = context.read<ExhibitProvider>();
+    var exProvW = context.watch<AnimalProvider>();
+    var exProvR = context.read<AnimalProvider>();
     var nextExhW = exProvW.nextExhibit;
     var nextExhR = exProvR.nextExhibit;
     double pTop = tutorial ? 8.0 : 13;

@@ -11,14 +11,14 @@ import 'package:app_rl/res/widgets/my_sized_box.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ExhibitPage extends StatefulWidget {
-  const ExhibitPage({super.key});
+class AnimalPage extends StatefulWidget {
+  const AnimalPage({super.key});
 
   @override
-  State<ExhibitPage> createState() => _ExhibitPageState();
+  State<AnimalPage> createState() => _AnimalPageState();
 }
 
-class _ExhibitPageState extends State<ExhibitPage> {
+class _AnimalPageState extends State<AnimalPage> {
   late bool endGame, noEnergy, hasWin;
 
   bool isShown = false;
@@ -57,11 +57,11 @@ class _ExhibitPageState extends State<ExhibitPage> {
       });
     }
 
-    hasWin = context.read<ExhibitProvider>().nextIsWinnerExhibit();
+    hasWin = context.read<AnimalProvider>().nextIsWinnerExhibit();
     noEnergy = context.read<EnergyProvider>().energy == 0;
     endGame = hasWin || noEnergy;
     GameProvider gProvR = context.read<GameProvider>();
-    ExhibitProvider exProvW = context.watch<ExhibitProvider>();
+    AnimalProvider exProvW = context.watch<AnimalProvider>();
 
     return Scaffold(
       backgroundColor: gProvR.trovato && endGame

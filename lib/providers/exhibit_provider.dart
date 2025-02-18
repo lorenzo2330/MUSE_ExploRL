@@ -5,7 +5,7 @@ import '../models/exhibit.dart';
 import '../models/exhibit_list.dart';
 
 
-class ExhibitProvider extends ChangeNotifier {
+class AnimalProvider extends ChangeNotifier {
 
   bool _inTutorial = false;
 
@@ -13,17 +13,17 @@ class ExhibitProvider extends ChangeNotifier {
 
   void setInTutorial(bool mode) { _inTutorial = mode; notifyListeners(); }
 
-  Exhibit _nextExhibit = ExhibitList.startingExhibit;
+  Animale _nextExhibit = ExhibitList.startingExhibit;
 
-  void setExhibit(Exhibit e) { _nextExhibit = e; notifyListeners(); }
+  void setExhibit(Animale e) { _nextExhibit = e; notifyListeners(); }
 
-  Exhibit get nextExhibit => inTutorial ? ExhibitList.tutorialExhibit :  _nextExhibit;
+  Animale get nextExhibit => inTutorial ? ExhibitList.tutorialExhibit :  _nextExhibit;
 
-  List<Exhibit> _visited = [];
+  List<Animale> _visited = [];
 
-  List<Exhibit> get visited => _visited;
+  List<Animale> get visited => _visited;
 
-  void visit(Exhibit e) {
+  void visit(Animale e) {
     if(e != ExhibitList.tutorialExhibit) _visited.add(e);
     notifyListeners();
   }
@@ -56,11 +56,11 @@ class ExhibitProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Exhibit? _prossimoForTutorial = ExhibitList.tutorialExhibit;
+  Animale? _prossimoForTutorial = ExhibitList.tutorialExhibit;
 
-  Exhibit? get prossimoForTutorial => _prossimoForTutorial;
+  Animale? get prossimoForTutorial => _prossimoForTutorial;
 
-  void setProssimoForTutorial(Exhibit? e){ _prossimoForTutorial = e; notifyListeners(); }
+  void setProssimoForTutorial(Animale? e){ _prossimoForTutorial = e; notifyListeners(); }
 
 /*  Notify listeners avvisa tutti i listeners comunicando
   *   che è avvenuta una modifica (ha cambiato stato) */

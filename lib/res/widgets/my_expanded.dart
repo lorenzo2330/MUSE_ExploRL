@@ -11,8 +11,8 @@ import '../my_string.dart';
 import 'my_text.dart';
 import 'my_stack.dart';
 
-List<Exhibit> getRelativeListOfExhibit(List<String> l) {
-  List<Exhibit> retList = [];
+List<Animale> getRelativeListOfExhibit(List<String> l) {
+  List<Animale> retList = [];
   for (String exName in l) {
     retList.add(ExhibitList.getExhibitByName(exName));
   }
@@ -86,7 +86,7 @@ class MyExpanded {
     );
   }
 
-  static Expanded alreadyVisitedList(List<Exhibit> listToDisplay) {
+  static Expanded alreadyVisitedList(List<Animale> listToDisplay) {
     return Expanded(
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -97,8 +97,8 @@ class MyExpanded {
                     children: [
                       MyExpanded.getAlreadyVisitedField(index.toString(), 0, false),
                       MyExpanded.getAlreadyVisitedField(listToDisplay[index].normalName, 1, false),
-                      MyExpanded.getAlreadyVisitedField(listToDisplay[index].loc, 2, false),
-                      MyExpanded.getAlreadyVisitedField(listToDisplay[index].alim, 3, false),
+                      MyExpanded.getAlreadyVisitedField(listToDisplay[index].ambiente, 2, false),
+                      MyExpanded.getAlreadyVisitedField(listToDisplay[index].alimentazione, 3, false),
                     ],
                   )),
         ),

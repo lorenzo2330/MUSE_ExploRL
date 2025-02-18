@@ -13,7 +13,7 @@ void main() async {
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => EnergyProvider()),
-        ChangeNotifierProvider(create: (_) => ExhibitProvider()),
+        ChangeNotifierProvider(create: (_) => AnimalProvider()),
         ChangeNotifierProvider(create: (_) => GameProvider())
       ],
       child: const MyApp()));

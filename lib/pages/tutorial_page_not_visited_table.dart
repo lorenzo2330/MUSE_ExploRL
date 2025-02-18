@@ -26,15 +26,15 @@ class _TutorialPageNotVisitedTableState extends State<TutorialPageNotVisitedTabl
     // Funzione chiamata al caricamento iniziale della pagina
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<GameProvider>().addSezioniVisitate(4);
-      context.read<ExhibitProvider>().setProssimoForTutorial(ExhibitList.tutorialExhibit);
-      context.read<ExhibitProvider>().setDaScansionare();
+      context.read<AnimalProvider>().setProssimoForTutorial(ExhibitList.tutorialExhibit);
+      context.read<AnimalProvider>().setDaScansionare();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     double s = MyInt.tutorialStringSize.toDouble();
-    ExhibitProvider exProvW = context.watch<ExhibitProvider>();
+    AnimalProvider exProvW = context.watch<AnimalProvider>();
     Text cosaVisitare = MyText.getLeftTextWithSize(MyString.cosaPuoiVisitare, s, true);
     ListView listOfExhibits = MyListView.getListOfNotVisitedExhibit(context, true);
     Text sceltaAnimale = MyText.getLeftTextWithSize(MyString.scegliAnimale, 20, false);

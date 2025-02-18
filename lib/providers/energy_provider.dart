@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class EnergyProvider extends ChangeNotifier{
 
-  static const int maxEnergy = 10;
+  static const int maxEnergy = 10;  //Modificare a piacimento
 
   int _energy = maxEnergy;
 
@@ -27,3 +27,9 @@ class EnergyProvider extends ChangeNotifier{
 
   void decreaseTutorialEnergy(){ if(_tutorialEnergy > 0) { _tutorialEnergy--; notifyListeners(); } }
 }
+
+
+
+
+
+

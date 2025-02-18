@@ -22,7 +22,7 @@ class _ObjectivePageState extends State<ObjectivePage> {
       *   caso, tornando indietro si ritorna nella sezione tutorial, quindi
       *   sarà necessario settare nuovamente inTutorial = true  */
       onPopInvokedWithResult: (bool x, dynamic result) {
-        context.read<ExhibitProvider>().setInTutorial(true);
+        context.read<AnimalProvider>().setInTutorial(true);
         return;
       },
       child: Scaffold(

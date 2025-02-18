@@ -9,8 +9,8 @@ import 'my_text.dart';
 
 class MyGestureDetector {
   static GestureDetector imageBox(BuildContext context) {
-    ExhibitProvider exProvR = context.read<ExhibitProvider>();
-    Exhibit e;
+    AnimalProvider exProvR = context.read<AnimalProvider>();
+    Animale e;
     if (exProvR.inTutorial) {
       e = exProvR.prossimoForTutorial!;
     } else {
