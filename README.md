@@ -6,4 +6,6 @@ App per attività didattica al Muse - Museo delle Scienze di Trento
 
 Clonare la cartella ed aprirla su AndoroidStudio (Consigliato) || VisualStudio || Intellij
 
+## Usage
+
 Per effettuare modifiche, consultare il file usage applicazione.docx
